@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Satish Pakalapati, a Full Stack Developer building innovative solutions.">
+    <meta name="keywords" content="Satish Pakalapati, Full Stack Developer, Portfolio, Web Development">
+    <meta name="author" content="Satish Pakalapati">
+    <meta property="og:title" content="Satish Pakalapati - Full Stack Developer">
+    <meta property="og:description" content="Explore the cosmic portfolio of Satish Pakalapati, showcasing innovative web projects.">
+    <meta property="og:image" content="https://yourwebsite.com/icon.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <title>Satish's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 100px;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            text-align: center;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes starField {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-500px, -500px); }
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+                @keyframes orbit {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(125px) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(125px) rotate(-360deg);
+            }
+        }
+        @keyframes arcWave {
+        0% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.5); /* Grows outward */
+                opacity: 2; /* Fades out */
+            }
+        }
+            /* Full Loader */
+        .full-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease;
+        }
+
+        .full-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cosmic-loader {
+            position: relative;
+            width: 350px; /* Increased from 300px to fit arcs */
+            height: 350px;
+            display: none;
+        }
+
+        .cosmic-loader.active {
+            display: block;
+        }
+
+        .planet {
+            width: 50px;
+            height: 50px;
+            background: #1e90ff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            animation: orbit 3s linear infinite;
+        }
+
+         .ring {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border: 2px solid #1e90ff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: spin 4s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ring::before,
+        .ring::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border: 2px solid transparent;
+            border-top-color: #1e90ff; /* Arc segment */
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: arcWave 2s linear infinite;
+        }
+
+        .ring::after {
+            animation-delay: 0.5s; /* Staggered wave effect */
+        }
+
+        .ring1 {
+            animation-delay: 0.4s;
+        }
+
+        .ring2 {
+            animation-delay: 0.2s;
+        }
+
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Orbitron', sans-serif;
+            color: #1e90ff; /* Deep blue */
+            font-size: 24px; /* Slightly larger */
+        }
+
+        .loading-text {
+            font-family: 'Orbitron', sans-serif;
+            color: #1e90ff; /* Deep blue */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.7));
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+            border-bottom: 1px solid #00f6ff33;
+        }
+
+       /* Navbar */
+.navbar h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    margin: 0;
+    color: #55a7c5; /* Default color, matches theme */
+    transition: text-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+.navbar h1:hover {
+    text-shadow: 0 0 10px #1e90ff, 0 0 20px #1e90ff, 0 0 30px #1e90ff; /* Deep blue glow on hover */
+}
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar a:hover {
+            color: #00f6ff;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            background: linear-gradient(45deg, #00f6ff, #007bff);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .dropdown-toggle:hover {
+            background: linear-gradient(45deg, #007bff, #00f6ff);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #1a1a1a;
+            min-width: 180px;
+            z-index: 1;
+            box-shadow: 0 8px 16px rgba(0, 246, 255, 0.2);
+            border-radius: 10px;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: #e0e0e0;
+            text-decoration: none;
+            text-align: left;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: #00f6ff33;
+            color: #00f6ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            color: #00f6ff;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(270deg, #0a0a0a, #1a1a1a);
+            background-size: auto, 200% 200%;
+            animation: starField 50s linear infinite, gradient 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 246, 255, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 0;
+        }
+/* Hero Section */
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    text-transform: uppercase;
+    color: #55a7c5; /* Default color, matches theme */
+    animation: fadeIn 1.5s ease-in; /* Keep fadeIn animation */
+    z-index: 1;
+    transition: text-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+.hero h1:hover {
+    text-shadow: 0 0 10px #1e90ff, 0 0 20px #1e90ff, 0 0 30px #1e90ff; /* Deep blue glow on hover */
+}
+
+.hero p {
+    font-size: 24px;
+    color: #e0e0e0;
+    animation: typing 4s steps(30) 1s infinite, blink 0.7s infinite;
+    white-space: nowrap; /* Prevents text wrapping for typing effect */
+    overflow: hidden;
+    border-right: 3px solid #1e90ff; /* Deep blue to match hover glow */
+    max-width: 80%; /* Slightly smaller for centering */
+    z-index: 1; /* Above background */
+    transition: text-shadow 0.3s ease; /* For hover glow */
+}
+
+.hero p:hover {
+    text-shadow: 0 0 10px #1e90ff, 0 0 20px #1e90ff; /* Deep blue glow on hover */
+}
+
+/* Typing animation */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Cursor blink animation */
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+        .hero button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-family: 'Orbitron', sans-serif;
+            border: 2px solid #00f6ff;
+            background: transparent;
+            color: #00f6ff;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            z-index: 1;
+        }
+
+        .hero button:hover {
+            background: #00f6ff33;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.5);
+        }
+
+        .hero button:active {
+            transform: translateY(0);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.7s ease;
+        }
+
+        .projects, .contact {
+            background: #1a1a1a;
+            border-top: 1px solid #00f6ff33;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project {
+            background: #222;
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #00f6ff33;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 246, 255, 0.3);
+        }
+
+        .project h3 {
+            color: #00f6ff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .project a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid #00f6ff;
+            color: #00f6ff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .project a:hover {
+            background: #00f6ff;
+            color: #0a0a0a;
+        }
+
+        /* Contact Form */
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #00f6ff33;
+            border-radius: 10px;
+            background: #222;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .input-group input:focus + label,
+        .input-group textarea:focus + label,
+        .input-group input:not(:placeholder-shown) + label,
+        .input-group textarea:not(:placeholder-shown) + label {
+            top: 0;
+            font-size: 12px;
+            color: #00f6ff;
+            background: #222;
+            padding: 0 5px;
+        }
+
+        .input-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .contact input:focus,
+        .contact textarea:focus {
+            outline: none;
+            border: 1px solid #00f6ff;
+            box-shadow: 0 0 10px rgba(0, 246, 255, 0.3);
+        }
+
+        .contact input:invalid:focus,
+        .contact textarea:invalid:focus {
+            border: 1px solid #ff4d4d;
+        }
+
+        .contact button {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-family: 'Orbitron', sans-serif;
+            border: 2px solid #00f6ff;
+            background: transparent;
+            color: #00f6ff;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .contact button:hover {
+            background: #00f6ff33;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.5);
+            animation: pulse 1s infinite;
+        }
+
+        .contact button:active {
+            transform: translateY(0);
+        }
+
+        .success-message,
+        .error-message,
+        .loading-message {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .success-message {
+            display: none;
+            color: #00f6ff;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .error-message {
+            display: none;
+            color: #ff4d4d;
+        }
+
+        .loading-message {
+            display: none;
+            color: #00f6ff;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #0a0a0a;
+            color: #666;
+            border-top: 1px solid #00f6ff33;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                background: #1a1a1a;
+                border-radius: 10px;
+                padding: 15px;
+                border: 1px solid #00f6ff33;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .dropdown-content {
+                position: static;
+                transform: none;
+                opacity: 1;
+                min-width: 100%;
+                margin-top: 5px;
+                box-shadow: none;
+                background: #222;
+                border-radius: 5px;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .project-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Full Loader -->
+    <div class="full-loader">
+        <span class="loading-text">Loading Satish's Portfolio.....</span>
+        <div class="cosmic-loader active">
+            <div class="planet"></div>
+            <div class="ring ring1"></div>
+            <div class="ring ring2"></div>
+            <div class="percentage">0%</div>
+        </div>
+    </div>
+
+    <header class="navbar">
+        <h1>Satish Pakalapati</h1>
+        <nav>
+            <span class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</span>
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="#about">About</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Full Stack Developer</h1>
+        <p>Building the Future | One Code at a Time |
+            Born to Code at Ease | Come Along
+        </p>
+        <button id="view-work-btn">Explore My Universe</button>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a developer on a mission to create innovative, universe-changing solutions.</p>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>My Creations</h2>
+        <div class="project-list">
+            <div class="project">
+                <h3>Starship App</h3>
+                <p>A revolutionary app for interstellar communication.</p>
+                <a href="https://github.com/yourusername/starship-app" target="_blank">Discover More</a>
+            </div>
+            <div class="project">
+                <h3>Quantum Dashboard</h3>
+                <p>Real-time analytics powered by quantum algorithms.</p>
+                <a href="https://github.com/yourusername/quantum-dashboard" target="_blank">Discover More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Connect with Me</h2>
+        <form id="contact-form" action="https://formspree.io/f/mvgkywqy" method="POST">
+            <div class="input-group">
+                <input type="text" name="name" id="name" required placeholder=" " />
+                <label for="name">Your Name</label>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" id="email" required placeholder=" " />
+                <label for="email">Your Email</label>
+            </div>
+            <div class="input-group">
+                <textarea name="message" id="message" required placeholder=" "></textarea>
+                <label for="message">Your Message</label>
+            </div>
+            <button type="submit">Launch Message</button>
+            <div class="success-message">Satish will approve your Message Shortly!!</div>
+            <div class="error-message">Failed to send message. Try again!</div>
+            <div class="loading-message">Sending...</div>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 Satish Portfolio. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Full Loader
+        const fullLoader = document.querySelector('.full-loader');
+        const cosmicLoader = document.querySelector('.cosmic-loader');
+        const percentage = document.querySelector('.percentage');
+        let loadProgress = 0;
+
+        function updateLoader() {
+            loadProgress += 1;
+            percentage.textContent = loadProgress + '%';
+
+            if (loadProgress >= 100) {
+                setTimeout(() => {
+                    fullLoader.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 500);
+            } else {
+                setTimeout(updateLoader, 60);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.overflow = 'hidden';
+            cosmicLoader.classList.add('active');
+            updateLoader();
+        });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navUl = document.querySelector('.navbar ul');
+        hamburger.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+            const isExpanded = navUl.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', isExpanded);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.getElementById('view-work-btn').addEventListener('click', () => {
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Section Fade-In Animation
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Form Submission
+        const form = document.getElementById('contact-form');
+        const successMessage = document.querySelector('.success-message');
+        const errorMessage = document.querySelector('.error-message');
+        const loadingMessage = document.querySelector('.loading-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            loadingMessage.style.display = 'none';
+
+            const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/;
+            const emailInput = form.querySelector('input[name="email"]');
+            const messageInput = form.querySelector('textarea[name="message"]');
+
+            if (!emailRegex.test(emailInput.value)) {
+                errorMessage.textContent = 'Please enter a valid email address!';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+                return;
+            }
+
+            if (messageInput.value.length < 10) {
+                errorMessage.textContent = 'Message must be at least 10 characters long!';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+                return;
+            }
+
+            loadingMessage.style.display = 'block';
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                loadingMessage.style.display = 'none';
+                if (response.ok) {
+                    form.reset();
+                    successMessage.style.display = 'block';
+                    setTimeout(() => successMessage.style.display = 'none', 3000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                loadingMessage.style.display = 'none';
+                errorMessage.textContent = error.message.includes('network')
+                    ? 'Network error. Please check your connection.'
+                    : 'Failed to send message. Try again!';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+            }
+        });
+    </script>
+</body>
+</html>
