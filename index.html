@@ -1464,22 +1464,28 @@ Managed and optimized Google Ads campaigns for better ROI.  </p></a>
       });
       
       // Theme Toggle Functionality
-      const themeOptions = document.querySelectorAll('.theme-option');
-      const themeIcon = document.querySelector('.theme-icon');
+      // Theme Toggle Functionality
+const themeOptions = document.querySelectorAll('.theme-option');
+const themeIcon = document.querySelector('.theme-icon');
 
-      // Load saved theme from localStorage
-      const savedTheme = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcon(savedTheme);
+const updateThemeIcon = (theme) => {
+  themeIcon.classList.remove('ri-sun-line', 'ri-moon-line', 'ri-contrast-2-line');
+  themeIcon.classList.add(theme === 'light' ? 'ri-sun-line' : theme === 'dark' ? 'ri-moon-line' : 'ri-contrast-2-line');
+};
 
-      themeOptions.forEach(option => {
-        option.addEventListener('click', () => {
-          const theme = option.getAttribute('data-theme');
-          document.documentElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
-          updateThemeIcon(theme);
-        });
-      });
+// Load saved theme from localStorage
+const savedTheme = localStorage.getItem('theme') || 'default';
+document.documentElement.setAttribute('data-theme', savedTheme);
+updateThemeIcon(savedTheme);
+
+themeOptions.forEach(option => {
+  option.addEventListener('click', () => {
+    const theme = option.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateThemeIcon(theme);
+  });
+});
 
       function updateThemeIcon(theme) {
         if (theme === 'light') {
