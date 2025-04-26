@@ -876,6 +876,41 @@
       .theme-option:hover {
         background-color: var(--primary-color-dark);
       }
+
+
+      .doc-preview {
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+}
+
+.doc-preview img {
+    width: 100%;
+    height: auto;
+}
+
+.view-details-btn {
+    padding: 12px 24px;
+    border: none;
+    color: #ebb709;
+    background-color: #000000;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.view-details-btn:hover {
+    background-color: #333;
+}
+
+      
     </style>
   </head>
   <body>
@@ -1103,9 +1138,11 @@
         </button>
     </a>
         </div>
-        <div class="project__card mix design">
-            <a href="https://viharayatra.weebly.com/"><img src="https://www.mdmarketingdigital.com/blog/wp-content/uploads/2024/01/que-es-el-marketing-digital-1-1200x900.jpg" alt="project" /></a>
-            <h4 style="margin: 15px 0;">Digital Marketing</h4>
+       <div class="project__card mix design">
+    <a href="https://viharayatra.weebly.com/">
+        <img src="https://www.mdmarketingdigital.com/blog/wp-content/uploads/2024/01/que-es-el-marketing-digital-1-1200x900.jpg" alt="project" />
+    </a>
+    <h4 style="margin: 15px 0;">Digital Marketing</h4>
     <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
         <li>Improved online presence through Google Analytics, SEO, and Google Ads</li>
         <li>Tracked and optimized site performance using Google Analytics</li>
@@ -1113,12 +1150,13 @@
         <li>Conducted SEO audits and resolved issues to boost search rankings</li>
         <li>Managed and optimized Google Ads campaigns for better ROI</li>
     </ul>
-        <a href="https://docs.google.com/document/d/1uYv0ruzVb0YY0XzTCK4ax1l2G-x90ENx/edit?usp=sharing&ouid=117247420458496169293&rtpof=true&sd=true">
-        <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000;border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
-            View Details
-        </button>
-    </a> 
-        </div>
+    <button class="view-details-btn" data-doc="digital2.pdf">
+        View Details
+    </button>
+    <div class="doc-preview" style="display: none;">
+        <img src="images/digital2.pdf" alt="Document Preview" />
+    </div>
+</div>
       </div>
     </section>
     
@@ -1528,5 +1566,37 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       </script>
+    
+   <script>
+     document.addEventListener('DOMContentLoaded', () => {
+    const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const docPreview = button.nextElementSibling; // Get the next sibling (doc-preview div)
+            if (docPreview.style.display === 'none' || docPreview.style.display === '') {
+                docPreview.style.display = 'block';
+                // Position the preview near the button
+                const rect = button.getBoundingClientRect();
+                docPreview.style.top = `${rect.bottom + window.scrollY + 5}px`;
+                docPreview.style.left = `${rect.left + window.scrollX}px`;
+            } else {
+                docPreview.style.display = 'none';
+            }
+        });
+    });
+
+    // Hide preview when clicking outside
+    document.addEventListener('click', (e) => {
+        const docPreviews = document.querySelectorAll('.doc-preview');
+        docPreviews.forEach(preview => {
+            if (!preview.contains(e.target) && !e.target.classList.contains('view-details-btn')) {
+                preview.style.display = 'none';
+            }
+        });
+    });
+});
+  </script>
   </body>
 </html>
