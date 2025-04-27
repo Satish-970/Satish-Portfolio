@@ -882,7 +882,16 @@
         background-color: var(--primary-color-dark);
       }
 
+.header__image img {
+  border-radius: 12px; /* Smooth corners */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  display: block; /* Ensures proper rendering */
+}
 
+.header__image img:hover {
+  transform: translateY(-5px); /* Slight lift for 3D effect */
+  box-shadow: 0 4px 0 #ff5733; /* Colored line (orange, adjust color as needed) */
+}
 
       
     </style>
