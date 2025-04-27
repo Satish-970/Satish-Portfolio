@@ -634,10 +634,21 @@
           display: flex;
         }
 
-        nav {
-          position: static;
-        }
+    nav {
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+  }
+  nav {
+    background-color: rgba(3, 6, 15, 0.9);
+}
+[data-theme="light"] nav {
+  background-color: rgba(224, 224, 224, 0.9); /* Adjust for light theme */
+}
 
+[data-theme="dark"] nav {
+  background-color: rgba(26, 26, 26, 0.9); /* Adjust for dark theme */
+}
         .nav__bar {
           padding: 2rem 1rem;
         }
@@ -661,6 +672,7 @@
 
         .header__container {
           padding: 0 1rem;
+          padding-top: 70px;
           grid-template-columns: repeat(2, 1fr);
           align-items: center;
           gap: 2rem;
@@ -804,30 +816,6 @@
         padding-top: 18px;
         padding-left: 10px;
       }
-
-     #topBtn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: #060f75;
-  color: white;
-  cursor: pointer;
-  padding: 12px 18px;
-  border-radius: 50%;
-  font-size: 18px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#topBtn:hover {
-  background-color: #0707b2;
-}
-      #topBtn {
-  /* Existing styles */
-  display: none; /* Hide by default */
-}
 
       /* Theme Toggle Styles */
       .theme-toggle {
@@ -1091,6 +1079,12 @@
 /* Hide main content until preloader is gone */
 body:not(.loaded) > *:not(.preloader) {
   visibility: hidden;
+}
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+  padding-top: 7rem; /* Add extra padding to push content below navbar */
 }
 
       
@@ -1518,7 +1512,7 @@ body:not(.loaded) > *:not(.preloader) {
           <div class="loading-message" style="display: none; color: var(--text-light); margin-top: 1rem; text-align: center;">Sending...</div>
         </form>
     </section>
- <button id="topBtn" title="Go to top">↑</button>
+ 
     <footer class="footer">
       <div class="section__container footer__container">
         <div class="footer__col">
@@ -1756,13 +1750,7 @@ body:not(.loaded) > *:not(.preloader) {
         }
       }
     </script>
-    <script>
-        const topBtn = document.getElementById("topBtn");
-      
-        topBtn.addEventListener("click", function () {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      </script>
+
     
   <!-- Add this JavaScript at the end of your <script> tags, before </body> -->
 <script>
@@ -1825,15 +1813,6 @@ body:not(.loaded) > *:not(.preloader) {
       }
     });
   });
-</script>
-<script>window.addEventListener('scroll', function () {
-  const topBtn = document.getElementById('topBtn');
-  if (window.scrollY > 300) { // Show button after scrolling 300px
-    topBtn.style.display = 'block';
-  } else {
-    topBtn.style.display = 'none';
-  }
-});
   </script>
   </body>
 </html>
