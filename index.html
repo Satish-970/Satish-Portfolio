@@ -1798,8 +1798,30 @@ body:not(.loaded) > *:not(.preloader) {
     });
   };
 </script>
-   <!-- Tidio Chatbot Script -->
-    <script src="//code.tidio.co/your-unique-tidio-script.js"></script>
+    
+   <script src="https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+    window.AgentInitializer.init({
+      rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
+      formID: "0196780295ee7122bd0ba94b69563ee95eb1",
+      queryParams: ["skipWelcome=1", "maximizable=1"],
+      domain: "https:\/\/www.jotform.com",
+      isInitialOpen: false,
+      isDraggable: false,
+      background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
+      buttonBackgroundColor: "#051258",
+      buttonIconColor: "#FFFFFF",
+      variant: false,
+      customizations: {
+        greeting: "Yes",
+        greetingMessage: "Hi there, my name is Nani! Do you know how I can help you?",
+        pulse: "Yes",
+        position: "right"
+      }
+    });
+  });
+</script>
 
   </body>
 </html>
