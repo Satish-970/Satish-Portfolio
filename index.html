@@ -898,43 +898,44 @@
         box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6); /* Glowing gold line effect */
       }
  /* Preloader Styles */
+/* Preloader Styles */
 .preloader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--secondary-color-dark); /* Matches theme background */
+  background-color: var(--secondary-color-dark);
   display: flex;
-  flex-direction: column; /* Stack spinner and text vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Above all content */
+  z-index: 9999;
   opacity: 1;
   transition: opacity 0.5s ease;
 }
 
 .preloader--hidden {
   opacity: 0;
-  pointer-events: none; /* Disable interactions when hidden */
+  pointer-events: none;
 }
 
 .preloader__spinner {
-  width: 90px; /* Consistent size for logo and orbit */
-  height: 90px;
+  width: 80px;
+  height: 80px;
   position: relative;
-  margin-bottom: 1.5rem; /* Space between spinner and text */
+  margin-bottom: 1.5rem;
 }
 
 .preloader__logo {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50px; /* Logo size */
-  height: 50px;
-  transform: translate(-50%, -50%); /* Center logo */
-  z-index: 1; /* Above orbiting dots */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); /* Subtle shadow for depth */
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .preloader__orbit {
@@ -943,92 +944,93 @@
   position: absolute;
   top: 0;
   left: 0;
-  animation: spin 2s linear infinite; /* Smooth orbit animation */
+  animation: spin 1.8s linear infinite;
 }
 
 .preloader__orbit-line {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 6px; /* Small orbiting dots */
-  height: 6px;
-  background: var(--primary-color); /* Theme-consistent color */
+  width: 5px;
+  height: 5px;
+  background: var(--primary-color);
   border-radius: 50%;
   transform-origin: center;
-  box-shadow: 0 0 8px var(--primary-color); /* Glow effect */
+  box-shadow: 0 0 6px var(--primary-color);
 }
 
 .preloader__orbit-line:nth-child(1) {
-  transform: rotate(0deg) translate(30px, 0);
+  transform: rotate(0deg) translate(28px, 0);
 }
 
 .preloader__orbit-line:nth-child(2) {
-  transform: rotate(72deg) translate(30px, 0);
+  transform: rotate(72deg) translate(28px, 0);
 }
 
 .preloader__orbit-line:nth-child(3) {
-  transform: rotate(144deg) translate(30px, 0);
+  transform: rotate(144deg) translate(28px, 0);
 }
 
 .preloader__orbit-line:nth-child(4) {
-  transform: rotate(216deg) translate(30px, 0);
+  transform: rotate(216deg) translate(28px, 0);
 }
 
 .preloader__orbit-line:nth-child(5) {
-  transform: rotate(288deg) translate(30px, 0);
+  transform: rotate(288deg) translate(28px, 0);
 }
 
 .preloader__text {
   text-align: center;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Consistent font with fallbacks */
+  font-family: "Poppins", sans-serif;
+  position: relative;
 }
 
 .preloader__text-line {
   display: block;
-  font-size: 1.4rem; /* Balanced size for readability */
-  font-weight: 600; /* Bold but not overpowering */
-  color: var(--white); /* Theme-consistent text color */
-  letter-spacing: 0.5px; /* Subtle spacing for clarity */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Depth and readability */
-  opacity: 0; /* For fade-in animation */
-  transform: translateY(10px); /* Slight lift effect */
-  animation: fadeIn 0.5s ease forwards; /* Smooth appearance */
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.4s ease forwards;
 }
 
 .preloader__text-line:nth-child(2) {
-  font-size: 1.1rem; /* Slightly smaller for hierarchy */
-  font-weight: 400; /* Lighter weight for contrast */
-  color: var(--primary-color); /* Accent color for second line */
-  animation-delay: 0.3s; /* Staggered animation */
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  animation-delay: 0.3s;
+  position: relative;
 }
 
-/* Blinking cursor for second line */
+/* Cursor only on second line */
 .preloader__text-line:nth-child(2)::after {
   content: "|";
   position: absolute;
-  right: -10px; /* Adjusted for better alignment */
   color: var(--primary-color);
-  font-size: 1.1rem; /* Matches text size */
-  line-height: 1.1rem; /* Vertical alignment */
-  animation: blink 0.7s step-end infinite; /* Smoother blink */
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-left: 4px;
+  animation: blink 0.7s step-end infinite;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .preloader__spinner {
-    width: 60px; /* Smaller spinner for mobile */
+    width: 60px;
     height: 60px;
   }
 
   .preloader__logo {
-    width: 40px; /* Smaller logo */
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 
   .preloader__orbit-line {
-    width: 5px; /* Slightly smaller dots */
-    height: 5px;
-    transform-origin: center;
+    width: 4px;
+    height: 4px;
   }
 
   .preloader__orbit-line:nth-child(1),
@@ -1037,15 +1039,15 @@
   .preloader__orbit-line:nth-child(4),
   .preloader__orbit-line:nth-child(5) {
     transform-origin: center;
-    transform: rotate(calc(72deg * var(--i))) translate(25px, 0); /* Adjusted orbit radius */
+    transform: rotate(calc(72deg * var(--i))) translate(25px, 0);
   }
 
   .preloader__text-line {
-    font-size: 1.2rem; /* Smaller text for mobile */
+    font-size: 1.2rem;
   }
 
   .preloader__text-line:nth-child(2) {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -1055,7 +1057,7 @@
   }
 
   .preloader__text-line:nth-child(2) {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -1082,11 +1084,10 @@
   }
 }
 
-/* Ensure main content is hidden until preloader is gone */
+/* Hide main content until preloader is gone */
 body:not(.loaded) > *:not(.preloader) {
   visibility: hidden;
 }
-
 
       
     </style>
@@ -1762,41 +1763,41 @@ body:not(.loaded) > *:not(.preloader) {
   <!-- Add this JavaScript at the end of your <script> tags, before </body> -->
 <script>
   window.onload = function () {
-  const preloader = document.querySelector('.preloader');
-  const textLines = document.querySelectorAll('.preloader__text-line');
+    const preloader = document.querySelector('.preloader');
+    const textLines = document.querySelectorAll('.preloader__text-line');
 
-  // Typing animation
-  function typeText(element, text, speed, callback) {
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      } else {
-        callback();
+    // Typing animation
+    function typeText(element, text, speed, callback) {
+      let i = 0;
+      element.textContent = ''; // Clear initial text
+      function type() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          callback();
+        }
       }
+      type();
     }
-    type();
-  }
 
-  // Start typing first line
-  typeText(textLines[0], textLines[0].getAttribute('data-text'), 50, function () {
-    // Start typing second line after first is done
-    typeText(textLines[1], textLines[1].getAttribute('data-text'), 50, function () {
-      // Fade out preloader after typing is complete
-      setTimeout(() => {
-        preloader.classList.add('preloader--hidden');
-        document.body.classList.add('loaded');
-        // Remove preloader from DOM after transition
+    // Start typing first line
+    typeText(textLines[0], textLines[0].getAttribute('data-text'), 60, function () {
+      // Start typing second line
+      typeText(textLines[1], textLines[1].getAttribute('data-text'), 60, function () {
+        // Fade out preloader after typing
         setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 500); // Match CSS transition duration
-      }, 500); // Slight delay after typing completes
+          preloader.classList.add('preloader--hidden');
+          document.body.classList.add('loaded');
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 500);
+        }, 800); // Delay for cursor visibility
+      });
     });
-  });
-};
-  </script>
+  };
+</script>
    
   </body>
 </html>
