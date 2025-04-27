@@ -1790,29 +1790,33 @@ body:not(.loaded) > *:not(.preloader) {
     });
   };
 </script>
-    
-   <script src="https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js"></script>
+
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
 <script>
   window.addEventListener("DOMContentLoaded", function() {
     window.AgentInitializer.init({
+      agentRenderURL: "https://agent.jotform.com/0196780295ee7122bd0ba94b69563ee95eb1",
       rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
-      formID: "0196780295ee7122bd0ba94b69563ee95eb1",
+      formID: "https://form.jotform.com/251165265378058",
       queryParams: ["skipWelcome=1", "maximizable=1"],
-      domain: "https:\/\/www.jotform.com",
-      isInitialOpen: false,
+      domain: "https://www.jotform.com",
       isDraggable: false,
       background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
       buttonBackgroundColor: "#051258",
       buttonIconColor: "#FFFFFF",
       variant: false,
       customizations: {
-        greeting: "Yes",
-        greetingMessage: "Hi there, my name is Nani! Do you know how I can help you?",
-        pulse: "Yes",
-        position: "right"
-      }
+        "greeting": "Yes",
+        "greetingMessage": "Hi! How can I assist you?",
+        "openByDefault": "No",
+        "pulse": "Yes",
+        "position": "right",
+        "autoOpenChatIn": "0"
+      },
+      isVoice: false,
     });
   });
-  </script>
+</script>
+    
   </body>
 </html>
