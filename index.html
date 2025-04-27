@@ -886,19 +886,170 @@
       }
       
       .header__image img {
-        border-radius: 12px; /* Smooth corners */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-        display: block; /* Ensure proper rendering */
-      }
+  width: auto; /* Remove width constraints */
+  height: auto;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
       
       .header__image img:hover {
         transform: scale(1.05) translateY(-5px); /* Enlarge slightly and lift */
         box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6); /* Glowing gold line effect */
       }
+ /* Preloader Styles */
+    .preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color-dark); /* Matches your dark theme background */
+  display: flex;
+  flex-direction: column; /* Stack spinner and text vertically */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it’s above all content */
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.preloader--hidden {
+  opacity: 0;
+  pointer-events: none; /* Disable interactions when hidden */
+}
+
+.preloader__spinner {
+  width: 80px; /* Size to accommodate logo and orbiting dots */
+  height: 80px;
+  position: relative;
+}
+
+.preloader__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px; /* Logo size */
+  height: 50px;
+  transform: translate(-50%, -50%); /* Center logo */
+  z-index: 1; /* Ensure logo is above orbiting dots */
+}
+
+.preloader__orbit {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: spin 2s linear infinite; /* Spin animation for orbiting dots */
+}
+
+.preloader__orbit-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px; /* Small dot for orbiting effect */
+  height: 6px; /* Dot size */
+  background: var(--primary-color); /* Primary color for visibility */
+  border-radius: 50%; /* Circular dots */
+  transform-origin: center;
+}
+
+.preloader__orbit-line:nth-child(1) {
+  transform: rotate(0deg) translate(30px, 0); /* Position on circular path */
+}
+
+.preloader__orbit-line:nth-child(2) {
+  transform: rotate(72deg) translate(30px, 0);
+}
+
+.preloader__orbit-line:nth-child(3) {
+  transform: rotate(144deg) translate(30px, 0);
+}
+
+.preloader__orbit-line:nth-child(4) {
+  transform: rotate(216deg) translate(30px, 0);
+}
+
+.preloader__orbit-line:nth-child(5) {
+  transform: rotate(288deg) translate(30px, 0);
+}
+
+.preloader__text {
+  margin-top: 2rem;
+  text-align: center;
+  font-family: "Poppins", sans-serif; /* Match your site’s font */
+}
+
+.preloader__text-line {
+  display: block;
+  font-size: 1.8rem; /* Bold and prominent */
+  font-weight: 600; /* Bold for impact */
+  color: var(--white); /* Matches your text color */
+  position: relative;
+  overflow: hidden; /* Hide text during typing */
+  white-space: nowrap; /* Keep text on one line */
+}
+
+.preloader__text-line:nth-child(2) {
+  font-size: 1.5rem; /* Slightly smaller for hierarchy */
+  font-weight: 400; /* Lighter weight for contrast */
+  color: var(--primary-color); /* Accent color for second line */
+}
+
+/* Blinking cursor for second line only */
+.preloader__text-line:nth-child(2)::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  color: var(--primary-color);
+  font-size: 1.5rem; /* Match second line text size */
+  line-height: 1.5rem; /* Align cursor vertically */
+  animation: blink 0.5s step-end infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Ensure main content is hidden until preloader is gone */
+body:not(.loaded) > *:not(.preloader) {
+  visibility: hidden;
+}
+
+
       
     </style>
   </head>
   <body>
+     <!-- Add this at the very start of your <body> (before <header>) -->
+<div class="preloader">
+  <div class="preloader__spinner">
+    <img src="favicon-32x32.png" alt="SP Logo" class="preloader__logo" />
+    <div class="preloader__orbit">
+      <span class="preloader__orbit-line"></span>
+      <span class="preloader__orbit-line"></span>
+      <span class="preloader__orbit-line"></span>
+      <span class="preloader__orbit-line"></span>
+      <span class="preloader__orbit-line"></span>
+    </div>
+  </div>
+  <div class="preloader__text">
+    <span class="preloader__text-line" data-text="Code builds the future"></span>
+    <span class="preloader__text-line" data-text="one line at a time"></span>
+  </div>
+</div>
     <header class="header">
       <div class="header__socials">
         <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
@@ -1549,7 +1700,44 @@
         });
       </script>
     
- 
+  <!-- Add this JavaScript at the end of your <script> tags, before </body> -->
+<script>
+  window.onload = function () {
+  const preloader = document.querySelector('.preloader');
+  const textLines = document.querySelectorAll('.preloader__text-line');
+
+  // Typing animation
+  function typeText(element, text, speed, callback) {
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      } else {
+        callback();
+      }
+    }
+    type();
+  }
+
+  // Start typing first line
+  typeText(textLines[0], textLines[0].getAttribute('data-text'), 50, function () {
+    // Start typing second line after first is done
+    typeText(textLines[1], textLines[1].getAttribute('data-text'), 50, function () {
+      // Fade out preloader after typing is complete
+      setTimeout(() => {
+        preloader.classList.add('preloader--hidden');
+        document.body.classList.add('loaded');
+        // Remove preloader from DOM after transition
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500); // Match CSS transition duration
+      }, 500); // Slight delay after typing completes
+    });
+  });
+};
+  </script>
    
   </body>
 </html>
