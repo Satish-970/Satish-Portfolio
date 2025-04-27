@@ -881,17 +881,20 @@
       .theme-option:hover {
         background-color: var(--primary-color-dark);
       }
-
-.header__image img {
-  border-radius: 12px; /* Smooth corners */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-  display: block; /* Ensures proper rendering */
-}
-
-.header__image img:hover {
-  transform: scale(1.05) translateY(-5px); /* Enlarge slightly and lift */
-  box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6); /* Glowing gold line effect */
-}
+      .header__image {
+        overflow: visible; /* Prevent clipping of enlarged image */
+      }
+      
+      .header__image img {
+        border-radius: 12px; /* Smooth corners */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        display: block; /* Ensure proper rendering */
+      }
+      
+      .header__image img:hover {
+        transform: scale(1.05) translateY(-5px); /* Enlarge slightly and lift */
+        box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6); /* Glowing gold line effect */
+      }
       
     </style>
   </head>
