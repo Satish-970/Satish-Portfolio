@@ -163,7 +163,20 @@
         color: var(--secondary-color);
         background-image: var(--gradient);
       }
-    
+    /* Target the navigation container */
+nav {
+    padding: 10px 20px; /* Adds 10px padding on top/bottom and 20px on left/right */
+}
+
+/* Alternatively, target individual links/buttons for more control */
+nav a, nav button {
+    padding: 8px 15px; /* Adds padding around each link/button */
+}
+
+/* Specifically for the Contact button to ensure it looks balanced */
+nav button {
+    padding: 8px 20px; /* Adjust padding for the button */
+}
       nav {
         position: fixed;
         top: 0; /* Ensure it sticks to the top */
