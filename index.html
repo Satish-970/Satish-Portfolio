@@ -2,16 +2,15 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LDYL7SZQ1M"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LDYL7SZQ1M');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDYL7SZQ1M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LDYL7SZQ1M');
+    </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -167,77 +166,216 @@
     
       nav {
         position: fixed;
-        isolation: isolate;
+        top: 0; /* Ensure it sticks to the top */
         width: 100%;
-        z-index: 9;
+        z-index: 100; /* Keep it above other content */
+        background-color: var(--secondary-color); /* Ensure a visible background */
+        isolation: isolate;
       }
     
+      /* Theme-specific backgrounds */
+      [data-theme="light"] nav {
+        background-color: var(--secondary-color);
+      }
+    
+      [data-theme="dark"] nav {
+        background-color: var(--secondary-color);
+      }
+    
+      /* Navbar container */
       .nav__bar {
         position: relative;
-        isolation: isolate;
         max-width: var(--max-width);
         margin-inline: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 1rem;
+        overflow: visible;
+        padding: 1rem;
       }
     
+      /* Navbar header (contains logo and menu button) */
       .nav__header {
-        padding: 1rem;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: var(--secondary-color);
+        padding: 0; /* Remove extra padding */
+        background-color: transparent; /* Ensure transparency */
       }
     
+      /* Logo styling */
       .nav__logo a {
         font-size: 1.5rem;
         font-weight: 700;
+        color: var(--white);
       }
     
       .nav__logo a span {
         color: var(--primary-color-dark);
       }
     
+      /* Navigation links (hidden by default on mobile) */
       .nav__links {
         position: absolute;
-        top: 68px;
+        top: 60px; /* Adjusted to fit below the navbar */
         left: 0;
         width: 100%;
-        padding: 2rem;
+        padding: 1.5rem;
         list-style: none;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
         transform: translateY(-100%);
         background-color: var(--secondary-color-light);
-        transition: 0.5s;
-        z-index: -1;
+        transition: transform 0.5s ease;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
       }
     
       .nav__links.open {
         transform: translateY(0);
       }
     
+      /* Link styling */
       .link a {
-        transition: 0.3s;
+        font-size: 1rem;
+        color: var(--white);
+        transition: color 0.3s;
+        display: block;
       }
     
       .link.btn a {
         color: var(--secondary-color) !important;
+        padding: 0.5rem 1rem;
+        background-image: var(--gradient);
+        border-radius: 5rem;
       }
     
       .link a:hover {
         color: var(--primary-color-dark);
       }
     
+      /* Hamburger menu button */
       .nav__menu__btn {
         font-size: 1.5rem;
+        color: var(--white);
         cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+    
+      /* Navigation adjustments for mobile */
+      @media (max-width: 1024px) {
+        .nav__menu__btn {
+          display: block;
+        }
+    
+        .nav__links {
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          padding: 1.5rem;
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 1.5rem;
+          transform: translateY(-100%);
+          background-color: var(--secondary-color-light);
+          transition: transform 0.5s ease;
+          z-index: 10;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          visibility: hidden;
+        }
+    
+        .nav__links.open {
+          transform: translateY(0);
+          visibility: visible;
+        }
+    
+        .nav__bar {
+          padding: 0.5rem 1rem; /* Reduced padding for smaller screens */
+        }
+    
+        .section__container {
+          padding: 3rem 1rem;
+          padding-top: 5rem; /* Adjusted to clear the navbar */
+        }
+      }
+    
+      /* Ensure desktop behavior remains intact */
+      @media (min-width: 1025px) {
+        nav {
+          background-color: rgba(3, 6, 15, 0.9); /* Semi-transparent background for desktop */
+        }
+    
+        [data-theme="light"] nav {
+          background-color: rgba(224, 224, 224, 0.9);
+        }
+    
+        [data-theme="dark"] nav {
+          background-color: rgba(26, 26, 26, 0.9);
+        }
+    
+        .nav__bar {
+          padding: 1rem 2rem;
+        }
+    
+        .nav__header {
+          padding: 0;
+          background-color: transparent;
+        }
+    
+        .nav__menu__btn {
+          display: none;
+        }
+    
+        .nav__links {
+          position: static;
+          padding: 0;
+          flex-direction: row;
+          background-color: transparent;
+          transform: none;
+          z-index: 10;
+          box-shadow: none;
+        }
+    
+        .link {
+          width: 100%;
+          text-align: center;
+        }
+    
+        .link a {
+          font-size: 1.1rem;
+        }
+      }
+    
+      /* Additional adjustment for smaller mobile screens */
+      @media (max-width: 480px) {
+        .nav__logo a {
+          font-size: 1.2rem;
+        }
+    
+        .nav__menu__btn {
+          font-size: 1.2rem;
+        }
+    
+        .nav__links {
+          top: 50px; /* Adjust for smaller navbar height */
+          padding: 1rem;
+          gap: 1rem;
+        }
+    
+        .link a {
+          font-size: 0.9rem;
+        }
       }
     
       .header__container {
@@ -599,6 +737,51 @@
         text-align: center;
       }
     
+      /* Theme Toggle Styles */
+      .theme-toggle {
+        position: relative;
+        margin-left: auto;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+    
+      .theme-icon {
+        font-size: 1.5rem;
+        color: var(--white);
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+      }
+    
+      .theme-icon:hover {
+        background-color: var(--secondary-color-light);
+      }
+    
+      /* Theme option colors (for icon state indication) */
+      [data-theme="light"] .theme-icon {
+        color: #ebb709;
+      }
+    
+      [data-theme="dark"] .theme-icon {
+        color: #f4b60b;
+      }
+    
+      [data-theme="default"] .theme-icon {
+        color: #ecd909;
+      }
+    
+      /* Adjustments for mobile */
+      @media (max-width: 1024px) {
+        .theme-toggle {
+          margin-right: 0;
+        }
+    
+        .theme-icon {
+          font-size: 1.2rem;
+          padding: 0.3rem;
+        }
+      }
+    
       @media (width > 480px) {
         .banner__container {
           grid-template-columns: repeat(2, 1fr);
@@ -630,7 +813,7 @@
         }
       }
     
-      @media (min-width: 1025px) { /* Changed from 768px to 1025px */
+      @media (min-width: 1025px) {
         .header__socials {
           display: flex;
         }
@@ -737,36 +920,6 @@
         }
       }
     
-      /* Navigation adjustments for mobile */
-      @media (max-width: 1024px) {
-        .nav__menu__btn {
-          display: block;
-        }
-    
-        .nav__links {
-          position: absolute;
-          top: 68px;
-          left: 0;
-          width: 100%;
-          padding: 2rem;
-          flex-direction: column;
-          transform: translateY(-100%);
-          background-color: var(--secondary-color-light);
-          transition: 0.5s;
-          z-index: -1;
-          max-height: 80vh;
-          overflow-y: auto;
-        }
-    
-        .nav__links.open {
-          transform: translateY(0);
-        }
-    
-        .nav__bar {
-          padding: 1rem;
-        }
-      }
-    
       /* Header adjustments for mobile */
       @media (max-width: 1024px) {
         .header__container {
@@ -832,23 +985,6 @@
         .service__card img {
           width: 60px;
           height: 60px;
-        }
-      }
-    
-      /* Theme toggle adjustments for mobile */
-      @media (max-width: 1024px) {
-        .theme-toggle {
-          margin-right: 0;
-        }
-    
-        .theme-dropdown {
-          right: 0;
-          min-width: 100px;
-        }
-    
-        .theme-option {
-          padding: 0.3rem 0.8rem;
-          font-size: 0.9rem;
         }
       }
     
@@ -973,66 +1109,6 @@
         color: #ee9821;
         padding-top: 18px;
         padding-left: 10px;
-      }
-    
-      /* Theme Toggle Styles */
-      .theme-toggle {
-        position: relative;
-        margin-left: auto;
-        margin-right: 1rem;
-      }
-    
-      .theme-icon {
-        font-size: 1.5rem;
-        color: var(--white);
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 50%;
-        transition: background-color 0.3s;
-      }
-    
-      .theme-icon:hover {
-        background-color: var(--secondary-color-light);
-      }
-    
-      .theme-dropdown {
-        position: absolute;
-        top: 100%;
-        right: 9;
-        background-color: var(--secondary-color-light);
-        border-radius: 5px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        display: none;
-        flex-direction: column;
-        min-width: 120px;
-        z-index: 10;
-      }
-    
-      .theme-toggle:hover .theme-dropdown {
-        display: flex;
-      }
-    
-      .theme-option {
-        padding: 0.5rem 1rem;
-        color: var(--white);
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-    
-      [data-theme="light"] .theme-option {
-        color: #ebb709;
-      }
-    
-      [data-theme="dark"] .theme-option {
-        color: #f4b60b;
-      }
-    
-      [data-theme="default"] .theme-option {
-        color: #ecd909;
-      }
-    
-      .theme-option:hover {
-        background-color: var(--primary-color-dark);
       }
     
       .header__image {
@@ -1244,23 +1320,24 @@
     </style>
   </head>
   <body>
-     <!-- Add this at the very start of your <body> (before <header>) -->
-<div class="preloader">
-  <div class="preloader__spinner">
-    <img src="favicon-32x32.png" alt="SP Logo" class="preloader__logo" />
-    <div class="preloader__orbit">
-      <span class="preloader__orbit-line"></span>
-      <span class="preloader__orbit-line"></span>
-      <span class="preloader__orbit-line"></span>
-      <span class="preloader__orbit-line"></span>
-      <span class="preloader__orbit-line"></span>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader__spinner">
+        <img src="favicon-32x32.png" alt="SP Logo" class="preloader__logo" />
+        <div class="preloader__orbit">
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+        </div>
+      </div>
+      <div class="preloader__text">
+        <span class="preloader__text-line" data-text="Forging the Future"></span>
+        <span class="preloader__text-line" data-text="Code. Innovate. Impact"></span>
+      </div>
     </div>
-  </div>
-  <div class="preloader__text">
-    <span class="preloader__text-line" data-text="Forging the Future"></span>
-    <span class="preloader__text-line" data-text="Code. Innovate. Impact"></span>
-  </div>
-</div>
+    
     <header class="header">
       <div class="header__socials">
         <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
@@ -1282,16 +1359,11 @@
             <li class="link"><a href="#about">About</a></li>
             <li class="link"><a href="#client">Resume</a></li>
             <li class="link"><a href="#project">Projects</a></li>
-            <li class="link"><a href="#service">SKills</a></li>
+            <li class="link"><a href="#service">Skills</a></li>
             <li class="link"><a href="#blog">Blog</a></li>
             <li class="link btn"><a href="#contact">Contact</a></li>
             <li class="theme-toggle">
               <i class="ri-sun-line theme-icon"></i>
-              <div class="theme-dropdown">
-                <div class="theme-option" data-theme="default">Default</div>
-                <div class="theme-option" data-theme="light">Light</div>
-                <div class="theme-option" data-theme="dark">Dark</div>
-              </div>
             </li>
           </ul>
         </div>
@@ -1320,18 +1392,17 @@
         <img src="images/IMG_6225.JPEG.jpg" alt="about" />
       </div>
       <div class="about__content">
-        <h2 class="section__header">
-            About me</h2>
-            Satish Pakalapati
-           A relentless B.Tech Computer Science student at Lovely Professional University,
-        mastering the art of Data Science and Digital Marketing with unmatched drive.
+        <h2 class="section__header">About me</h2>
+        <p>Satish Pakalapati
+          A relentless B.Tech Computer Science student at Lovely Professional University,
+          mastering the art of Data Science and Digital Marketing with unmatched drive.
         </p>
         <h4>
           Expertise
           Fueled by a passion for innovation, Satish excels at crafting dynamic dashboards and engineering cutting-edge machine learning models.
           Committed to pushing boundaries, he continuously hones expertise in emerging technologies, 
           delivering high-impact solutions that redefine what's possible.
-          </h4>
+        </h4>
         <div class="about__btns">
           <a href="images/Resume.pdf" target="_blank" class="download__btn" rel="noopener noreferrer">
             Download CV
@@ -1347,81 +1418,76 @@
       <div class="banner__card">
         <span><i class="ri-pen-nib-line"></i></span>
         <div>
-            <h4>Vision in Action</h4>
-            <p>
-              A relentless imagination drives every decision — igniting exploration, creation, and mastery in every pursuit.
-            </p>
+          <h4>Vision in Action</h4>
+          <p>
+            A relentless imagination drives every decision — igniting exploration, creation, and mastery in every pursuit.
+          </p>
         </div>
       </div>
       <div class="banner__card">
         <span><i class="ri-layout-masonry-line"></i></span>
         <div>
-            <h4>Build with Purpose</h4>
-            <p>
-              Forged digital solutions by fusing analytical rigor with creative brilliance — from data to design, built with unwavering purpose and precision.
-            </p>
+          <h4>Build with Purpose</h4>
+          <p>
+            Forged digital solutions by fusing analytical rigor with creative brilliance — from data to design, built with unwavering purpose and precision.
+          </p>
         </div>
       </div>
       <div class="banner__card">
         <span><i class="ri-checkbox-line"></i></span>
         <div>
-            <h4>Quality, Always</h4>
-            <p>
-             Committed to flawless, dependable builds — every project meticulously tested, refined, and optimized for maximum impact.
-            </p>
+          <h4>Quality, Always</h4>
+          <p>
+            Committed to flawless, dependable builds — every project meticulously tested, refined, and optimized for maximum impact.
+          </p>
         </div>
       </div>
     </section>
 
     <section class="section__container client__container" id="client">
-        <h2 class="section__subheader">Resume</h2>
-        <div class="testimonial__card1">
-           <a href="https://www.boardinfinity.com/programs/college-courses"> <h3>Summer Training Program</h3></a>
-            <p>Board Infinity - DBMS and SQL</p>
-            <p>
-              Mastered a robust foundation in database management systems, encompassing DBMS evolution, core types, ER diagrams, normalization (1NF–3NF), indexing (B/B+ Trees), and transaction principles including ACID, serializability, and concurrency control.
-              Excelled in SQL, wielding advanced proficiency in DDL, DML, DCL, and TCL commands, alongside precise data manipulation using WHERE, ORDER BY, regex, and functions (string, boolean, grouping). Seamlessly navigated joins, subqueries, GROUP BY, HAVING, UNION, CASE, and complex multi-table queries.
-            Proficiently bridged MySQL and NoSQL, adept at distinguishing relational from non-relational databases with clarity and precision.
-            </p>
-            <h4 >Learnt Tech <span>: MySQl,SQL</span></h4>
-          </div>
-          <h3 class="test">Education</h3>
-        <div class="testimonial__grid">
-         
-          <div class="testimonial__card">
-            <h2>Btech</h2>
-            <p>
-                2022 - present<br>
-                lovely Professional University</br>
-              
-            </p>
-            <h4>7.98/10.00</h4>
-          </div>
-          <div class="testimonial__card">
-            <h2>Intermediate</h2>
-            <p>
-                2020 - 2022<br>
-                DKNP JR College</br>
-              </p>
-            <h4>957/1000</h4>
-          </div>
-          <div class="testimonial__card">
-            <h2>Secondary</h2>
-            <p>
-                2019 - 2020<br>
-                Sri Siddartha Educational Institutions</br>
-              </p>
-            <h4>10.00/10.00</h4>
-          </div>
-          <div class="about__btns">
+      <h2 class="section__subheader">Resume</h2>
+      <div class="testimonial__card1">
+        <a href="https://www.boardinfinity.com/programs/college-courses"><h3>Summer Training Program</h3></a>
+        <p>Board Infinity - DBMS and SQL</p>
+        <p>
+          Mastered a robust foundation in database management systems, encompassing DBMS evolution, core types, ER diagrams, normalization (1NF–3NF), indexing (B/B+ Trees), and transaction principles including ACID, serializability, and concurrency control.
+          Excelled in SQL, wielding advanced proficiency in DDL, DML, DCL, and TCL commands, alongside precise data manipulation using WHERE, ORDER BY, regex, and functions (string, boolean, grouping). Seamlessly navigated joins, subqueries, GROUP BY, HAVING, UNION, CASE, and complex multi-table queries.
+          Proficiently bridged MySQL and NoSQL, adept at distinguishing relational from non-relational databases with clarity and precision.
+        </p>
+        <h4>Learnt Tech <span>: MySQL, SQL</span></h4>
+      </div>
+      <h3 class="test">Education</h3>
+      <div class="testimonial__grid">
+        <div class="testimonial__card">
+          <h2>Btech</h2>
+          <p>
+            2022 - present<br>Lovely Professional University</br>
+          </p>
+          <h4>7.98/10.00</h4>
+        </div>
+        <div class="testimonial__card">
+          <h2>Intermediate</h2>
+          <p>
+            2020 - 2022<br>DKNP JR College</br>
+          </p>
+          <h4>957/1000</h4>
+        </div>
+        <div class="testimonial__card">
+          <h2>Secondary</h2>
+          <p>
+            2019 - 2020<br>Sri Siddartha Educational Institutions</br>
+          </p>
+          <h4>10.00/10.00</h4>
+        </div>
+        <div class="about__btns">
           <a href="images/Resume.pdf" target="_blank" class="download__btn" rel="noopener noreferrer">
             Download CV
           </a>
         </div>
-        </div>
-      </section>
-      
-<section class="section__container project__container" id="project">
+      </div>
+    </section>
+    
+    <section class="section__container project__container" id="project">
       <div class="project__header">
         <h2 class="section__header">My Projects</h2>
         <div class="project__nav">
@@ -1443,187 +1509,179 @@
           <a href="https://colab.research.google.com/github/Satish-970/Bitcoin-price/blob/main/Bitcoin.ipynb"><img src="https://elitedatascience.com/wp-content/uploads/2018/05/Model-Training-Feature.jpg" alt="project" /></a>
           <h4 style="margin: 15px 0;">Bitcoin Close Price</h4>
           <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
-              <li>Aims to analyze and predict Bitcoin prices using historical data</li>
-              <li>Involves data preprocessing</li>
-              <li>Includes exploratory analysis</li>
-              <li>Uses machine learning with Linear Regression to predict future Bitcoin prices</li>
+            <li>Aims to analyze and predict Bitcoin prices using historical data</li>
+            <li>Involves data preprocessing</li>
+            <li>Includes exploratory analysis</li>
+            <li>Uses machine learning with Linear Regression to predict future Bitcoin prices</li>
           </ul>
           <a href="https://github.com/Satish-970/Bitcoin-price">
-              <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
-                  View on GitHub
-              </button>
+            <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View on GitHub
+            </button>
           </a>
         </div>
         <div class="project__card mix game">
-            <a href="https://www.linkedin.com/in/satishpakalapati/details/projects/"><img src="https://datakwery-bucket1.s3.amazonaws.com/featured_image/2021/11/02/7steps.png" alt="project" /></a>
-            <h4 style="margin: 15px 0;">Data Science Job Salary Analysis</h4>
-    <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
-        <li>Analyzes employment data using Tableau</li>
-        <li>Creates interactive visualizations</li>
-        <li>Explores relationships between salary, job titles, experience levels, company locations, and employment types</li>
-        <li>Provides insights into global salary trends and employment patterns</li>
-    </ul>
-    <a href="https://github.com/Satish-970/DataSciencejobsAnalysis">
-        <button style="padding: 12px 24px; border: none;  color:#ebb709;background-color: #000000;border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
-            View on GitHub
-        </button>
-    </a>
+          <a href="https://www.linkedin.com/in/satishpakalapati/details/projects/"><img src="https://datakwery-bucket1.s3.amazonaws.com/featured_image/2021/11/02/7steps.png" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Data Science Job Salary Analysis</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Analyzes employment data using Tableau</li>
+            <li>Creates interactive visualizations</li>
+            <li>Explores relationships between salary, job titles, experience levels, company locations, and employment types</li>
+            <li>Provides insights into global salary trends and employment patterns</li>
+          </ul>
+          <a href="https://github.com/Satish-970/DataSciencejobsAnalysis">
+            <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View on GitHub
+            </button>
+          </a>
         </div>
         <div class="project__card mix web">
-            <a href="https://github.com/Satish-970/SQL"><img src="https://miro.medium.com/v2/resize:fit:1400/1*806NY7TXHwi2DvSjuYdHIg.jpeg" alt="project" /></a>
-            <h4 style="margin: 15px 0;">Query Based Analysis - SQL</h4>
-    <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
-        <li>Showcases SQL skills through real-world HR data analysis</li>
-        <li>Focuses on employees, departments, salaries, and job roles</li>
-        <li>Uses a relational HR database for practical use cases</li>
-        <li>Demonstrates joins, subqueries, aggregations, and logic-based queries</li>
-        <li>Aims to derive actionable HR insights through efficient SQL querying</li>
-    </ul>
-    <a href="https://github.com/Satish-970/SQL">
-        <button style="padding: 12px 24px; color:#ebb709;background-color: #000000 ;border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
-            View on GitHub
-        </button>
-    </a>
+          <a href="https://github.com/Satish-970/SQL"><img src="https://miro.medium.com/v2/resize:fit:1400/1*806NY7TXHwi2DvSjuYdHIg.jpeg" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Query Based Analysis - SQL</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Showcases SQL skills through real-world HR data analysis</li>
+            <li>Focuses on employees, departments, salaries, and job roles</li>
+            <li>Uses a relational HR database for practical use cases</li>
+            <li>Demonstrates joins, subqueries, aggregations, and logic-based queries</li>
+            <li>Aims to derive actionable HR insights through efficient SQL querying</li>
+          </ul>
+          <a href="https://github.com/Satish-970/SQL">
+            <button style="padding: 12px 24px; color:#ebb709;background-color: #000000; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View on GitHub
+            </button>
+          </a>
         </div>
-      <div class="project__card mix design">
-            <a href="https://viharayatra.weebly.com/"><img src="https://www.mdmarketingdigital.com/blog/wp-content/uploads/2024/01/que-es-el-marketing-digital-1-1200x900.jpg" alt="project" /></a>
-            <h4 style="margin: 15px 0;">Digital Marketing</h4>
-    <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
-        <li>Improved online presence through Google Analytics, SEO, and Google Ads</li>
-        <li>Tracked and optimized site performance using Google Analytics</li>
-        <li>Researched high-impact keywords via SEMrush and Google Keyword Planner</li>
-        <li>Conducted SEO audits and resolved issues to boost search rankings</li>
-        <li>Managed and optimized Google Ads campaigns for better ROI</li>
-    </ul>
-        <a href="https://docs.google.com/document/d/1uYv0ruzVb0YY0XzTCK4ax1l2G-x90ENx/edit?usp=sharing&ouid=117247420458496169293&rtpof=true&sd=true">
-        <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000;border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
-            View Details
-        </button>
-    </a> 
+        <div class="project__card mix design">
+          <a href="https://viharayatra.weebly.com/"><img src="https://www.mdmarketingdigital.com/blog/wp-content/uploads/2024/01/que-es-el-marketing-digital-1-1200x900.jpg" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Digital Marketing</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Improved online presence through Google Analytics, SEO, and Google Ads</li>
+            <li>Tracked and optimized site performance using Google Analytics</li>
+            <li>Researched high-impact keywords via SEMrush and Google Keyword Planner</li>
+            <li>Conducted SEO audits and resolved issues to boost search rankings</li>
+            <li>Managed and optimized Google Ads campaigns for better ROI</li>
+          </ul>
+          <a href="https://docs.google.com/document/d/1uYv0ruzVb0YY0XzTCK4ax1l2G-x90ENx/edit?usp=sharing&ouid=117247420458496169293&rtpof=true&sd=true">
+            <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View Details
+            </button>
+          </a>
         </div>
       </div>
     </section>
     
     <section class="section__container service__container" id="service">
-        <p class="section__subheader">🛠 Skills & Technologies</p>
-        <h2 class="section__header">What Do I Learn?</h2>
-        <p class="section__description">
-          Specialized in programming, data visualization, and cutting-edge digital technologies, expertly analyzing and conveying insights with precision and impact.
-        </p>
-        <div class="service__grid">
-          <div class="service__card">
-            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="40" /></span>
-            <h4>Python</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://www.admecindia.co.in/wp-content/uploads/2015/10/admec-internal-Loops-in-C-and-C.jpg" alt="C/C++" width="40" /></span>
-            <h4>C/C++</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://static.vecteezy.com/system/resources/previews/051/336/407/non_2x/java-programming-transparent-logo-free-png.png" alt="Java" width="40" /></span>
-            <h4>Java</h4>  
+      <p class="section__subheader">🛠 Skills & Technologies</p>
+      <h2 class="section__header">What Do I Learn?</h2>
+      <p class="section__description">
+        Specialized in programming, data visualization, and cutting-edge digital technologies, expertly analyzing and conveying insights with precision and impact.
+      </p>
+      <div class="service__grid">
+        <div class="service__card">
+          <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="40" /></span>
+          <h4>Python</h4>
         </div>
-          <div class="service__card">
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Rlogo.png" alt="R" width="40" /></span>
-            <h4>R Language</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://www.rogersoft.com/storage/attachments/1694676692.jpg" alt="SQL" width="40" /></span>
-            <h4>SQL</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://img.icons8.com/color/48/000000/tableau-software.png" alt="Tableau Prep" width="40" /></span>
-            <h4>Tableau Prep</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://img.icons8.com/color/48/000000/google-ads.png" alt="Google Ads" width="40" /></span>
-            <h4>SEO & Analytics</h4>
-            <p>Google Ads, SEMrush</p>
-          </div>
-          <div class="service__card">
-            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="40" /></span>
-            <h4>MySQL</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjK8c4bgTWytBoJtUXN7cdSh4Jk2ROi9Zu3_v-jrrrb6-saAlAJCj6mDNbIHm-lWOOu1QfpiqWZCJUZrio3wYfmSNPDYw1bJbx2RZZySgZigF5q5qYg8ISXMPNYDi_6siZar5pJf31KDWl6/s1600/oracle.png" alt="Oracle" width="40" /></span>
-            <h4>Oracle</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://miro.medium.com/v2/resize:fit:786/format:webp/0*UcvDXUMq8onpVRZO.png" alt="Tableau Desktop" width="50" /></span>
-            <h4>Tableau Desktop</h4>
-          </div>
-          <div class="service__card">
-            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hadoop/hadoop-original.svg" alt="Apache" width="40" /></span>
-            <h4>Apache</h4>
-            <p>Hadoop, Hive, Hbase, Pig</p>
-          </div>
-          <div class="service__card">
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png" alt="Jyputer" width="40" /></span>
-            <h4>Jupyter Notebook</h4>
-            <p>Python Libraries, Data Visualization</p>
-          </div>
-          <div class="service__card">
-            <span><img src="https://images.icon-icons.com/3685/PNG/512/github_logo_icon_229278.png" alt="GitHub" width="40" /></span>
-            <h4>Version Control</h4>
-            <p>Git, GitHub</p>
-          </div>
+        <div class="service__card">
+          <span><img src="https://www.admecindia.co.in/wp-content/uploads/2015/10/admec-internal-Loops-in-C-and-C.jpg" alt="C/C++" width="40" /></span>
+          <h4>C/C++</h4>
         </div>
-      </section>
-      
-
-   
-      <section class="section__container client__container" id="client">
-        <h2 class="section__subheader">Certifications / Courses</h2>
-        
-        <div class="testimonial__grid">
-         
-          <div class="testimonial__card">
-            <h2>NPTEL</h2>
-            <p>
-                <img src="images/12210470_MOOC_DZU2MXFCertificate_page-0001.jpg" alt=" Image" />
-              Earned a prestigious cloud computing certificate from Swayam, an initiative by the Indian Government, unlocking deep expertise in cloud computing technologies and their transformative applications.
-            </p>
-            <a href="https://drive.google.com/file/d/1kXMl26U8M9dGRxv2W_9ZGZ5N3DfTL2JC/view?usp=sharing"><h4>click Here</h4></a>
-          </div>
-          <div class="testimonial__card">
-            <h2>Coursera - Supervised Learning</h2>
-            <p>
-                <img src="images/12210470_MOOC_7VK5AUXCertificate_page-0001.jpg" alt=" Image" />
-                Earned a Supervised Learning certificate through Coursera, a globally recognized online learning platform offering courses from top universities and institutions.
-              </p>
-              <a href="https://drive.google.com/file/d/10To75UJpChRRsKQdrSanRagJ7EbPhhMp/view?usp=sharing"><h4>click Here</h4></a>
-          </div>
-          <div class="testimonial__card">
-            <h2>Hacker rank - Python</h2>
-            <p>
-                <img src="images/python_basic certificate_page-0001.jpg" alt=" Image" />
-                Achieved a Python certification from HackerRank, demonstrating proficiency in core programming concepts and problem-solving skills.
-              </p>
-              <a href="https://www.hackerrank.com/certificates/b18906a3a19c"><h4>click Here</h4></a>
-
-          </div>
-          <div class="testimonial__card">
-            <h2>Coursera - Tableau</h2>
-            <p>
-                <img src="images/12210470_MOOC_PVXX77WCertificate_page-0001.jpg" alt=" Image" />
-                Completed a Tableau course on Coursera, gaining hands-on experience in data visualization, dashboard creation, and interactive analytics.
-              </p>
-              <a href="https://drive.google.com/file/d/1wL3HxfTMfYB-OstuJikaRAdDZVYf3-s3/view?usp=sharing"><h4>click Here</h4></a>
-
-          </div>
-          <div class="testimonial__card">
-            <h2>Coursera - C++</h2>
-            <p>
-                <img src="images/COURSERA_CPP_page-0001.jpg" alt=" Image" />
-                Completed a C++ programming course on Coursera, covering object-oriented principles, data structures, and algorithmic problem solving.
-              </p>
-              <a href="https://drive.google.com/file/d/1jjIG6ASvM0bo2-P_SIURsjUvIwdd348o/view?usp=sharing"><h4>click Here</h4></a>
-
-          </div>
+        <div class="service__card">
+          <span><img src="https://static.vecteezy.com/system/resources/previews/051/336/407/non_2x/java-programming-transparent-logo-free-png.png" alt="Java" width="40" /></span>
+          <h4>Java</h4>  
         </div>
-      </section>
-      
-
+        <div class="service__card">
+          <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Rlogo.png" alt="R" width="40" /></span>
+          <h4>R Language</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://www.rogersoft.com/storage/attachments/1694676692.jpg" alt="SQL" width="40" /></span>
+          <h4>SQL</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://img.icons8.com/color/48/000000/tableau-software.png" alt="Tableau Prep" width="40" /></span>
+          <h4>Tableau Prep</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://img.icons8.com/color/48/000000/google-ads.png" alt="Google Ads" width="40" /></span>
+          <h4>SEO & Analytics</h4>
+          <p>Google Ads, SEMrush</p>
+        </div>
+        <div class="service__card">
+          <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="40" /></span>
+          <h4>MySQL</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjK8c4bgTWytBoJtUXN7cdSh4Jk2ROi9Zu3_v-jrrrb6-saAlAJCj6mDNbIHm-lWOOu1QfpiqWZCJUZrio3wYfmSNPDYw1bJbx2RZZySgZigF5q5qYg8ISXMPNYDi_6siZar5pJf31KDWl6/s1600/oracle.png" alt="Oracle" width="40" /></span>
+          <h4>Oracle</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://miro.medium.com/v2/resize:fit:786/format:webp/0*UcvDXUMq8onpVRZO.png" alt="Tableau Desktop" width="50" /></span>
+          <h4>Tableau Desktop</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hadoop/hadoop-original.svg" alt="Apache" width="40" /></span>
+          <h4>Apache</h4>
+          <p>Hadoop, Hive, Hbase, Pig</p>
+        </div>
+        <div class="service__card">
+          <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png" alt="Jyputer" width="40" /></span>
+          <h4>Jupyter Notebook</h4>
+          <p>Python Libraries, Data Visualization</p>
+        </div>
+        <div class="service__card">
+          <span><img src="https://images.icon-icons.com/3685/PNG/512/github_logo_icon_229278.png" alt="GitHub" width="40" /></span>
+          <h4>Version Control</h4>
+          <p>Git, GitHub</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section__container client__container" id="client">
+      <h2 class="section__subheader">Certifications / Courses</h2>
+      <div class="testimonial__grid">
+        <div class="testimonial__card">
+          <h2>NPTEL</h2>
+          <p>
+            <img src="images/12210470_MOOC_DZU2MXFCertificate_page-0001.jpg" alt=" Image" />
+            Earned a prestigious cloud computing certificate from Swayam, an initiative by the Indian Government, unlocking deep expertise in cloud computing technologies and their transformative applications.
+          </p>
+          <a href="https://drive.google.com/file/d/1kXMl26U8M9dGRxv2W_9ZGZ5N3DfTL2JC/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Coursera - Supervised Learning</h2>
+          <p>
+            <img src="images/12210470_MOOC_7VK5AUXCertificate_page-0001.jpg" alt=" Image" />
+            Earned a Supervised Learning certificate through Coursera, a globally recognized online learning platform offering courses from top universities and institutions.
+          </p>
+          <a href="https://drive.google.com/file/d/10To75UJpChRRsKQdrSanRagJ7EbPhhMp/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Hacker rank - Python</h2>
+          <p>
+            <img src="images/python_basic certificate_page-0001.jpg" alt=" Image" />
+            Achieved a Python certification from HackerRank, demonstrating proficiency in core programming concepts and problem-solving skills.
+          </p>
+          <a href="https://www.hackerrank.com/certificates/b18906a3a19c"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Coursera - Tableau</h2>
+          <p>
+            <img src="images/12210470_MOOC_PVXX77WCertificate_page-0001.jpg" alt=" Image" />
+            Completed a Tableau course on Coursera, gaining hands-on experience in data visualization, dashboard creation, and interactive analytics.
+          </p>
+          <a href="https://drive.google.com/file/d/1wL3HxfTMfYB-OstuJikaRAdDZVYf3-s3/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Coursera - C++</h2>
+          <p>
+            <img src="images/COURSERA_CPP_page-0001.jpg" alt=" Image" />
+            Completed a C++ programming course on Coursera, covering object-oriented principles, data structures, and algorithmic problem solving.
+          </p>
+          <a href="https://drive.google.com/file/d/1jjIG6ASvM0bo2-P_SIURsjUvIwdd348o/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+      </div>
+    </section>
+    
     <section class="section__container blog__container" id="blog">
       <p class="section__subheader">Blog Posts</p>
       <h2 class="section__header">I Love To Write Articles</h2>
@@ -1650,20 +1708,20 @@
     </section>
 
     <section class="section__container contact__container" id="contact">
-        <p class="section__subheader">Contact Me</p>
-        <h2 class="section__header">Get In Touch</h2>
-        <form id="contact-form" action="https://formspree.io/f/mvgkywqy" method="POST" class="contact__form">
-          <div class="input__row">
-            <input type="text" name="firstName" id="firstName" placeholder="First Name" required />
-            <input type="text" name="lastName" id="lastName" placeholder="Last Name" required />
-          </div>
-          <input type="email" name="email" id="email" placeholder="Email" required />
-          <input type="text" name="message" id="message" placeholder="Description" required />
-          <button type="submit" class="btn">Submit</button>
-          <div class="success-message" style="display: none; color: var(--primary-color-dark); margin-top: 1rem; text-align: center;">Message sent successfully!</div>
-          <div class="error-message" style="display: none; color: #ff3333; margin-top: 1rem; text-align: center;">Failed to send message. Try again!</div>
-          <div class="loading-message" style="display: none; color: var(--text-light); margin-top: 1rem; text-align: center;">Sending...</div>
-        </form>
+      <p class="section__subheader">Contact Me</p>
+      <h2 class="section__header">Get In Touch</h2>
+      <form id="contact-form" action="https://formspree.io/f/mvgkywqy" method="POST" class="contact__form">
+        <div class="input__row">
+          <input type="text" name="firstName" id="firstName" placeholder="First Name" required />
+          <input type="text" name="lastName" id="lastName" placeholder="Last Name" required />
+        </div>
+        <input type="email" name="email" id="email" placeholder="Email" required />
+        <input type="text" name="message" id="message" placeholder="Description" required />
+        <button type="submit" class="btn">Submit</button>
+        <div class="success-message" style="display: none; color: var(--primary-color-dark); margin-top: 1rem; text-align: center;">Message sent successfully!</div>
+        <div class="error-message" style="display: none; color: #ff3333; margin-top: 1rem; text-align: center;">Failed to send message. Try again!</div>
+        <div class="loading-message" style="display: none; color: var(--text-light); margin-top: 1rem; text-align: center;">Sending...</div>
+      </form>
     </section>
  
     <footer class="footer">
@@ -1683,11 +1741,10 @@
         <div class="footer__col">
           <div class="footer__links">
           </div>
-        </div>
           <div class="footer__links">
             <h4>Support</h4>
             <br><a href="mailto:satishpakalapati65@gmail.com">Contact</a>
-           <a href="https://satishportfolio.blogspot.com/">My Blog</a>
+            <a href="https://satishportfolio.blogspot.com/">My Blog</a>
           </div>
         </div>
       </div>
@@ -1697,279 +1754,240 @@
     </footer>
 
     <script>
-        // Form Submission
-        document.addEventListener('DOMContentLoaded', function() {
-          const form = document.getElementById('contact-form');
-          const successMessage = document.querySelector('.success-message');
-          const errorMessage = document.querySelector('.error-message');
-          const loadingMessage = document.querySelector('.loading-message');
-      
-          form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
+      // Form Submission
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contact-form');
+        const successMessage = document.querySelector('.success-message');
+        const errorMessage = document.querySelector('.error-message');
+        const loadingMessage = document.querySelector('.loading-message');
+    
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          successMessage.style.display = 'none';
+          errorMessage.style.display = 'none';
+          loadingMessage.style.display = 'none';
+    
+          const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/;
+          const emailInput = form.querySelector('input[name="email"]');
+          const messageInput = form.querySelector('input[name="message"]');
+    
+          if (!emailRegex.test(emailInput.value)) {
+            errorMessage.textContent = 'Please enter a valid email address!';
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+            return;
+          }
+    
+          if (messageInput.value.length < 10) {
+            errorMessage.textContent = 'Message must be at least 10 characters long!';
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+            return;
+          }
+    
+          loadingMessage.style.display = 'block';
+          try {
+            const response = await fetch(form.action, {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'Accept': 'application/json' }
+            });
             loadingMessage.style.display = 'none';
-      
-            const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/;
-            const emailInput = form.querySelector('input[name="email"]');
-            const messageInput = form.querySelector('input[name="message"]');
-      
-            if (!emailRegex.test(emailInput.value)) {
-              errorMessage.textContent = 'Please enter a valid email address!';
-              errorMessage.style.display = 'block';
-              setTimeout(() => errorMessage.style.display = 'none', 3000);
-              return;
+            if (response.ok) {
+              form.reset();
+              successMessage.style.display = 'block';
+              setTimeout(() => successMessage.style.display = 'none', 3000);
+            } else {
+              throw new Error('Submission failed');
             }
-      
-            if (messageInput.value.length < 10) {
-              errorMessage.textContent = 'Message must be at least 10 characters long!';
-              errorMessage.style.display = 'block';
-              setTimeout(() => errorMessage.style.display = 'none', 3000);
-              return;
-            }
-      
-            loadingMessage.style.display = 'block';
-            try {
-              const response = await fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-              });
-              loadingMessage.style.display = 'none';
-              if (response.ok) {
-                form.reset();
-                successMessage.style.display = 'block';
-                setTimeout(() => successMessage.style.display = 'none', 3000);
-              } else {
-                throw new Error('Submission failed');
-              }
-            } catch (error) {
-              loadingMessage.style.display = 'none';
-              errorMessage.textContent = error.message.includes('network')
-                ? 'Network error. Please check your connection.'
-                : 'Failed to send message. Try again!';
-              errorMessage.style.display = 'block';
-              setTimeout(() => errorMessage.style.display = 'none', 3000);
-            }
-          });
+          } catch (error) {
+            loadingMessage.style.display = 'none';
+            errorMessage.textContent = error.message.includes('network')
+              ? 'Network error. Please check your connection.'
+              : 'Failed to send message. Try again!';
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+          }
         });
-      </script>
-      <script>
-        const testimonials = document.querySelectorAll('.testimonial__card, .testimonial__card1');
-      
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('show');
-              observer.unobserve(entry.target); // optional: animate once
-            }
-          });
-        }, {
-          threshold: 0.4
+      });
+    </script>
+    
+    <script>
+      const testimonials = document.querySelectorAll('.testimonial__card, .testimonial__card1');
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target); // optional: animate once
+          }
         });
-      
-        testimonials.forEach(card => {
-          observer.observe(card);
-        });
-      </script>
-      
+      }, {
+        threshold: 0.4
+      });
+    
+      testimonials.forEach(card => {
+        observer.observe(card);
+      });
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
-      const menuBtn = document.getElementById("menu-btn");
-      const navLinks = document.getElementById("nav-links");
-      const menuBtnIcon = menuBtn.querySelector("i");
+      document.addEventListener('DOMContentLoaded', () => {
+        // Navbar Toggle
+        const menuBtn = document.getElementById("menu-btn");
+        const navLinks = document.getElementById("nav-links");
+        const menuBtnIcon = menuBtn.querySelector("i");
 
-      menuBtn.addEventListener("click", (e) => {
-        navLinks.classList.toggle("open");
-
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute(
-          "class",
-          isOpen ? "ri-close-line" : "ri-menu-3-line"
-        );
-      });
-
-      navLinks.addEventListener("click", (e) => {
-        navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-3-line");
-      });
-
-      const mixer = mixitup(".project__grid");
-
-      const swiper = new Swiper(".swiper", {
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-        },
-      });
-
-      const scrollRevealOption = {
-        distance: "50px",
-        origin: "bottom",
-        duration: 1000,
-      };
-
-      ScrollReveal().reveal(".header__image img", {
-        ...scrollRevealOption,
-      });
-
-      ScrollReveal().reveal(".header__content h4", {
-        ...scrollRevealOption,
-        delay: 500,
-      });
-
-      ScrollReveal().reveal(".header__content h1", {
-        ...scrollRevealOption,
-        delay: 1000,
-      });
-
-      ScrollReveal().reveal(".header__content p", {
-        ...scrollRevealOption,
-        delay: 1500,
-      });
-
-      ScrollReveal().reveal(".header__content .btn", {
-        ...scrollRevealOption,
-        delay: 2000,
-      });
-
-      ScrollReveal().reveal(".about__image img", {
-        ...scrollRevealOption,
-        origin: "left",
-      });
-
-      ScrollReveal().reveal(".about__content .section__header", {
-        ...scrollRevealOption,
-        delay: 500,
-      });
-
-      ScrollReveal().reveal(".about__content p", {
-        ...scrollRevealOption,
-        delay: 1000,
-      });
-
-      ScrollReveal().reveal(".about__content h4", {
-        ...scrollRevealOption,
-        delay: 1500,
-      });
-
-      ScrollReveal().reveal(".about__btns", {
-        ...scrollRevealOption,
-        delay: 2000,
-      });
-
-      ScrollReveal().reveal(".service__card", {
-        duration: 1000,
-        interval: 500,
-      });
-
-      ScrollReveal().reveal(".blog__card", {
-        ...scrollRevealOption,
-        interval: 500,
-      });
-      
-    
-      // Theme Toggle Functionality
-      const themeOptions = document.querySelectorAll('.theme-option');
-      const themeIcon = document.querySelector('.theme-icon');
-
-      // Load saved theme from localStorage
-      const savedTheme = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcon(savedTheme);
-
-      themeOptions.forEach(option => {
-        option.addEventListener('click', () => {
-          const theme = option.getAttribute('data-theme');
-          document.documentElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
-          updateThemeIcon(theme);
+        menuBtn.addEventListener("click", (e) => {
+          console.log("Menu button clicked");
+          navLinks.classList.toggle("open");
+          const isOpen = navLinks.classList.contains("open");
+          menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-3-line");
         });
-      });
 
+        navLinks.addEventListener("click", (e) => {
+          if (e.target.tagName === "A") {
+            navLinks.classList.remove("open");
+            menuBtnIcon.setAttribute("class", "ri-menu-3-line");
+          }
+        });
 
-      function updateThemeIcon(theme) {
-        if (theme === 'light') {
-          themeIcon.classList.replace('ri-moon-line', 'ri-sun-line');
-          themeIcon.classList.replace('ri-contrast-2-line', 'ri-sun-line');
-        } else if (theme === 'dark') {
-          themeIcon.classList.replace('ri-sun-line', 'ri-moon-line');
-          themeIcon.classList.replace('ri-contrast-2-line', 'ri-moon-line');
-        } else {
-          themeIcon.classList.replace('ri-sun-line', 'ri-contrast-2-line');
-          themeIcon.classList.replace('ri-moon-line', 'ri-contrast-2-line');
+        // Theme Toggle Functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+
+        // Load saved theme from localStorage
+        let currentTheme = localStorage.getItem('theme') || 'default';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+          if (currentTheme === 'default') {
+            currentTheme = 'light';
+          } else if (currentTheme === 'light') {
+            currentTheme = 'dark';
+          } else if (currentTheme === 'dark') {
+            currentTheme = 'default';
+          }
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+          updateThemeIcon(currentTheme);
+        });
+
+        function updateThemeIcon(theme) {
+          if (theme === 'light') {
+            themeIcon.classList.replace('ri-moon-line', 'ri-sun-line');
+            themeIcon.classList.replace('ri-contrast-2-line', 'ri-sun-line');
+          } else if (theme === 'dark') {
+            themeIcon.classList.replace('ri-sun-line', 'ri-moon-line');
+            themeIcon.classList.replace('ri-contrast-2-line', 'ri-moon-line');
+          } else {
+            themeIcon.classList.replace('ri-sun-line', 'ri-contrast-2-line');
+            themeIcon.classList.replace('ri-moon-line', 'ri-contrast-2-line');
+          }
         }
-      }
+
+        // Mixitup Initialization
+        const mixer = mixitup(".project__grid");
+
+        // Swiper Initialization
+        const swiper = new Swiper(".swiper", {
+          loop: true,
+          pagination: {
+            el: ".swiper-pagination",
+          },
+        });
+
+        // ScrollReveal Initialization
+        const scrollRevealOption = {
+          distance: "50px",
+          origin: "bottom",
+          duration: 1000,
+        };
+
+        ScrollReveal().reveal(".header__image img", { ...scrollRevealOption });
+        ScrollReveal().reveal(".header__content h4", { ...scrollRevealOption, delay: 500 });
+        ScrollReveal().reveal(".header__content h1", { ...scrollRevealOption, delay: 1000 });
+        ScrollReveal().reveal(".header__content p", { ...scrollRevealOption, delay: 1500 });
+        ScrollReveal().reveal(".header__content .btn", { ...scrollRevealOption, delay: 2000 });
+        ScrollReveal().reveal(".about__image img", { ...scrollRevealOption, origin: "left" });
+        ScrollReveal().reveal(".about__content .section__header", { ...scrollRevealOption, delay: 500 });
+        ScrollReveal().reveal(".about__content p", { ...scrollRevealOption, delay: 1000 });
+        ScrollReveal().reveal(".about__content h4", { ...scrollRevealOption, delay: 1500 });
+        ScrollReveal().reveal(".about__btns", { ...scrollRevealOption, delay: 2000 });
+        ScrollReveal().reveal(".service__card", { duration: 1000, interval: 500 });
+        ScrollReveal().reveal(".blog__card", { ...scrollRevealOption, interval: 500 });
+      });
     </script>
 
-    
-  <!-- Add this JavaScript at the end of your <script> tags, before </body> -->
-<script>
-  window.onload = function () {
-    const preloader = document.querySelector('.preloader');
-    const textLines = document.querySelectorAll('.preloader__text-line');
+    <!-- Preloader Script -->
+    <script>
+      window.onload = function () {
+        const preloader = document.querySelector('.preloader');
+        const textLines = document.querySelectorAll('.preloader__text-line');
 
-    // Typing animation
-    function typeText(element, text, speed, callback) {
-      let i = 0;
-      element.textContent = ''; // Clear initial text
-      function type() {
-        if (i < text.length) {
-          element.textContent += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        } else {
-          callback();
+        // Typing animation
+        function typeText(element, text, speed, callback) {
+          let i = 0;
+          element.textContent = ''; // Clear initial text
+          function type() {
+            if (i < text.length) {
+              element.textContent += text.charAt(i);
+              i++;
+              setTimeout(type, speed);
+            } else {
+              callback();
+            }
+          }
+          type();
         }
-      }
-      type();
-    }
 
-    // Start typing first line
-    typeText(textLines[0], textLines[0].getAttribute('data-text'), 60, function () {
-      // Start typing second line
-      typeText(textLines[1], textLines[1].getAttribute('data-text'), 60, function () {
-        // Fade out preloader after typing
-        setTimeout(() => {
-          preloader.classList.add('preloader--hidden');
-          document.body.classList.add('loaded');
-          setTimeout(() => {
-            preloader.style.display = 'none';
-          }, 500);
-        }, 800); // Delay for cursor visibility
-      });
-    });
-  };
-</script>
+        // Start typing first line
+        typeText(textLines[0], textLines[0].getAttribute('data-text'), 60, function () {
+          // Start typing second line
+          typeText(textLines[1], textLines[1].getAttribute('data-text'), 60, function () {
+            // Fade out preloader after typing
+            setTimeout(() => {
+              preloader.classList.add('preloader--hidden');
+              document.body.classList.add('loaded');
+              setTimeout(() => {
+                preloader.style.display = 'none';
+              }, 500);
+            }, 800); // Delay for cursor visibility
+          });
+        });
+      };
+    </script>
 
     <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-<script>
-  window.addEventListener("DOMContentLoaded", function() {
-    window.AgentInitializer.init({
-      agentRenderURL: "https://agent.jotform.com/0196780295ee7122bd0ba94b69563ee95eb1",
-      rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
-      formID: "https://form.jotform.com/251165265378058",
-      queryParams: ["skipWelcome=1", "maximizable=1"],
-      domain: "https://www.jotform.com",
-      isDraggable: false,
-      background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
-      buttonBackgroundColor: "#051258",
-      buttonIconColor: "#FFFFFF",
-      variant: false,
-      customizations: {
-        "greeting": "Yes",
-        "greetingMessage": "Hi! I am Satish's Assistant, How can I assist you?",
-        "openByDefault": "No",
-        "pulse": "Yes",
-        "position": "right",
-        "autoOpenChatIn": "0"
-      },
-      isVoice: false,
-    });
-  });
-</script>
-    
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        window.AgentInitializer.init({
+          agentRenderURL: "https://agent.jotform.com/0196780295ee7122bd0ba94b69563ee95eb1",
+          rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
+          formID: "https://form.jotform.com/251165265378058",
+          queryParams: ["skipWelcome=1", "maximizable=1"],
+          domain: "https://www.jotform.com",
+          isDraggable: false,
+          background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
+          buttonBackgroundColor: "#051258",
+          buttonIconColor: "#FFFFFF",
+          variant: false,
+          customizations: {
+            "greeting": "Yes",
+            "greetingMessage": "Hi! I am Satish's Assistant, How can I assist you?",
+            "openByDefault": "No",
+            "pulse": "Yes",
+            "position": "right",
+            "autoOpenChatIn": "1"
+          },
+          isVoice: false,
+        });
+      });
+    </script>
   </body>
 </html>
