@@ -86,7 +86,7 @@
         max-width: var(--max-width);
         margin: auto;
         padding: 5rem 1rem;
-        padding-top: 7rem; /* Add extra padding to push content below navbar */
+        padding-top: 0.5rem; /* Add extra padding to push content below navbar */
       }
     
       .section__header {
@@ -163,20 +163,7 @@
         color: var(--secondary-color);
         background-image: var(--gradient);
       }
-    /* Target the navigation container */
-nav {
-    padding: 10px 20px; /* Adds 10px padding on top/bottom and 20px on left/right */
-}
-
-/* Alternatively, target individual links/buttons for more control */
-nav a, nav button {
-    padding: 8px 15px; /* Adds padding around each link/button */
-}
-
-/* Specifically for the Contact button to ensure it looks balanced */
-nav button {
-    padding: 8px 20px; /* Adjust padding for the button */
-}
+    
       nav {
         position: fixed;
         top: 0; /* Ensure it sticks to the top */
@@ -319,7 +306,7 @@ nav button {
     
         .section__container {
           padding: 3rem 1rem;
-          padding-top: 5rem; /* Adjusted to clear the navbar */
+          padding-top: 3rem; /* Adjusted to clear the navbar */
         }
       }
     
@@ -392,7 +379,7 @@ nav button {
       }
     
       .header__container {
-        padding-top: 10rem;
+        padding-top: 8rem;
         display: grid;
         gap: 4rem;
       }
@@ -877,7 +864,9 @@ nav button {
           align-items: center;
           gap: 2rem;
         }
-    
+        .header__container {
+    padding-top: 6rem; /* Adjust for mobile */
+  }
         .header__content {
           padding-block: 5rem;
           text-align: left;
@@ -977,11 +966,6 @@ nav button {
     
         .header__content p {
           font-size: 0.9rem;
-        }
-    
-        .section__container {
-          padding: 3rem 1rem;
-          padding-top: 5rem;
         }
       }
     
@@ -1330,6 +1314,7 @@ nav button {
       body:not(.loaded) > *:not(.preloader) {
         visibility: hidden;
       }
+  
     </style>
   </head>
   <body>
@@ -1853,30 +1838,46 @@ nav button {
         const menuBtn = document.getElementById("menu-btn");
         const navLinks = document.getElementById("nav-links");
         const menuBtnIcon = menuBtn.querySelector("i");
-
+    
         menuBtn.addEventListener("click", (e) => {
           console.log("Menu button clicked");
           navLinks.classList.toggle("open");
           const isOpen = navLinks.classList.contains("open");
           menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-3-line");
         });
-
+    
         navLinks.addEventListener("click", (e) => {
           if (e.target.tagName === "A") {
             navLinks.classList.remove("open");
             menuBtnIcon.setAttribute("class", "ri-menu-3-line");
           }
         });
-
+    
+        // Scroll Offset for Navbar Links
+        document.querySelectorAll('.nav__links a').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            const navbarHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight-20;
+    
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          });
+        });
+    
         // Theme Toggle Functionality
         const themeToggle = document.querySelector('.theme-toggle');
         const themeIcon = document.querySelector('.theme-icon');
-
+    
         // Load saved theme from localStorage
         let currentTheme = localStorage.getItem('theme') || 'default';
         document.documentElement.setAttribute('data-theme', currentTheme);
         updateThemeIcon(currentTheme);
-
+    
         // Cycle through themes on click
         themeToggle.addEventListener('click', () => {
           if (currentTheme === 'default') {
@@ -1890,7 +1891,7 @@ nav button {
           localStorage.setItem('theme', currentTheme);
           updateThemeIcon(currentTheme);
         });
-
+    
         function updateThemeIcon(theme) {
           if (theme === 'light') {
             themeIcon.classList.replace('ri-moon-line', 'ri-sun-line');
@@ -1903,10 +1904,10 @@ nav button {
             themeIcon.classList.replace('ri-moon-line', 'ri-contrast-2-line');
           }
         }
-
+    
         // Mixitup Initialization
         const mixer = mixitup(".project__grid");
-
+    
         // Swiper Initialization
         const swiper = new Swiper(".swiper", {
           loop: true,
@@ -1914,14 +1915,14 @@ nav button {
             el: ".swiper-pagination",
           },
         });
-
+    
         // ScrollReveal Initialization
         const scrollRevealOption = {
           distance: "50px",
           origin: "bottom",
           duration: 1000,
         };
-
+    
         ScrollReveal().reveal(".header__image img", { ...scrollRevealOption });
         ScrollReveal().reveal(".header__content h4", { ...scrollRevealOption, delay: 500 });
         ScrollReveal().reveal(".header__content h1", { ...scrollRevealOption, delay: 1000 });
@@ -1936,7 +1937,7 @@ nav button {
         ScrollReveal().reveal(".blog__card", { ...scrollRevealOption, interval: 500 });
       });
     </script>
-
+    
     <!-- Preloader Script -->
     <script>
       window.onload = function () {
@@ -1992,14 +1993,33 @@ nav button {
           variant: false,
           customizations: {
             "greeting": "Yes",
-            "greetingMessage": "Hi! I am Satish's Assistant, How can I assist you?",
+            "greetingMessage": "Hi! How can I assist you?",
             "openByDefault": "No",
             "pulse": "Yes",
             "position": "right",
-            "autoOpenChatIn": "1"
+            "autoOpenChatIn": "0"
           },
           isVoice: false,
         });
+      });
+    </script>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Dynamically adjust the header padding based on navbar height
+        const navbar = document.querySelector('nav');
+        const headerContainer = document.querySelector('.header__container');
+    
+        function adjustHeaderPadding() {
+          const navbarHeight = navbar.offsetHeight;
+          headerContainer.style.paddingTop = `${navbarHeight + 20}px`; // Add extra 20px for buffer
+        }
+    
+        // Run on page load
+        adjustHeaderPadding();
+    
+        // Run on window resize to handle responsive changes
+        window.addEventListener('resize', adjustHeaderPadding);
       });
     </script>
   </body>
