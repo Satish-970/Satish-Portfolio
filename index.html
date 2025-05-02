@@ -1333,6 +1333,7 @@
   height: 24px;
   pointer-events: none;
   z-index: 9999;
+  display: none;
 }
 .custom-cursor::before,
 .custom-cursor::after {
@@ -1365,6 +1366,7 @@
   pointer-events: none;
   z-index: 9999;
   animation: pulse 1.5s infinite ease-in-out;
+  display: none;
 }
 @keyframes pulse {
   0% { box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark); }
@@ -1380,6 +1382,10 @@
   .cursor-dot {
     display: none;
   }
+}
+      .custom-cursor.active,
+.cursor-dot.active {
+  display: block;
 }
       
     </style>
@@ -2111,5 +2117,30 @@
     cursorDot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`;
   });
 </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.querySelector('.custom-cursor');
+  const cursorDot = document.querySelector('.cursor-dot');
+  const body = document.body;
+
+  // Show custom cursor on mouse enter
+  body.addEventListener('mouseenter', () => {
+    cursor.classList.add('active');
+    cursorDot.classList.add('active');
+  });
+
+  // Hide custom cursor on mouse leave
+  body.addEventListener('mouseleave', () => {
+    cursor.classList.remove('active');
+    cursorDot.classList.remove('active');
+  });
+
+  // Existing mousemove event for cursor movement
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
+    cursorDot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`;
+  });
+});
+    </script>
   </body>
 </html>
