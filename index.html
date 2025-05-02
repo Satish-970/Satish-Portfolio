@@ -1317,7 +1317,71 @@
       body:not(.loaded) > *:not(.preloader) {
         visibility: hidden;
       }
-  
+
+
+      body {
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  background-color: var(--secondary-color);
+  cursor: none; /* Hide default cursor for desktop */
+}
+
+/* Custom Cursor Styles */
+.custom-cursor {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 9999;
+}
+.custom-cursor::before,
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  background: var(--primary-color-dark);
+  box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark);
+  animation: pulse 1.5s infinite ease-in-out;
+  opacity: 0.8;
+}
+.custom-cursor::before {
+  width: 2px;
+  height: 24px;
+  top: 0;
+  left: 11px; /* Center vertically */
+}
+.custom-cursor::after {
+  width: 24px;
+  height: 2px;
+  top: 11px; /* Center horizontally */
+  left: 0;
+}
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
+  pointer-events: none;
+  z-index: 9999;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark); }
+  50% { box-shadow: 0 0 12px var(--primary-color-dark), 0 0 18px var(--primary-color-dark); }
+  100% { box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark); }
+}
+/* Show default cursor on mobile/touch devices */
+@media (max-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+  .custom-cursor,
+  .cursor-dot {
+    display: none;
+  }
+}
+      
     </style>
   </head>
   <body>
@@ -1338,7 +1402,8 @@
         <span class="preloader__text-line" data-text="Code. Innovate. Impact"></span>
       </div>
     </div>
-    
+    <div class="custom-cursor"></div>
+<div class="cursor-dot"></div>
     <header class="header">
       <div class="header__socials">
         <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
@@ -2038,5 +2103,13 @@
         window.addEventListener('resize', adjustHeaderPadding);
       });
     </script>
+    <script>
+  document.addEventListener('mousemove', (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
+    cursorDot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`;
+  });
+</script>
   </body>
 </html>
