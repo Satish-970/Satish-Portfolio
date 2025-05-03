@@ -1387,7 +1387,16 @@
 .cursor-dot.active {
   display: block;
 }
-      
+
+ 
+.project__card {
+  border-radius: 0 0 15px 15px; /* Top-left and top-right set to 0, bottom-right and bottom-left set to 15px */
+  border: 2px solid rgb(156, 127, 0);
+  transition: transform 0.3s ease;
+ }
+ .project__card:hover {
+  transform: scale(1.05); /* Zooms the element by 5% on hover */
+}
     </style>
   </head>
   <body>
