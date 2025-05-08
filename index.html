@@ -1393,6 +1393,48 @@
   border-radius: 0 0 15px 15px; /* Top-left and top-right set to 0, bottom-right and bottom-left set to 15px */
   border: 2px solid rgb(156, 127, 0);
 }
+      /* Active link styling */
+.nav__links .link.active a {
+  position: relative;
+  color: var(--primary-color-dark); /* Match hover color for consistency */
+}
+
+.nav__links .link.active a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; /* Position below the link text */
+  left: 0;
+  width: 100%;
+  height: 3px; /* Thicker for visibility */
+  background: var(--primary-color-dark); /* Gradient for a "filling" effect */
+  transform: scaleX(0); /* Start with zero width */
+  transform-origin: left; /* Grow from left to right */
+  animation: fillContainer 0.5s ease forwards; /* Trigger filling animation */
+}
+
+/* Animation for the filling effect */
+@keyframes fillContainer {
+  0% {
+    transform: scaleX(0); /* Start empty */
+  }
+  100% {
+    transform: scaleX(1); /* Fully filled */
+  }
+}
+
+/* Ensure non-active links don't show the underline */
+.nav__links .link a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent; /* Invisible when not active */
+  transform: scaleX(0); /* Keep it hidden */
+  transform-origin: left;
+  transition: transform 0.5s ease; /* Smooth transition when leaving */
+}
     </style>
   </head>
   <body>
@@ -2144,6 +2186,31 @@
   document.addEventListener('mousemove', (e) => {
     cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
     cursorDot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`;
+  });
+});
+    </script>
+       <script>
+      // Active link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav__links .link a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (window.pageYOffset >= sectionTop - 60) { // Adjust 60 for navbar height
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach((link) => {
+    const parentLi = link.parentElement;
+    parentLi.classList.remove('active');
+    if (link.getAttribute('href').substring(1) === current) {
+      parentLi.classList.add('active');
+    }
   });
 });
     </script>
