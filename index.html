@@ -1435,6 +1435,37 @@
   transform-origin: left;
   transition: transform 0.5s ease; /* Smooth transition when leaving */
 }
+      
+  /* Define the auroraText animation keyframes */
+  @keyframes auroraText {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Style for the word "Satish" */
+    .aurora-name {
+      font-size: 3rem; /* Adjust based on your --biggest-font-size variable */
+      text-align: center;
+      position: relative;
+      margin: 0;
+      -webkit-text-fill-color: transparent; /* Transparent text to show gradient */
+      -webkit-background-clip: text; /* Clip gradient to text */
+      background-clip: text; /* Standard property for compatibility */
+      background-image: linear-gradient(45deg, #f2bc32, #da9902, #D3D3D3,#2db6e9, #c89209);
+      background-size: 200% 200%; /* Large background for animation */
+      animation: auroraText 6s ease-in-out infinite; /* Apply animation */
+      visibility: visible; /* Ensure text is visible */
+      opacity: 1; /* Fully opaque */
+      transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); /* Initial transform */
+      transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.4s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.4s; /* Fade-in effect */
+    }
     </style>
   </head>
   <body>
@@ -1493,7 +1524,7 @@
         </div>
         <div class="header__content">
           <h4>Crafting Digital Excellence</h4>
-          <h1>Hi, This is Satish Pakalapati's Portfolio!</h1>
+         <h1>Hi, This is <span class="aurora-name">Satish </span>Pakalapati's Portfolio!</h1>
           <p>
             A dynamic Data Analyst and developer,
             fiercely dedicated to unlocking insights through data and driving AI-powered breakthroughs. 
