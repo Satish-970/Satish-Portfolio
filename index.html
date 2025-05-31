@@ -1466,6 +1466,46 @@
       transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); /* Initial transform */
       transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.4s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.4s; /* Fade-in effect */
     }
+
+       /* General Button and Social Icon Styles */
+  .btn, .download__btn, .project__btn, .project__card button, .about__btns a {
+    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out; /* Smooth transition for scale and brightness */
+  }
+
+  .btn:hover, .download__btn:hover, .project__btn:hover, .project__card button:hover, .about__btns a:hover {
+    transform: scale(1.1); /* Enlarge by 10% */
+    filter: brightness(1.1); /* Slight brightness increase for vibrancy */
+  }
+
+
+  /* Ensure project__btn active state retains hover effect */
+  .project__btn.mixitup-control-active:hover {
+    transform: scale(1.1); /* Maintain enlargement even when active */
+  }
+
+  /* Update mobile media query to disable hover effects */
+  @media (max-width: 1024px) {
+    .header__image img:hover,
+    .about__image img:hover,
+    .project__card:hover,
+    .service__card:hover,
+    .blog__card a:hover,
+    .footer__socials a:hover,
+    .theme-icon:hover,
+    .theme-option:hover,
+    .btn:hover,
+    .download__btn:hover,
+    .project__btn:hover,
+    .project__card button:hover,
+    .about__btns a:hover,
+    .header__content .btn:hover { /* Added specific Hire Me Now selector */
+      transform: none;
+      background-color: inherit;
+      color: inherit;
+      filter: none; /* Reset filter */
+      clip-path: none; /* Reset clip-path for images */
+    }
+  }
     </style>
   </head>
   <body>
@@ -1527,9 +1567,9 @@
          <h1>Hi, This is <span class="aurora-name">Satish </span>Pakalapati's Portfolio!</h1>
           <p>
             A dynamic Data Analyst and developer,
-            fiercely dedicated to unlocking insights through data and driving AI-powered breakthroughs. 
-            With relentless self-motivation and unparalleled adaptability, Satish fuses razor-sharp analytical
-            prowess with cutting-edge development expertise, tirelessly crafting smarter, high-impact solutions 
+            Fiercely dedicated to unlocking insights through data and driving AI-powered breakthroughs. 
+            With relentless self-motivation and unparalleled adaptability, Fuses razor-sharp analytical
+            prowess with cutting-edge development expertise, Tirelessly crafting smarter, High-impact solutions 
             that redefine efficiency and innovation.
           </p>
           <a href="mailto:satishpakalapati65@gmail.com" class="btn">Hire Me Now</a>
@@ -1545,17 +1585,17 @@
         <h2 class="section__header">About me</h2>
         <p>Satish Pakalapati
           A relentless B.Tech Computer Science student at Lovely Professional University,
-          mastering the art of Data Science and Digital Marketing with unmatched drive.
+          Mastering the art of Data Science and Digital Marketing with unmatched drive.
         </p>
         <h4>
           Expertise
           Fueled by a passion for innovation, Excels at crafting dynamic dashboards and engineering cutting-edge machine learning models.
           Committed to pushing boundaries, Continuously hones expertise in emerging technologies, 
-          delivering high-impact solutions that redefine what's possible.
+          Delivering high-impact solutions that redefine what's possible!.
         </h4>
         <div class="about__btns">
           <a href="images/Resume.pdf" target="_blank" class="download__btn" rel="noopener noreferrer">
-            Download CV
+             Access My CV
           </a>
           <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
           <a href="https://github.com/Satish-970"><i class="ri-github-fill"></i></a>
