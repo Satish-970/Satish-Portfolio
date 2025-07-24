@@ -1,0 +1,3086 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDYL7SZQ1M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LDYL7SZQ1M');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <title>Satish's Portfolio | Satish</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+    
+      :root {
+        --primary-color: #f8f208;
+        --primary-color-dark: #ee9821;
+        --secondary-color: #04091d;
+        --secondary-color-light: #0f1221;
+        --secondary-color-dark: #03060f;
+        --text-light: #94a3b8;
+        --white: #ffffff;
+        --max-width: 1200px;
+        --gradient: linear-gradient(
+          to right,
+          var(--primary-color-dark),
+          var(--primary-color)
+        );
+      }
+    
+      /* Light Theme */
+      [data-theme="light"] {
+        --primary-color: #ff9900;
+        --primary-color-dark: #ff6200;
+        --secondary-color: #ffffff;
+        --secondary-color-light: #f5f5f5;
+        --secondary-color-dark: #e0e0e0;
+        --text-light: #666666;
+        --white: #000000;
+        --gradient: linear-gradient(
+          to right,
+          var(--primary-color-dark),
+          var(--primary-color)
+        );
+      }
+    
+      /* Dark Theme */
+      [data-theme="dark"] {
+        --primary-color: #4a90e2;
+        --primary-color-dark: #357abd;
+        --secondary-color: #1a1a1a;
+        --secondary-color-light: #2c2c2c;
+        --secondary-color-dark: #0d0d0d;
+        --text-light: #a0a0a0;
+        --white: #ffffff;
+        --gradient: linear-gradient(
+          to right,
+          var(--primary-color-dark),
+          var(--primary-color)
+        );
+      }
+    
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+    
+      .section__container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+        padding-top: 0.5rem; /* Add extra padding to push content below navbar */
+      }
+    
+      .section__header {
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-align: center;
+      }
+    
+      .section__subheader {
+        margin-bottom: 10px;
+        font-size: 2.2rem;
+        text-align: center;
+      }
+    
+      .section__description {
+        max-width: 600px;
+        margin-top: 1rem;
+        margin-inline: auto;
+        color: var(--text-light);
+        text-align: center;
+      }
+    
+      .btn {
+        padding: 0.5rem 1.5rem;
+        outline: none;
+        border: none;
+        font-size: 1rem;
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+        border-radius: 5rem;
+        cursor: pointer;
+      }
+    
+      img {
+        display: flex;
+        width: 100%;
+      }
+    
+      a {
+        text-decoration: none;
+        color: var(--white);
+      }
+    
+      html,
+      body {
+        scroll-behavior: smooth;
+      }
+    
+      body {
+        font-family: "Poppins", sans-serif;
+        color: var(--white);
+        background-color: var(--secondary-color);
+      }
+    
+      .header {
+        position: relative;
+        background-color: var(--secondary-color-dark);
+      }
+    
+      .header__socials {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        flex-direction: column;
+        gap: 1rem;
+        z-index: 1;
+      }
+    
+      .header__socials a {
+        padding: 7px 13px;
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+      }
+    
+      nav {
+        position: fixed;
+        top: 0; /* Ensure it sticks to the top */
+        width: 100%;
+        z-index: 100; /* Keep it above other content */
+        background-color: var(--secondary-color); /* Ensure a visible background */
+        isolation: isolate;
+      }
+    
+      /* Theme-specific backgrounds */
+      [data-theme="light"] nav {
+        background-color: var(--secondary-color);
+      }
+    
+      [data-theme="dark"] nav {
+        background-color: var(--secondary-color);
+      }
+    
+      /* Navbar container */
+      .nav__bar {
+        position: relative;
+        max-width: var(--max-width);
+        margin-inline: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        overflow: visible;
+        padding: 1rem;
+      }
+    
+      /* Navbar header (contains logo and menu button) */
+      .nav__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0; /* Remove extra padding */
+        background-color: transparent; /* Ensure transparency */
+      }
+    
+      /* Logo styling */
+      .nav__logo a {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+    
+      .nav__logo a span {
+        color: var(--primary-color-dark);
+      }
+    
+      /* Navigation links (hidden by default on mobile) */
+      .nav__links {
+        position: absolute;
+        top: 60px; /* Adjusted to fit below the navbar */
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1.5rem;
+        transform: translateY(-100%);
+        background-color: var(--secondary-color-light);
+        transition: transform 0.5s ease;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
+      }
+    
+      .nav__links.open {
+        transform: translateY(0);
+      }
+    
+      /* Link styling */
+      .link a {
+        font-size: 1rem;
+        color: var(--white);
+        transition: color 0.3s;
+        display: block;
+      }
+    
+      .link.btn a {
+        color: var(--secondary-color) !important;
+        padding: 0.5rem 1rem;
+        background-image: var(--gradient);
+        border-radius: 5rem;
+      }
+    
+      .link a:hover {
+        color: var(--primary-color-dark);
+      }
+    
+      /* Hamburger menu button */
+      .nav__menu__btn {
+        font-size: 1.5rem;
+        color: var(--white);
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+    
+      /* Navigation adjustments for mobile */
+      @media (max-width: 1024px) {
+        .nav__menu__btn {
+          display: block;
+        }
+    
+        .nav__links {
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          padding: 1.5rem;
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 1.5rem;
+          transform: translateY(-100%);
+          background-color: var(--secondary-color-light);
+          transition: transform 0.5s ease;
+          z-index: 10;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          visibility: hidden;
+        }
+    
+        .nav__links.open {
+          transform: translateY(0);
+          visibility: visible;
+        }
+    
+        .nav__bar {
+          padding: 0.5rem 1rem; /* Reduced padding for smaller screens */
+        }
+    
+        .section__container {
+          padding: 3rem 1rem;
+          padding-top: 3rem; /* Adjusted to clear the navbar */
+        }
+      }
+    
+      /* Ensure desktop behavior remains intact */
+      @media (min-width: 1025px) {
+        nav {
+          background-color: rgba(3, 6, 15, 0.9); /* Semi-transparent background for desktop */
+        }
+    
+        [data-theme="light"] nav {
+          background-color: rgba(224, 224, 224, 0.9);
+        }
+    
+        [data-theme="dark"] nav {
+          background-color: rgba(26, 26, 26, 0.9);
+        }
+    
+        .nav__bar {
+          padding: 1rem 2rem;
+        }
+    
+        .nav__header {
+          padding: 0;
+          background-color: transparent;
+        }
+    
+        .nav__menu__btn {
+          display: none;
+        }
+    
+        .nav__links {
+          position: static;
+          padding: 0;
+          flex-direction: row;
+          background-color: transparent;
+          transform: none;
+          z-index: 10;
+          box-shadow: none;
+        }
+    
+        .link {
+          width: 100%;
+          text-align: center;
+        }
+    
+        .link a {
+          font-size: 1.1rem;
+        }
+      }
+    
+      /* Additional adjustment for smaller mobile screens */
+      @media (max-width: 480px) {
+        .nav__logo a {
+          font-size: 1.2rem;
+        }
+    
+        .nav__menu__btn {
+          font-size: 1.2rem;
+        }
+    
+        .nav__links {
+          top: 50px; /* Adjust for smaller navbar height */
+          padding: 1rem;
+          gap: 1rem;
+        }
+    
+        .link a {
+          font-size: 0.9rem;
+        }
+      }
+    
+      .header__container {
+        padding-top: 8rem;
+        display: grid;
+        gap: 4rem;
+      }
+    
+      .header__image img {
+        max-width: 400px;
+        margin: auto;
+      }
+    
+      .header__content {
+        text-align: center;
+      }
+    
+      .header__content h4 {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+    
+      .header__content h1 {
+        margin-bottom: 2rem;
+        font-size: 3rem;
+        font-weight: 600;
+        line-height: 3.5rem;
+      }
+    
+      .header__content p {
+        margin-bottom: 2rem;
+        color: #635109;
+      }
+    
+      .about__container {
+        display: grid;
+        gap: 4rem;
+      }
+    
+      .about__image img {
+        max-width: 450px;
+        margin: auto;
+      }
+    
+      .about__content .section__header {
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+    
+      .about__content p {
+        margin-bottom: 2rem;
+        color: var(--text-light);
+      }
+    
+      .about__content h4 {
+        padding: 2rem;
+        margin-bottom: 2rem;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #635109;
+        background-color: var(--secondary-color-light);
+        border-left: 2px solid var(--primary-color-dark);
+        border-radius: 5px;
+      }
+    
+      .about__btns {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    
+      .about__btns .download__btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 5rem;
+      }
+    
+      .about__btns a {
+        padding: 3px 8px;
+        font-size: 1.25rem;
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+        border-radius: 100%;
+      }
+    
+      .banner__container {
+        padding-block: 2rem;
+        display: grid;
+        gap: 1rem;
+      }
+    
+      .banner__card {
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        background-color: var(--secondary-color-light);
+        border-radius: 5px;
+        border-bottom: 2px solid transparent;
+        transition: 0.3s;
+      }
+    
+      .banner__card:hover {
+        border-color: var(--primary-color-dark);
+      }
+    
+      .banner__card span {
+        padding: 4px 10px;
+        font-size: 1.5rem;
+        background-color: var(--secondary-color-dark);
+        border-radius: 100%;
+        transition: 0.3s;
+      }
+    
+      .banner__card:hover span {
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+      }
+    
+      .banner__card h4 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    
+      .banner__card p {
+        color: var(--text-light);
+      }
+    
+      .project__header {
+        margin-bottom: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 2rem;
+      }
+    
+      .project__nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 2rem;
+      }
+    
+      .project__btn {
+        color: var(--white);
+        background-image: none;
+        background-color: transparent;
+      }
+    
+      .mixitup-control-active {
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+      }
+    
+      .project__grid {
+        display: grid;
+        gap: 1rem;
+      }
+    
+      .project__card img {
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    
+      .service__grid {
+        margin-top: 4rem;
+        display: grid;
+        gap: 4rem;
+      }
+    
+      .service__card {
+        position: relative;
+        padding: 2rem;
+        padding-top: 3rem;
+        text-align: center;
+        background-color: var(--secondary-color-light);
+        border-bottom: 2px solid transparent;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+    
+      .service__card:hover {
+        border-color: var(--primary-color-dark);
+      }
+    
+      .service__card span {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 4px 10px;
+        font-size: 2rem;
+        background-color: var(--secondary-color-light);
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+    
+      .service__card:hover span {
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+      }
+    
+      .service__card h4 {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    
+      .service__card p {
+        color: var(--text-light);
+      }
+    
+      .swiper {
+        margin-top: 4rem;
+        padding-bottom: 4rem;
+        width: 100%;
+      }
+    
+      .swiper-slide {
+        padding-block: 2rem;
+        background-color: var(--secondary-color-light);
+      }
+    
+      .swiper-pagination-bullet-active {
+        background-color: var(--primary-color-dark);
+      }
+    
+      .blog__grid {
+        margin-top: 4rem;
+        display: grid;
+        gap: 2rem 1rem;
+      }
+    
+      .blog__card img {
+        margin-bottom: 1rem;
+        border-radius: 5px;
+      }
+    
+      .blog__card p {
+        margin-bottom: 5px;
+        color: var(--primary-color-dark);
+      }
+    
+      .blog__card h4 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    
+      .blog__card a {
+        color: var(--text-light);
+        transition: 0.3s;
+      }
+    
+      .blog__card a:hover {
+        color: var(--primary-color-dark);
+      }
+    
+      .contact__form {
+        max-width: 600px;
+        margin-inline: auto;
+        margin-top: 4rem;
+        display: grid;
+        gap: 1rem;
+      }
+    
+      .contact__form .input__row {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    
+      .contact__form input {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        color: var(--white);
+        background-color: transparent;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid var(--primary-color-dark);
+        border-radius: 5px;
+      }
+    
+      .contact__form input::placeholder {
+        color: var(--text-light);
+      }
+    
+      .contact__form .btn {
+        max-width: fit-content;
+        margin-inline: auto;
+        margin-top: 1rem;
+      }
+    
+      .footer {
+        background-color: var(--secondary-color-dark);
+      }
+    
+      .footer__container {
+        display: grid;
+        gap: 2rem;
+      }
+    
+      .footer__col h5 {
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    
+      .footer__col p {
+        margin-bottom: 1.5rem;
+        color: var(--text-light);
+      }
+    
+      .footer__socials {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+    
+      .footer__socials a {
+        margin-bottom: 1rem;
+        padding: 3px 8px;
+        font-size: 1.25rem;
+        background-color: var(--secondary-color-light);
+        border-radius: 100%;
+        transition: 0.3s;
+      }
+    
+      .footer__socials a:hover {
+        color: var(--secondary-color);
+        background-image: var(--gradient);
+      }
+    
+      .footer__col h4 {
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+    
+      .footer__links a {
+        display: block;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+      }
+    
+      .footer__links a:hover {
+        color: var(--primary-color-dark);
+      }
+    
+      .footer__bar {
+        padding: 1rem;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        text-align: center;
+      }
+    
+      /* Theme Toggle Styles */
+      .theme-toggle {
+        position: relative;
+        margin-left: auto;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+    
+      .theme-icon {
+        font-size: 1.5rem;
+        color: var(--white);
+        padding: 0.5rem;
+        border-radius: 50%;
+        visibility:visible;
+        transition: background-color 0.3s;
+        margin-left: -0.2rem;
+        margin-right: 2.5rem;
+      }
+    
+      .theme-icon:hover {
+        background-color: var(--secondary-color-light);
+      }
+    
+      /* Theme option colors (for icon state indication) */
+      [data-theme="light"] .theme-icon {
+        color: #ebb709;
+      }
+    
+      [data-theme="dark"] .theme-icon {
+        color: #f4b60b;
+      }
+    
+      [data-theme="default"] .theme-icon {
+        color: #ecd909;
+      }
+    
+      /* Adjustments for mobile */
+      @media (max-width: 1024px) {
+        .theme-toggle {
+          margin-right: 0;
+        }
+    
+        .theme-icon {
+          font-size: 1.2rem;
+          padding: 0.3rem;
+        }
+      }
+    
+      @media (width > 480px) {
+        .banner__container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+    
+        .project__grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+    
+        .service__grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 4rem 1rem;
+        }
+    
+        .blog__grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+    
+        .contact__form .input__row {
+          flex-direction: row;
+        }
+    
+        .footer__container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+    
+        .footer__col:first-child {
+          grid-column: 1/3;
+        }
+      }
+    
+      @media (min-width: 1025px) {
+        .header__socials {
+          display: flex;
+        }
+    
+        nav {
+          position: fixed;
+          width: 100%;
+          z-index: 9;
+        }
+    
+        nav {
+          background-color: rgba(3, 6, 15, 0.9);
+        }
+    
+        [data-theme="light"] nav {
+          background-color: rgba(224, 224, 224, 0.9);
+        }
+    
+        [data-theme="dark"] nav {
+          background-color: rgba(26, 26, 26, 0.9);
+        }
+    
+        .nav__bar {
+          padding: 2rem 1rem;
+        }
+    
+        .nav__header {
+          padding: 0;
+          background-color: transparent;
+        }
+    
+        .nav__menu__btn {
+          display: none;
+        }
+    
+        .nav__links {
+          position: static;
+          padding: 0;
+          flex-direction: row;
+          background-color: transparent;
+          transform: none;
+        }
+    
+        .header__container {
+          padding: 0 1rem;
+          padding-top: 70px;
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+          gap: 2rem;
+        }
+        .header__container {
+    padding-top: 6rem; /* Adjust for mobile */
+  }
+        .header__content {
+          padding-block: 5rem;
+          text-align: left;
+          grid-area: 1/1/2/2;
+        }
+    
+        .about__container {
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+          gap: 2rem;
+        }
+    
+        .banner__container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .project__header {
+          flex-direction: row;
+        }
+    
+        .project__grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .service__grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .blog__grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .footer__container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    
+      @media (width > 1024px) {
+        .banner__container {
+          gap: 2rem;
+        }
+    
+        .project__grid {
+          gap: 2rem;
+        }
+    
+        .service__grid {
+          gap: 2rem;
+        }
+    
+        .blog__grid {
+          gap: 2rem;
+        }
+      }
+    
+      /* Header adjustments for mobile */
+      @media (max-width: 1024px) {
+        .header__container {
+          grid-template-columns: 1fr;
+          padding-top: 80px;
+        }
+    
+        .header__content {
+          text-align: center;
+        }
+    
+        .header__image img {
+          max-width: 300px;
+        }
+      }
+    
+      /* About section adjustments for mobile */
+      @media (max-width: 1024px) {
+        .about__container {
+          grid-template-columns: 1fr;
+        }
+    
+        .about__image img {
+          max-width: 300px;
+        }
+      }
+    
+      /* Font sizes and spacing for mobile */
+      @media (max-width: 1024px) {
+        .section__header {
+          font-size: 2rem;
+        }
+    
+        .section__subheader {
+          font-size: 1.8rem;
+        }
+    
+        .header__content h1 {
+          font-size: 2.2rem;
+          line-height: 2.5rem;
+        }
+    
+        .header__content p {
+          font-size: 0.9rem;
+        }
+      }
+    
+      /* Image sizing for mobile */
+      @media (max-width: 1024px) {
+        .header__image img,
+        .about__image img,
+        .project__card img,
+        .blog__card img {
+          max-width: 100%;
+          height: auto;
+        }
+    
+        .service__card img {
+          width: 60px;
+          height: 60px;
+        }
+      }
+    
+      /* Touch-friendly adjustments for mobile */
+      @media (max-width: 1024px) {
+        .btn {
+          padding: 0.7rem 2rem;
+          font-size: 1.1rem;
+        }
+    
+        .project__card button {
+          padding: 10px 20px;
+          font-size: 1rem;
+        }
+    
+        /* Disable hover effects on mobile */
+        .header__image img:hover,
+        .project__card:hover,
+        .service__card:hover,
+        .blog__card a:hover,
+        .footer__socials a:hover,
+        .theme-icon:hover,
+        .theme-option:hover {
+          transform: none;
+          box-shadow: none;
+          background-color: inherit;
+          color: inherit;
+        }
+      }
+    
+      /* Contact form adjustments */
+      @media (max-width: 767px) {
+        .contact__form .input__row {
+          flex-direction: column;
+        }
+    
+        .contact__form input {
+          font-size: 0.9rem;
+          padding: 0.8rem;
+        }
+      }
+    
+      .service__card img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        margin-bottom: 10px;
+      }
+    
+      .testimonial__grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        margin-top: 2rem;
+      }
+    
+      .testimonial__card,
+      .testimonial__card1 {
+        background-color: var(--secondary-color-light);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        color: var(--text-light);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+    
+      .testimonial__card.show,
+      .testimonial__card1.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    
+      .testimonial__card:hover {
+        transform: translateY(-5px);
+      }
+    
+      .testimonial__card p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        color: var(--text-light);
+      }
+    
+      .testimonial__card h4 {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--primary-color-dark);
+      }
+    
+      .testimonial__card h4 span {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--text-light);
+      }
+    
+      .testimonial__card1 {
+        max-width: 1200px;
+        text-align: left;
+      }
+    
+      .testimonial__card1:hover {
+        transform: translateY(-5px);
+      }
+    
+      .testimonial__card1 h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-color-dark);
+        margin-bottom: 0.5rem;
+      }
+    
+      .testimonial__card1 p {
+        font-size: 0.95rem;
+        color: var(--text-light);
+        margin: 0;
+      }
+    
+      .test {
+        color: #ee9821;
+        padding-top: 18px;
+        padding-left: 10px;
+      }
+    
+      .header__image {
+        overflow: visible;
+      }
+    
+      .header__image img {
+        width: auto;
+        height: auto;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: block;
+      }
+    
+      .header__image img:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6);
+      }
+    
+      /* Preloader Styles */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--secondary-color-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+    
+      .preloader--hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    
+      .preloader__spinner {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+    
+      .preloader__logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      }
+    
+      .preloader__orbit {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: spin 3.3s linear infinite;
+      }
+    
+      .preloader__orbit-line {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        transform-origin: center;
+        box-shadow: 0 0 6px var(--primary-color);
+      }
+    
+      .preloader__orbit-line:nth-child(1) {
+        transform: rotate(0deg) translate(28px, 0);
+      }
+    
+      .preloader__orbit-line:nth-child(2) {
+        transform: rotate(72deg) translate(28px, 0);
+      }
+    
+      .preloader__orbit-line:nth-child(3) {
+        transform: rotate(144deg) translate(28px, 0);
+      }
+    
+      .preloader__orbit-line:nth-child(4) {
+        transform: rotate(216deg) translate(28px, 0);
+      }
+    
+      .preloader__orbit-line:nth-child(5) {
+        transform: rotate(288deg) translate(28px, 0);
+      }
+    
+      .preloader__text {
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+        position: relative;
+      }
+    
+      .preloader__text-line {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--white);
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 0.4s ease forwards;
+      }
+    
+      .preloader__text-line:nth-child(2) {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--primary-color);
+        animation-delay: 0.3s;
+        position: relative;
+      }
+    
+      .preloader__text-line:nth-child(2)::after {
+        content: "|";
+        position: absolute;
+        color: var(--primary-color);
+        font-size: 1rem;
+        line-height: 1rem;
+        margin-left: 4px;
+        animation: blink 0.7s step-end infinite;
+      }
+    
+      /* Preloader responsive adjustments */
+      @media (max-width: 767px) {
+        .preloader__spinner {
+          width: 50px;
+          height: 50px;
+        }
+    
+        .preloader__logo {
+          width: 25px;
+          height: 25px;
+        }
+    
+        .preloader__orbit-line {
+          width: 4px;
+          height: 4px;
+        }
+    
+        .preloader__orbit-line:nth-child(1),
+        .preloader__orbit-line:nth-child(2),
+        .preloader__orbit-line:nth-child(3),
+        .preloader__orbit-line:nth-child(4),
+        .preloader__orbit-line:nth-child(5) {
+          transform-origin: center;
+          transform: rotate(calc(72deg * var(--i))) translate(25px, 0);
+        }
+    
+        .preloader__text-line {
+          font-size: 1rem;
+        }
+    
+        .preloader__text-line:nth-child(2) {
+          font-size: 0.8rem;
+        }
+      }
+    
+      @media (max-width: 480px) {
+        .preloader__text-line {
+          font-size: 1rem;
+        }
+    
+        .preloader__text-line:nth-child(2) {
+          font-size: 0.8rem;
+        }
+      }
+    
+      /* Animations */
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    
+      /* Hide main content until preloader is gone */
+      body:not(.loaded) > *:not(.preloader) {
+        visibility: hidden;
+      }
+
+
+      body {
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  background-color: var(--secondary-color);
+  cursor: none; /* Hide default cursor for desktop */
+}
+
+/* Custom Cursor Styles */
+.custom-cursor {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+}
+.custom-cursor::before,
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  background: var(--primary-color-dark);
+  box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark);
+  animation: pulse 1.5s infinite ease-in-out;
+  opacity: 0.8;
+}
+.custom-cursor::before {
+  width: 2px;
+  height: 24px;
+  top: 0;
+  left: 11px; /* Center vertically */
+}
+.custom-cursor::after {
+  width: 24px;
+  height: 2px;
+  top: 11px; /* Center horizontally */
+  left: 0;
+}
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
+  pointer-events: none;
+  z-index: 9999;
+  animation: pulse 1.5s infinite ease-in-out;
+  display: none;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark); }
+  50% { box-shadow: 0 0 12px var(--primary-color-dark), 0 0 18px var(--primary-color-dark); }
+  100% { box-shadow: 0 0 8px var(--primary-color-dark), 0 0 12px var(--primary-color-dark); }
+}
+/* Show default cursor on mobile/touch devices */
+@media (max-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+  .custom-cursor,
+  .cursor-dot {
+    display: none;
+  }
+}
+      .custom-cursor.active,
+.cursor-dot.active {
+  display: block;
+}
+
+ 
+.project__card {
+  border-radius: 0 0 15px 15px; /* Top-left and top-right set to 0, bottom-right and bottom-left set to 15px */
+  border: 2px solid rgb(156, 127, 0);
+}
+      /* Active link styling */
+.nav__links .link.active a {
+  position: relative;
+  color: var(--primary-color-dark); /* Match hover color for consistency */
+}
+
+.nav__links .link.active a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; /* Position below the link text */
+  left: 0;
+  width: 100%;
+  height: 3px; /* Thicker for visibility */
+  background: var(--primary-color-dark); /* Gradient for a "filling" effect */
+  transform: scaleX(0); /* Start with zero width */
+  transform-origin: left; /* Grow from left to right */
+  animation: fillContainer 0.5s ease forwards; /* Trigger filling animation */
+}
+
+/* Animation for the filling effect */
+@keyframes fillContainer {
+  0% {
+    transform: scaleX(0); /* Start empty */
+  }
+  100% {
+    transform: scaleX(1); /* Fully filled */
+  }
+}
+
+/* Ensure non-active links don't show the underline */
+.nav__links .link a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent; /* Invisible when not active */
+  transform: scaleX(0); /* Keep it hidden */
+  transform-origin: left;
+  transition: transform 0.5s ease; /* Smooth transition when leaving */
+}
+      
+  /* Define the auroraText animation keyframes */
+  @keyframes auroraText {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Style for the word "Satish" */
+    .aurora-name {
+      font-size: 3rem; /* Adjust based on your --biggest-font-size variable */
+      text-align: center;
+      position: relative;
+      margin: 0;
+      -webkit-text-fill-color: transparent; /* Transparent text to show gradient */
+      -webkit-background-clip: text; /* Clip gradient to text */
+      background-clip: text; /* Standard property for compatibility */
+      background-image: linear-gradient(45deg, #f2bc32, #da9902, #D3D3D3,#2db6e9, #c89209);
+      background-size: 200% 200%; /* Large background for animation */
+      animation: auroraText 6s ease-in-out infinite; /* Apply animation */
+      visibility: visible; /* Ensure text is visible */
+      opacity: 1; /* Fully opaque */
+      transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); /* Initial transform */
+      transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.4s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.4s; /* Fade-in effect */
+    }
+
+       /* General Button and Social Icon Styles */
+  .btn, .download__btn, .project__btn, .project__card button, .about__btns a {
+    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out; /* Smooth transition for scale and brightness */
+  }
+
+  .btn:hover, .download__btn:hover, .project__btn:hover, .project__card button:hover, .about__btns a:hover {
+    transform: scale(1.1); /* Enlarge by 10% */
+    filter: brightness(1.1); /* Slight brightness increase for vibrancy */
+  }
+
+
+  /* Ensure project__btn active state retains hover effect */
+  .project__btn.mixitup-control-active:hover {
+    transform: scale(1.1); /* Maintain enlargement even when active */
+  }
+
+  /* Update mobile media query to disable hover effects */
+  @media (max-width: 1024px) {
+    .header__image img:hover,
+    .about__image img:hover,
+    .project__card:hover,
+    .service__card:hover,
+    .blog__card a:hover,
+    .footer__socials a:hover,
+    .theme-icon:hover,
+    .theme-option:hover,
+    .btn:hover,
+    .download__btn:hover,
+    .project__btn:hover,
+    .project__card button:hover,
+    .about__btns a:hover,
+    .header__content .btn:hover { /* Added specific Hire Me Now selector */
+      transform: none;
+      background-color: inherit;
+      color: inherit;
+      filter: none; /* Reset filter */
+      clip-path: none; /* Reset clip-path for images */
+    }
+  }
+  .game__container {
+  background: linear-gradient(135deg, var(--secondary-color-light) 0%, var(--secondary-color) 100%);
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.game__container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(248, 242, 8, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(238, 152, 33, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.game__wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.game__stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat__item {
+  background: var(--secondary-color-dark);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border: 2px solid var(--primary-color-dark);
+  min-width: 120px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(248, 242, 8, 0.2);
+}
+
+.stat__label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.stat__value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.puzzle__area {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+.puzzle__preview {
+  position: relative;
+  background: var(--secondary-color-dark);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--primary-color-dark);
+}
+
+.puzzle__preview img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.preview__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--white);
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.puzzle__container {
+  position: relative;
+  width: 100%;
+  max-width: 500px; /* Increased from 400px */
+  margin: 0 auto;
+}
+
+.puzzle__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px; /* Increased for better separation */
+  background: var(--secondary-color-dark);
+  border-radius: 10px;
+  padding: 10px;
+  border: 3px solid var(--primary-color-dark);
+  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
+}
+
+
+.puzzle__tile {
+  background-size: 300% 300%;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.puzzle__tile:hover {
+  transform: scale(0.95);
+  box-shadow: 0 0 15px rgba(248, 242, 8, 0.5);
+}
+
+.puzzle__tile.empty {
+  background: var(--secondary-color);
+  border: 2px dashed var(--text-light);
+  opacity: 0.3;
+}
+
+.puzzle__tile.hint {
+  box-shadow: 0 0 20px var(--primary-color), inset 0 0 20px rgba(248, 242, 8, 0.3);
+  animation: pulse 1s infinite;
+}
+
+.puzzle__loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--secondary-color-light);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.puzzle__loading.hidden {
+  display: none;
+}
+
+.loading__spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--text-light);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.game__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.game__btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.game__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(248, 242, 8, 0.3);
+}
+
+.game__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.puzzle__info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.info__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.info__item i {
+  color: var(--primary-color);
+}
+
+/* Success Modal */
+.success__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.success__modal.show {
+  display: flex;
+}
+
+.modal__content {
+  background: var(--secondary-color-light);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 3px solid var(--primary-color);
+  max-width: 400px;
+  width: 90%;
+}
+
+.success__icon {
+  font-size: 4rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.modal__content h3 {
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.success__stats p {
+  margin: 0.5rem 0;
+  color: var(--text-light);
+}
+
+.new-record {
+  color: var(--primary-color) !important;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.stat__value.update {
+  animation: slideIn 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .puzzle__area {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .puzzle__preview {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  
+  .puzzle__container {
+    max-width: 300px;
+  }
+  
+  .game__stats {
+    gap: 1rem;
+  }
+  
+  .stat__item {
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+  }
+  
+  .game__controls {
+    gap: 0.5rem;
+  }
+  
+  .game__btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+  
+  .puzzle__info {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .puzzle__container {
+    max-width: 280px;
+  }
+  
+  .puzzle__preview {
+    max-width: 150px;
+  }
+  
+  .puzzle__preview img {
+    height: 150px;
+  }
+  
+  .modal__content {
+    padding: 1.5rem;
+  }
+  
+  .success__icon {
+    font-size: 3rem;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader__spinner">
+        <img src="favicon-32x32.png" alt="SP Logo" class="preloader__logo" />
+        <div class="preloader__orbit">
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+          <span class="preloader__orbit-line"></span>
+        </div>
+      </div>
+      <div class="preloader__text">
+        <span class="preloader__text-line" data-text="Forging the Future"></span>
+        <span class="preloader__text-line" data-text="Code. Innovate. Impact"></span>
+      </div>
+    </div>
+    <div class="custom-cursor"></div>
+<div class="cursor-dot"></div>
+    <header class="header">
+      <div class="header__socials">
+        <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
+        <a href="https://github.com/Satish-970"><i class="ri-github-fill"></i></a>
+        <a href="https://www.linkedin.com/in/satishpakalapati/"><i class="ri-linkedin-fill"></i></a>
+      </div>
+      <nav>
+        <div class="nav__bar">
+          <div class="nav__header">
+            <div class="nav__logo">
+              <a href="#home">𝕊ℙ<span>.</span></a>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+              <span><i class="ri-menu-3-line"></i></span>
+            </div>
+          </div>
+          <ul class="nav__links" id="nav-links">
+            <li class="link"><a href="#home">Home</a></li>
+            <li class="link"><a href="#about">About</a></li>
+            <li class="link"><a href="#client">Resume</a></li>
+            <li class="link"><a href="#project">Projects</a></li>
+            <li class="link"><a href="#service">Skills</a></li>
+            <li class="link"><a href="#blog">Blog</a></li>
+            <li class="link btn"><a href="#contact">Contact</a></li>
+            <li class="theme-toggle">
+              <i class="ri-sun-line theme-icon"></i>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="section__container header__container" id="home">
+        <div class="header__image">
+          <img src="images/IMG_6223.jpg" alt="header" />
+        </div>
+        <div class="header__content">
+          <h4>Crafting Digital Excellence</h4>
+         <h1>Hi, This is <span class="aurora-name">Satish </span>Pakalapati's Portfolio!</h1>
+          <p>
+            A dynamic Data Analyst and developer,
+            Fiercely dedicated to unlocking insights through data and driving AI-powered breakthroughs. 
+            With relentless self-motivation and unparalleled adaptability, Fuses razor-sharp analytical
+            prowess with cutting-edge development expertise, Tirelessly crafting smarter, High-impact solutions 
+            that redefine efficiency and innovation.
+          </p>
+          <a href="mailto:satishpakalapati65@gmail.com" class="btn">Hire Me Now</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section__container about__container" id="about">
+      <div class="about__image">
+        <img src="images/IMG_6234.png" alt="about" />
+      </div>
+      <div class="about__content">
+        <h2 class="section__header">About me</h2>
+        <p>Satish Pakalapati
+          A relentless B.Tech Computer Science student at Lovely Professional University,
+          Mastering the art of Data Science and Digital Marketing with unmatched drive.
+        </p>
+        <h4>
+          Expertise
+          Fueled by a passion for innovation, Excels at crafting dynamic dashboards and engineering cutting-edge machine learning models.
+          Committed to pushing boundaries, Continuously hones expertise in emerging technologies, 
+          Delivering high-impact solutions that redefine what's possible!.
+        </h4>
+        <div class="about__btns">
+          <a href="images/Resume.pdf" target="_blank" class="download__btn" rel="noopener noreferrer">
+             Access My CV
+          </a>
+          <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
+          <a href="https://github.com/Satish-970"><i class="ri-github-fill"></i></a>
+          <a href="https://www.linkedin.com/in/satishpakalapati/"><i class="ri-linkedin-fill"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container banner__container">
+      <div class="banner__card">
+        <span><i class="ri-pen-nib-line"></i></span>
+        <div>
+          <h4>Vision in Action</h4>
+          <p>
+            A relentless imagination drives every decision — igniting exploration, creation, and mastery in every pursuit.
+          </p>
+        </div>
+      </div>
+      <div class="banner__card">
+        <span><i class="ri-layout-masonry-line"></i></span>
+        <div>
+          <h4>Build with Purpose</h4>
+          <p>
+            Forged digital solutions by fusing analytical rigor with creative brilliance — from data to design, built with unwavering purpose and precision.
+          </p>
+        </div>
+      </div>
+      <div class="banner__card">
+        <span><i class="ri-checkbox-line"></i></span>
+        <div>
+          <h4>Quality, Always</h4>
+          <p>
+            Committed to flawless, dependable builds — every project meticulously tested, refined, and optimized for maximum impact.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container client__container" id="client">
+      <h2 class="section__subheader">Resume</h2>
+      <div class="testimonial__card1">
+        <a href="https://www.boardinfinity.com/programs/college-courses"><h3>Summer Training Program</h3></a>
+        <p><h3>Board Infinity</h3></p>
+         <p><h5> Database Management Systems (DBMS)</h5></p>
+        <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+         <li>Strong grasp of DBMS evolution and core types.</li>
+          <li>Skilled in ER diagram creation and normalization (1NF–3NF).</li>
+          <li>Proficient in B/B+ Tree indexing for query optimization.</li>
+          <li>In-depth knowledge of transaction management: ACID, serializability, concurrency control.</li>
+        </ul>
+       <p><h5>SQL Proficiency</h5></p>
+         <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+           <li>Mastery of DDL, DML, DCL, TCL</li>
+           <li>Advanced querying: WHERE, ORDER BY, regex, string/boolean/grouping functions.</li>
+           <li>Expert in joins, subqueries, GROUP BY, HAVING, UNION, CASE, multi-table queries.</li>
+         </ul>
+        <p><h5>Relational & Non-Relational Databases</h5></p>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Proficient in MySQL; clear distinction between SQL and NoSQL systems.</li>
+          </ul>
+         
+        <h4>Learnt Tech <span>: MySQL, SQL</span></h4>
+      </div>
+      <h3 class="test">Education</h3>
+      <div class="testimonial__grid">
+        <div class="testimonial__card">
+          <h2>Btech</h2>
+          <p>
+            2022 - present<br>Lovely Professional University</br>
+          </p>
+          <h4>7.98/10.00</h4>
+        </div>
+        <div class="testimonial__card">
+          <h2>Intermediate</h2>
+          <p>
+            2020 - 2022<br>DKNP JR College</br>
+          </p>
+          <h4>957/1000</h4>
+        </div>
+        <div class="testimonial__card">
+          <h2>Secondary</h2>
+          <p>
+            2019 - 2020<br>Sri Siddartha Educational Institutions</br>
+          </p>
+          <h4>10.00/10.00</h4>
+        </div>
+        <div class="about__btns">
+          <a href="images/Resume.pdf" target="_blank" class="download__btn" rel="noopener noreferrer">
+            Download CV
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section__container project__container" id="project">
+      <div class="project__header">
+        <h2 class="section__header">My Projects</h2>
+        <div class="project__nav">
+          <button
+            class="btn project__btn mixitup-control-active"
+            data-filter="all"
+          >
+            All
+          </button>
+          <button class="btn project__btn" data-filter=".web">Data Process</button>
+          <button class="btn project__btn" data-filter=".game">Data Visual</button>
+          <button class="btn project__btn" data-filter=".design">
+            Marketing
+          </button>
+        </div>
+      </div>
+      <div class="project__grid">
+        <div class="project__card mix web">
+          <a href="https://colab.research.google.com/github/Satish-970/Bitcoin-price/blob/main/Bitcoin.ipynb"><img src="https://elitedatascience.com/wp-content/uploads/2018/05/Model-Training-Feature.jpg" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Bitcoin Close Price</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Aims to analyze and predict Bitcoin prices using historical data</li>
+            <li>Involves data preprocessing</li>
+            <li>Includes exploratory analysis</li>
+            <li>Uses machine learning with Linear Regression to predict future Bitcoin prices</li>
+          </ul>
+          <a href="https://github.com/Satish-970/Bitcoin-price">
+            <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View on GitHub
+            </button>
+          </a>
+        </div>
+        <div class="project__card mix game">
+          <a href="https://www.linkedin.com/in/satishpakalapati/details/projects/"><img src="https://datakwery-bucket1.s3.amazonaws.com/featured_image/2021/11/02/7steps.png" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Data Science Job Salary Analysis</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Analyzes employment data using Tableau</li>
+            <li>Creates interactive visualizations</li>
+            <li>Explores relationships between salary, job titles, experience levels, company locations, and employment types</li>
+            <li>Provides insights into global salary trends and employment patterns</li>
+          </ul>
+          <a href="https://github.com/Satish-970/DataSciencejobsAnalysis">
+            <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View on GitHub
+            </button>
+          </a>
+        </div>
+        <div class="project__card mix web">
+          <a href="https://github.com/Satish-970/SQL"><img src="https://miro.medium.com/v2/resize:fit:1400/1*806NY7TXHwi2DvSjuYdHIg.jpeg" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Query Based Analysis - SQL</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Showcases SQL skills through real-world HR data analysis</li>
+            <li>Focuses on employees, departments, salaries, and job roles</li>
+            <li>Uses a relational HR database for practical use cases</li>
+            <li>Demonstrates joins, subqueries, aggregations, and logic-based queries</li>
+            <li>Aims to derive actionable HR insights through efficient SQL querying</li>
+          </ul>
+          <a href="https://github.com/Satish-970/SQL">
+            <button style="padding: 12px 24px; color:#ebb709;background-color: #000000; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View on GitHub
+            </button>
+          </a>
+        </div>
+        <div class="project__card mix design">
+          <a href="https://viharayatra.weebly.com/"><img src="https://www.mdmarketingdigital.com/blog/wp-content/uploads/2024/01/que-es-el-marketing-digital-1-1200x900.jpg" alt="project" /></a>
+          <h4 style="margin: 15px 0;">Digital Marketing</h4>
+          <ul style="line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li>Improved online presence through Google Analytics, SEO, and Google Ads</li>
+            <li>Tracked and optimized site performance using Google Analytics</li>
+            <li>Researched high-impact keywords via SEMrush and Google Keyword Planner</li>
+            <li>Conducted SEO audits and resolved issues to boost search rankings</li>
+            <li>Managed and optimized Google Ads campaigns for better ROI</li>
+          </ul>
+          <a href="https://docs.google.com/document/d/1uYv0ruzVb0YY0XzTCK4ax1l2G-x90ENx/edit?usp=sharing&ouid=117247420458496169293&rtpof=true&sd=true">
+            <button style="padding: 12px 24px; border: none; color:#ebb709;background-color: #000000; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; transition: background-color 0.3s;">
+              View Details
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section__container service__container" id="service">
+      <p class="section__subheader">🛠 Skills & Technologies</p>
+      <h2 class="section__header">What Do I Learn?</h2>
+      <p class="section__description">
+        Specialized in programming, data visualization, and cutting-edge digital technologies, expertly analyzing and conveying insights with precision and impact.
+      </p>
+      <div class="service__grid">
+        <div class="service__card">
+          <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="40" /></span>
+          <h4>Python</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://www.admecindia.co.in/wp-content/uploads/2015/10/admec-internal-Loops-in-C-and-C.jpg" alt="C/C++" width="40" /></span>
+          <h4>C/C++</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://static.vecteezy.com/system/resources/previews/051/336/407/non_2x/java-programming-transparent-logo-free-png.png" alt="Java" width="40" /></span>
+          <h4>Java</h4>  
+        </div>
+        <div class="service__card">
+          <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Rlogo.png" alt="R" width="40" /></span>
+          <h4>R Language</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://www.rogersoft.com/storage/attachments/1694676692.jpg" alt="SQL" width="40" /></span>
+          <h4>SQL</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://img.icons8.com/color/48/000000/tableau-software.png" alt="Tableau Prep" width="40" /></span>
+          <h4>Tableau Prep</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://img.icons8.com/color/48/000000/google-ads.png" alt="Google Ads" width="40" /></span>
+          <h4>SEO & Analytics</h4>
+          <p>Google Ads, SEMrush</p>
+        </div>
+        <div class="service__card">
+          <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="40" /></span>
+          <h4>MySQL</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjK8c4bgTWytBoJtUXN7cdSh4Jk2ROi9Zu3_v-jrrrb6-saAlAJCj6mDNbIHm-lWOOu1QfpiqWZCJUZrio3wYfmSNPDYw1bJbx2RZZySgZigF5q5qYg8ISXMPNYDi_6siZar5pJf31KDWl6/s1600/oracle.png" alt="Oracle" width="40" /></span>
+          <h4>Oracle</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://miro.medium.com/v2/resize:fit:786/format:webp/0*UcvDXUMq8onpVRZO.png" alt="Tableau Desktop" width="50" /></span>
+          <h4>Tableau Desktop</h4>
+        </div>
+        <div class="service__card">
+          <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hadoop/hadoop-original.svg" alt="Apache" width="40" /></span>
+          <h4>Apache</h4>
+          <p>Hadoop, Hive, Hbase, Pig</p>
+        </div>
+        <div class="service__card">
+          <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png" alt="Jyputer" width="40" /></span>
+          <h4>Jupyter Notebook</h4>
+          <p>Python Libraries, Data Visualization</p>
+        </div>
+        <div class="service__card">
+          <span><img src="https://images.icon-icons.com/3685/PNG/512/github_logo_icon_229278.png" alt="GitHub" width="40" /></span>
+          <h4>Version Control</h4>
+          <p>Git, GitHub</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section__container client__container" id="client">
+      <h2 class="section__subheader">Certifications / Courses</h2>
+      <div class="testimonial__grid">
+        <div class="testimonial__card">
+          <h2>NPTEL</h2>
+          <p>
+            <img src="images/12210470_MOOC_DZU2MXFCertificate_page-0001.jpg" alt=" Image" />
+            Earned a prestigious cloud computing certificate from Swayam, an initiative by the Indian Government, unlocking deep expertise in cloud computing technologies and their transformative applications.
+          </p>
+          <a href="https://drive.google.com/file/d/1kXMl26U8M9dGRxv2W_9ZGZ5N3DfTL2JC/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Coursera - Supervised Learning</h2>
+          <p>
+            <img src="images/12210470_MOOC_7VK5AUXCertificate_page-0001.jpg" alt=" Image" />
+            Earned a Supervised Learning certificate through Coursera, a globally recognized online learning platform offering courses from top universities and institutions.
+          </p>
+          <a href="https://drive.google.com/file/d/10To75UJpChRRsKQdrSanRagJ7EbPhhMp/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Hacker rank - Python</h2>
+          <p>
+            <img src="images/python_basic certificate_page-0001.jpg" alt=" Image" />
+            Achieved a Python certification from HackerRank, demonstrating proficiency in core programming concepts and problem-solving skills.
+          </p>
+          <a href="https://www.hackerrank.com/certificates/b18906a3a19c"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Coursera - Tableau</h2>
+          <p>
+            <img src="images/12210470_MOOC_PVXX77WCertificate_page-0001.jpg" alt=" Image" />
+            Completed a Tableau course on Coursera, gaining hands-on experience in data visualization, dashboard creation, and interactive analytics.
+          </p>
+          <a href="https://drive.google.com/file/d/1wL3HxfTMfYB-OstuJikaRAdDZVYf3-s3/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+        <div class="testimonial__card">
+          <h2>Coursera - C++</h2>
+          <p>
+            <img src="images/COURSERA_CPP_page-0001.jpg" alt=" Image" />
+            Completed a C++ programming course on Coursera, covering object-oriented principles, data structures, and algorithmic problem solving.
+          </p>
+          <a href="https://drive.google.com/file/d/1jjIG6ASvM0bo2-P_SIURsjUvIwdd348o/view?usp=sharing"><h4>click Here</h4></a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section__container blog__container" id="blog">
+      <p class="section__subheader">Blog Posts</p>
+      <h2 class="section__header">I Love To Write Articles</h2>
+      <div class="blog__grid">
+        <div class="blog__card">
+          <img src="images/{60FD904D-E775-4C9F-9597-3531F8724AA6}.png" alt="blog" />
+          <p>Change Required in Life</p>
+          <h4>Turning Conversions into Information</h4>
+          <a href="https://satishportfolio.blogspot.com/">Read More</a>
+        </div>
+        <div class="blog__card">
+          <img src="images/{DCE52A84-3191-4015-8CCE-2FDDD525DD34}.png" alt="blog" />
+          <p>Educational</p>
+          <h4>The Ultimate Power Quantum Computing</h4>
+          <a href="https://satishportfolio.blogspot.com/">Read More</a>
+        </div>
+        <div class="blog__card">
+          <img src="images/{E642A587-48AE-4394-8BA8-238FCA8EFE85}.png" alt="blog" />
+          <p>Ai Rewiring</p>
+          <h4>What do you think about AI</h4>
+          <a href="https://satishportfolio.blogspot.com/">Read More</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container contact__container" id="contact">
+      <p class="section__subheader">Contact Me</p>
+      <h2 class="section__header">Get In Touch</h2>
+      <form id="contact-form" action="https://formspree.io/f/mvgkywqy" method="POST" class="contact__form">
+        <div class="input__row">
+          <input type="text" name="firstName" id="firstName" placeholder="First Name" required />
+          <input type="text" name="lastName" id="lastName" placeholder="Last Name" required />
+        </div>
+        <input type="email" name="email" id="email" placeholder="Email" required />
+        <input type="text" name="message" id="message" placeholder="Description" required />
+        <button type="submit" class="btn">Submit</button>
+        <div class="success-message" style="display: none; color: var(--primary-color-dark); margin-top: 1rem; text-align: center;">Message sent successfully!</div>
+        <div class="error-message" style="display: none; color: #ff3333; margin-top: 1rem; text-align: center;">Failed to send message. Try again!</div>
+        <div class="loading-message" style="display: none; color: var(--text-light); margin-top: 1rem; text-align: center;">Sending...</div>
+      </form>
+    </section>
+ <!-- Daily Puzzle Game Section -->
+<section class="section__container game__container" id="game">
+  <p class="section__subheader">Daily Challenge</p>
+  <h2 class="section__header">Daily Sliding Puzzle</h2>
+  <p class="section__description">
+    Solve today's puzzle by sliding tiles to recreate the original image. New puzzle every day!
+  </p>
+  
+  <div class="game__wrapper">
+    <div class="game__stats">
+      <div class="stat__item">
+        <span class="stat__label">Moves:</span>
+        <span class="stat__value" id="moves">0</span>
+      </div>
+      <div class="stat__item">
+        <span class="stat__label">Time:</span>
+        <span class="stat__value" id="timer">00:00</span>
+      </div>
+      <div class="stat__item">
+        <span class="stat__label">Best Time:</span>
+        <span class="stat__value" id="bestTime">--:--</span>
+      </div>
+    </div>
+    
+    <div class="puzzle__area">
+      <div class="puzzle__preview">
+        <img id="previewImage" src="" alt="Original Image" />
+        <div class="preview__label">Original</div>
+      </div>
+      
+      <div class="puzzle__container">
+        <div id="puzzleGrid" class="puzzle__grid">
+          <!-- Puzzle tiles will be generated here -->
+        </div>
+        <div class="puzzle__loading" id="puzzleLoading">
+          <div class="loading__spinner"></div>
+          <p>Loading today's puzzle...</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="game__controls">
+      <button class="btn game__btn" id="shuffleBtn">New Shuffle</button>
+      <button class="btn game__btn" id="hintBtn">Show Hint</button>
+      <button class="btn game__btn" id="resetBtn">Reset</button>
+    </div>
+    
+    <div class="puzzle__info">
+      <div class="info__item">
+        <i class="ri-calendar-line"></i>
+        <span id="puzzleDate"></span>
+      </div>
+      <div class="info__item">
+        <i class="ri-image-line"></i>
+        <span id="imageCategory">Nature</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Success Modal -->
+  <div class="success__modal" id="successModal">
+    <div class="modal__content">
+      <div class="success__icon">
+        <i class="ri-trophy-line"></i>
+      </div>
+      <h3>Puzzle Solved!</h3>
+      <div class="success__stats">
+        <p>Time: <span id="finalTime"></span></p>
+        <p>Moves: <span id="finalMoves"></span></p>
+        <p id="newRecord" class="new-record" style="display: none;">🎉 New Best Time!</p>
+      </div>
+      <button class="btn" id="closeModal">Awesome!</button>
+    </div>
+  </div>
+</section>
+    <footer class="footer">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <h5><a href="https://www.linkedin.com/in/satishpakalapati/">Satish Pakalapati</a></h5>
+          <p>
+            A Dedicated Data analyst with excel data visualization skills and good hands on programming languages like Java, Python etc....
+          </p>
+          <div class="footer__socials">
+            <a href="mailto:satishpakalapati65@gmail.com"><i class="ri-mail-fill"></i></a>
+            <a href="https://github.com/Satish-970"><i class="ri-github-fill"></i></a>
+            <a href="https://www.linkedin.com/in/satishpakalapati/"><i class="ri-linkedin-fill"></i></a>
+            <a href="https://x.com/satishpakalap22"><i class="ri-twitter-fill"></i></a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <div class="footer__links">
+          </div>
+          <div class="footer__links">
+            <h4>Support</h4>
+            <br><a href="mailto:satishpakalapati65@gmail.com">Contact</a>
+            <a href="https://satishportfolio.blogspot.com/">My Blog</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2025 Satish Pakalapati. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // Form Submission
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contact-form');
+        const successMessage = document.querySelector('.success-message');
+        const errorMessage = document.querySelector('.error-message');
+        const loadingMessage = document.querySelector('.loading-message');
+    
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          successMessage.style.display = 'none';
+          errorMessage.style.display = 'none';
+          loadingMessage.style.display = 'none';
+    
+          const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/;
+          const emailInput = form.querySelector('input[name="email"]');
+          const messageInput = form.querySelector('input[name="message"]');
+    
+          if (!emailRegex.test(emailInput.value)) {
+            errorMessage.textContent = 'Please enter a valid email address!';
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+            return;
+          }
+    
+          if (messageInput.value.length < 10) {
+            errorMessage.textContent = 'Message must be at least 10 characters long!';
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+            return;
+          }
+    
+          loadingMessage.style.display = 'block';
+          try {
+            const response = await fetch(form.action, {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'Accept': 'application/json' }
+            });
+            loadingMessage.style.display = 'none';
+            if (response.ok) {
+              form.reset();
+              successMessage.style.display = 'block';
+              setTimeout(() => successMessage.style.display = 'none', 3000);
+            } else {
+              throw new Error('Submission failed');
+            }
+          } catch (error) {
+            loadingMessage.style.display = 'none';
+            errorMessage.textContent = error.message.includes('network')
+              ? 'Network error. Please check your connection.'
+              : 'Failed to send message. Try again!';
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+          }
+        });
+      });
+    </script>
+    
+    <script>
+      const testimonials = document.querySelectorAll('.testimonial__card, .testimonial__card1');
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target); // optional: animate once
+          }
+        });
+      }, {
+        threshold: 0.4
+      });
+    
+      testimonials.forEach(card => {
+        observer.observe(card);
+      });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Navbar Toggle
+        const menuBtn = document.getElementById("menu-btn");
+        const navLinks = document.getElementById("nav-links");
+        const menuBtnIcon = menuBtn.querySelector("i");
+    
+        menuBtn.addEventListener("click", (e) => {
+          console.log("Menu button clicked");
+          navLinks.classList.toggle("open");
+          const isOpen = navLinks.classList.contains("open");
+          menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-3-line");
+        });
+    
+        navLinks.addEventListener("click", (e) => {
+          if (e.target.tagName === "A") {
+            navLinks.classList.remove("open");
+            menuBtnIcon.setAttribute("class", "ri-menu-3-line");
+          }
+        });
+    
+        // Scroll Offset for Navbar Links
+        document.querySelectorAll('.nav__links a').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            const navbarHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight-20;
+    
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          });
+        });
+    
+        // Theme Toggle Functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+    
+        // Load saved theme from localStorage
+        let currentTheme = localStorage.getItem('theme') || 'default';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+    
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+          if (currentTheme === 'default') {
+            currentTheme = 'light';
+          } else if (currentTheme === 'light') {
+            currentTheme = 'dark';
+          } else if (currentTheme === 'dark') {
+            currentTheme = 'default';
+          }
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+          updateThemeIcon(currentTheme);
+        });
+    
+        function updateThemeIcon(theme) {
+          if (theme === 'light') {
+            themeIcon.classList.replace('ri-moon-line', 'ri-sun-line');
+            themeIcon.classList.replace('ri-contrast-2-line', 'ri-sun-line');
+          } else if (theme === 'dark') {
+            themeIcon.classList.replace('ri-sun-line', 'ri-moon-line');
+            themeIcon.classList.replace('ri-contrast-2-line', 'ri-moon-line');
+          } else {
+            themeIcon.classList.replace('ri-sun-line', 'ri-contrast-2-line');
+            themeIcon.classList.replace('ri-moon-line', 'ri-contrast-2-line');
+          }
+        }
+    
+        // Mixitup Initialization
+        const mixer = mixitup(".project__grid");
+    
+        // Swiper Initialization
+        const swiper = new Swiper(".swiper", {
+          loop: true,
+          pagination: {
+            el: ".swiper-pagination",
+          },
+        });
+    
+        // ScrollReveal Initialization
+        const scrollRevealOption = {
+          distance: "50px",
+          origin: "bottom",
+          duration: 1000,
+        };
+    
+        ScrollReveal().reveal(".header__image img", { ...scrollRevealOption });
+        ScrollReveal().reveal(".header__content h4", { ...scrollRevealOption, delay: 500 });
+        ScrollReveal().reveal(".header__content h1", { ...scrollRevealOption, delay: 1000 });
+        ScrollReveal().reveal(".header__content p", { ...scrollRevealOption, delay: 1500 });
+        ScrollReveal().reveal(".header__content .btn", { ...scrollRevealOption, delay: 2000 });
+        ScrollReveal().reveal(".about__image img", { ...scrollRevealOption, origin: "left" });
+        ScrollReveal().reveal(".about__content .section__header", { ...scrollRevealOption, delay: 500 });
+        ScrollReveal().reveal(".about__content p", { ...scrollRevealOption, delay: 1000 });
+        ScrollReveal().reveal(".about__content h4", { ...scrollRevealOption, delay: 1500 });
+        ScrollReveal().reveal(".about__btns", { ...scrollRevealOption, delay: 2000 });
+        ScrollReveal().reveal(".service__card", { duration: 1000, interval: 500 });
+        ScrollReveal().reveal(".blog__card", { ...scrollRevealOption, interval: 500 });
+      });
+    </script>
+    
+    <!-- Preloader Script -->
+    <script>
+      window.onload = function () {
+        const preloader = document.querySelector('.preloader');
+        const textLines = document.querySelectorAll('.preloader__text-line');
+
+        // Typing animation
+        function typeText(element, text, speed, callback) {
+          let i = 0;
+          element.textContent = ''; // Clear initial text
+          function type() {
+            if (i < text.length) {
+              element.textContent += text.charAt(i);
+              i++;
+              setTimeout(type, speed);
+            } else {
+              callback();
+            }
+          }
+          type();
+        }
+
+        // Start typing first line
+        typeText(textLines[0], textLines[0].getAttribute('data-text'), 60, function () {
+          // Start typing second line
+          typeText(textLines[1], textLines[1].getAttribute('data-text'), 60, function () {
+            // Fade out preloader after typing
+            setTimeout(() => {
+              preloader.classList.add('preloader--hidden');
+              document.body.classList.add('loaded');
+              setTimeout(() => {
+                preloader.style.display = 'none';
+              }, 500);
+            }, 800); // Delay for cursor visibility
+          });
+        });
+      };
+    </script>
+
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        window.AgentInitializer.init({
+          agentRenderURL: "https://agent.jotform.com/0196780295ee7122bd0ba94b69563ee95eb1",
+          rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
+          formID: "https://form.jotform.com/251165265378058",
+          queryParams: ["skipWelcome=1", "maximizable=1"],
+          domain: "https://www.jotform.com",
+          isDraggable: false,
+          background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
+          buttonBackgroundColor: "#051258",
+          buttonIconColor: "#FFFFFF",
+          variant: false,
+          customizations: {
+            "greeting": "Yes",
+            "greetingMessage": "Hi! I am Satish's Assistant, How can I assist you?",
+            "openByDefault": "No",
+            "pulse": "Yes",
+            "position": "right",
+            "autoOpenChatIn": "0"
+          },
+          isVoice: false,
+        });
+      });
+    </script>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Dynamically adjust the header padding based on navbar height
+        const navbar = document.querySelector('nav');
+        const headerContainer = document.querySelector('.header__container');
+    
+        function adjustHeaderPadding() {
+          const navbarHeight = navbar.offsetHeight;
+          headerContainer.style.paddingTop = `${navbarHeight + 20}px`; // Add extra 20px for buffer
+        }
+    
+        // Run on page load
+        adjustHeaderPadding();
+    
+        // Run on window resize to handle responsive changes
+        window.addEventListener('resize', adjustHeaderPadding);
+      });
+    </script>
+    <script>
+  document.addEventListener('mousemove', (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
+    cursorDot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`;
+  });
+</script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.querySelector('.custom-cursor');
+  const cursorDot = document.querySelector('.cursor-dot');
+  const body = document.body;
+
+  // Show custom cursor on mouse enter
+  body.addEventListener('mouseenter', () => {
+    cursor.classList.add('active');
+    cursorDot.classList.add('active');
+  });
+
+  // Hide custom cursor on mouse leave
+  body.addEventListener('mouseleave', () => {
+    cursor.classList.remove('active');
+    cursorDot.classList.remove('active');
+  });
+
+  // Existing mousemove event for cursor movement
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
+    cursorDot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`;
+  });
+});
+    </script>
+       <script>
+      // Active link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav__links .link a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (window.pageYOffset >= sectionTop - 60) { // Adjust 60 for navbar height
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach((link) => {
+    const parentLi = link.parentElement;
+    parentLi.classList.remove('active');
+    if (link.getAttribute('href').substring(1) === current) {
+      parentLi.classList.add('active');
+    }
+  });
+});
+    </script>
+    <script>
+class DailyPuzzleGame {
+  constructor() {
+    this.gridSize = 3;
+    this.tiles = [];
+    this.emptyPos = { row: 2, col: 2 };
+    this.moves = 0;
+    this.startTime = null;
+    this.timer = null;
+    this.currentTime = 0;
+    this.gameStarted = false;
+    this.currentImageUrl = '';
+    
+    this.init();
+  }
+  
+  async init() {
+    this.setupEventListeners();
+    this.updateDate();
+    await this.loadDailyImage();
+    this.initializePuzzle();
+    this.loadBestTime();
+  }
+  
+  setupEventListeners() {
+    document.getElementById('shuffleBtn').addEventListener('click', () => this.shufflePuzzle());
+    document.getElementById('hintBtn').addEventListener('click', () => this.showHint());
+    document.getElementById('resetBtn').addEventListener('click', () => this.resetPuzzle());
+    document.getElementById('closeModal').addEventListener('click', () => this.closeModal());
+  }
+  
+  updateDate() {
+    const today = new Date();
+    const options = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    document.getElementById('puzzleDate').textContent = today.toLocaleDateString('en-US', options);
+  }
+  
+  async loadDailyImage() {
+    const loading = document.getElementById('puzzleLoading');
+    loading.classList.remove('hidden');
+    
+    try {
+      // Use date as seed for consistent daily images
+      const today = new Date().toDateString();
+      const imageId = this.hashCode(today) % 1000 + 1;
+      
+      // Using Picsum for reliable, high-quality images
+      const imageUrl = `https://picsum.photos/400/400?random=${imageId}`;
+      
+      // Test if image loads successfully
+      await this.loadImage(imageUrl);
+      
+      this.currentImageUrl = imageUrl;
+      document.getElementById('previewImage').src = imageUrl;
+      
+      // Update category based on image ID
+      const categories = ['Nature', 'Architecture', 'People', 'Animals', 'Travel', 'Art'];
+      const categoryIndex = imageId % categories.length;
+      document.getElementById('imageCategory').textContent = categories[categoryIndex];
+      
+    } catch (error) {
+      console.error('Failed to load daily image:', error);
+      // Fallback to a default image
+      this.currentImageUrl = 'https://picsum.photos/400/400?random=1';
+      document.getElementById('previewImage').src = this.currentImageUrl;
+      document.getElementById('imageCategory').textContent = 'Daily';
+    }
+    
+    loading.classList.add('hidden');
+  }
+  
+  loadImage(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = url;
+    });
+  }
+  
+  hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+  }
+  
+  initializePuzzle() {
+    this.createGrid();
+    this.createTiles();
+    this.shufflePuzzle();
+  }
+  
+  createGrid() {
+    const grid = document.getElementById('puzzleGrid');
+    grid.innerHTML = '';
+    
+    for (let i = 0; i < this.gridSize * this.gridSize; i++) {
+      const tile = document.createElement('div');
+      tile.className = 'puzzle__tile';
+      tile.dataset.index = i;
+      
+      if (i === this.gridSize * this.gridSize - 1) {
+        tile.classList.add('empty');
+      }
+      
+      tile.addEventListener('click', () => this.moveTile(i));
+      grid.appendChild(tile);
+    }
+  }
+  
+  createTiles() {
+    this.tiles = [];
+    
+    for (let i = 0; i < this.gridSize * this.gridSize; i++) {
+      if (i === this.gridSize * this.gridSize - 1) {
+        this.tiles.push(null); // Empty space
+      } else {
+        this.tiles.push(i);
+      }
+    }
+    
+    this.updateDisplay();
+  }
+  
+  updateDisplay() {
+    const gridElements = document.querySelectorAll('.puzzle__tile');
+    
+    gridElements.forEach((tile, index) => {
+      const tileValue = this.tiles[index];
+      
+      if (tileValue === null) {
+        tile.classList.add('empty');
+        tile.style.backgroundImage = '';
+      } else {
+        tile.classList.remove('empty');
+        
+        const row = Math.floor(tileValue / this.gridSize);
+        const col = tileValue % this.gridSize;
+        
+        tile.style.backgroundImage = `url(${this.currentImageUrl})`;
+        tile.style.backgroundPosition = `-${col * 100}% -${row * 100}%`;
+      }
+    });
+  }
+  
+  shufflePuzzle() {
+    // Reset game state
+    this.moves = 0;
+    this.currentTime = 0;
+    this.gameStarted = false;
+    
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+    
+    // Perform random valid moves to shuffle
+    for (let i = 0; i < 1000; i++) {
+      const emptyIndex = this.tiles.indexOf(null);
+      const neighbors = this.getNeighbors(emptyIndex);
+      const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+      this.swapTiles(emptyIndex, randomNeighbor);
+    }
+    
+    this.updateDisplay();
+    this.updateStats();
+    this.clearHints();
+  }
+  
+  resetPuzzle() {
+    // Create solved state
+    this.tiles = [];
+    for (let i = 0; i < this.gridSize * this.gridSize - 1; i++) {
+      this.tiles.push(i);
+    }
+    this.tiles.push(null);
+    
+    this.moves = 0;
+    this.currentTime = 0;
+    this.gameStarted = false;
+    
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+    
+    this.updateDisplay();
+    this.updateStats();
+    this.clearHints();
+  }
+  
+  moveTile(clickedIndex) {
+    if (!this.gameStarted) {
+      this.startGame();
+    }
+    
+    const emptyIndex = this.tiles.indexOf(null);
+    
+    if (this.isAdjacent(clickedIndex, emptyIndex)) {
+      this.swapTiles(clickedIndex, emptyIndex);
+      this.moves++;
+      this.updateDisplay();
+      this.updateStats();
+      this.clearHints();
+      
+      if (this.isPuzzleSolved()) {
+        this.endGame();
+      }
+    }
+  }
+  
+  startGame() {
+    this.gameStarted = true;
+    this.startTime = Date.now();
+    
+    this.timer = setInterval(() => {
+      this.currentTime = Math.floor((Date.now() - this.startTime) / 1000);
+      this.updateStats();
+    }, 1000);
+  }
+  
+  getNeighbors(index) {
+    const neighbors = [];
+    const row = Math.floor(index / this.gridSize);
+    const col = index % this.gridSize;
+    
+    if (row > 0) neighbors.push(index - this.gridSize); // Up
+    if (row < this.gridSize - 1) neighbors.push(index + this.gridSize); // Down
+    if (col > 0) neighbors.push(index - 1); // Left
+    if (col < this.gridSize - 1) neighbors.push(index + 1); // Right
+    
+    return neighbors;
+  }
+  
+  isAdjacent(index1, index2) {
+    const neighbors = this.getNeighbors(index1);
+    return neighbors.includes(index2);
+  }
+  
+  swapTiles(index1, index2) {
+    [this.tiles[index1], this.tiles[index2]] = [this.tiles[index2], this.tiles[index1]];
+  }
+  
+  isPuzzleSolved() {
+    for (let i = 0; i < this.gridSize * this.gridSize - 1; i++) {
+      if (this.tiles[i] !== i) {
+        return false;
+      }
+    }
+    return this.tiles[this.gridSize * this.gridSize - 1] === null;
+  }
+  
+  showHint() {
+    this.clearHints();
+    
+    // Find first incorrectly placed tile
+    for (let i = 0; i < this.gridSize * this.gridSize - 1; i++) {
+      if (this.tiles[i] !== i) {
+        const tileElements = document.querySelectorAll('.puzzle__tile');
+        tileElements[i].classList.add('hint');
+        
+        setTimeout(() => {
+          this.clearHints();
+        }, 3000);
+        
+        break;
+      }
+    }
+  }
+  
+  clearHints() {
+    document.querySelectorAll('.puzzle__tile.hint').forEach(tile => {
+      tile.classList.remove('hint');
+    });
+  }
+  
+  updateStats() {
+    document.getElementById('moves').textContent = this.moves;
+    
+    const minutes = Math.floor(this.currentTime / 60);
+    const seconds = this.currentTime % 60;
+    document.getElementById('timer').textContent = 
+      `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      
+    // Add animation to moves counter
+    document.getElementById('moves').classList.add('update');
+    setTimeout(() => {
+      document.getElementById('moves').classList.remove('update');
+    }, 300);
+  }
+  
+  loadBestTime() {
+    const today = new Date().toDateString();
+    const bestTime = localStorage.getItem(`puzzleBest_${today}`);
+    
+    if (bestTime) {
+      const minutes = Math.floor(bestTime / 60);
+      const seconds = bestTime % 60;
+      document.getElementById('bestTime').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+  }
+  
+  saveBestTime() {
+    const today = new Date().toDateString();
+    const currentBest = localStorage.getItem(`puzzleBest_${today}`);
+    
+    if (!currentBest || this.currentTime < parseInt(currentBest)) {
+      localStorage.setItem(`puzzleBest_${today}`, this.currentTime.toString());
+      return true; // New record
+    }
+    
+    return false;
+  }
+  
+  endGame() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+    
+    const isNewRecord = this.saveBestTime();
+    
+    // Show success modal
+    const modal = document.getElementById('successModal');
+    const minutes = Math.floor(this.currentTime / 60);
+    const seconds = this.currentTime % 60;
+    
+    document.getElementById('finalTime').textContent = 
+      `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('finalMoves').textContent = this.moves;
+    
+    if (isNewRecord) {
+      document.getElementById('newRecord').style.display = 'block';
+      this.loadBestTime(); // Update display
+    } else {
+      document.getElementById('newRecord').style.display = 'none';
+    }
+    
+    modal.classList.add('show');
+  }
+  
+  closeModal() {
+    document.getElementById('successModal').classList.remove('show');
+  }
+}
+
+// Initialize game when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new DailyPuzzleGame();
+});
+</script>
+  </body>
+</html>
