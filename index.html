@@ -2464,7 +2464,8 @@
     this.timer = null;
     this.currentTime = 0;
     this.gameStarted = false;
-    this.currentImageUrl = '';
+    this.currentImageUrl = 'images/fallback-puzzle.jpg'; // Fallback image
+    this.maxRetries = 3; // Max retry attempts for image loading
     
     this.init();
   }
@@ -2480,7 +2481,6 @@
   setupEventListeners() {
     document.getElementById('shuffleBtn').addEventListener('click', () => this.shufflePuzzle());
     document.getElementById('hintBtn').addEventListener('click', () => this.showHint());
-    document.getElementById('resetBtn').addEventListener('click', () => this.resetPuzzle());
     document.getElementById('closeModal').addEventListener('click', () => this.closeModal());
   }
   
@@ -2499,24 +2499,32 @@
     const loading = document.getElementById('puzzleLoading');
     loading.classList.remove('hidden');
     
-    try {
-      const today = new Date().toDateString();
-      const imageId = this.hashCode(today) % 1000 + 1;
-      const imageUrl = `https://picsum.photos/400/400?random=${imageId}`;
-      
-      await this.loadImage(imageUrl);
-      
-      this.currentImageUrl = imageUrl;
-      document.getElementById('previewImage').src = imageUrl;
-      
-      const categories = ['Nature', 'Technology', 'Architecture', 'People', 'Animals', 'Travel', 'Art'];
-      const categoryIndex = imageId % categories.length;
-      document.getElementById('imageCategory').textContent = categories[categoryIndex];
-    } catch (error) {
-      console.error('Failed to load daily image:', error);
-      this.currentImageUrl = 'https://picsum.photos/400/400?random=42';
-      document.getElementById('previewImage').src = this.currentImageUrl;
-      document.getElementById('imageCategory').textContent = '0Daily';
+    const today = new Date().toDateString();
+    const imageId = this.hashCode(today) % 1000 + 1;
+    const imageUrl = `https://picsum.photos/400/400?random=${imageId}`;
+    
+    let attempts = 0;
+    
+    while (attempts < this.maxRetries) {
+      try {
+        await this.loadImage(imageUrl);
+        this.currentImageUrl = imageUrl;
+        document.getElementById('previewImage').src = imageUrl;
+        
+        const categories = ['Nature', 'Technology', 'Architecture', 'People', 'Animals', 'Travel', 'Art'];
+        const categoryIndex = imageId % categories.length;
+        document.getElementById('imageCategory').textContent = categories[categoryIndex];
+        break; // Success, exit retry loop
+      } catch (error) {
+        console.error(`Attempt ${attempts + 1} failed to load image:`, error);
+        attempts++;
+        if (attempts === this.maxRetries) {
+          console.warn('All retries failed, using fallback image');
+          this.currentImageUrl = 'images/fallback-puzzle.jpg';
+          document.getElementById('previewImage').src = this.currentImageUrl;
+          document.getElementById('imageCategory').textContent = 'Daily';
+        }
+      }
     }
     
     loading.classList.add('hidden');
@@ -2619,27 +2627,6 @@
       const neighbors = this.getNeighbors(emptyIndex);
       const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
       this.swapTiles(emptyIndex, randomNeighbor);
-    }
-    
-    this.updateDisplay();
-    this.updateStats();
-    this.clearHints();
-  }
-  
-  resetPuzzle() {
-    this.tiles = [];
-    for (let i = 0; i < this.gridSize * this.gridSize - 1; i++) {
-      this.tiles.push(i);
-    }
-    this.tiles.push(null);
-    
-    this.moves = 0;
-    this.currentTime = 0;
-    this.gameStarted = false;
-    
-    if (this.timer) {
-      clearInterval(this.timer);
-      this.timer = null;
     }
     
     this.updateDisplay();
@@ -3053,3 +3040,4 @@ window.addEventListener('scroll', () => {
     </script>
   </body>
 </html>
+
