@@ -2800,78 +2800,47 @@ document.addEventListener('DOMContentLoaded', () => {
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Navbar Toggle
-        const menuBtn = document.getElementById("menu-btn");
-        const navLinks = document.getElementById("nav-links");
-        const menuBtnIcon = menuBtn.querySelector("i");
+    document.addEventListener('DOMContentLoaded', () => {
+  // Theme Toggle Functionality
+  const themeToggle = document.querySelector('.theme-toggle');
+  const themeIcon = document.querySelector('.theme-icon');
+
+  // Load saved theme from localStorage or default to 'default'
+  let currentTheme = localStorage.getItem('theme') || 'default';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  // Theme toggle event listener
+  themeToggle.addEventListener('click', () => {
+    // Cycle through themes
+    if (currentTheme === 'default') {
+      currentTheme = 'light';
+    } else if (currentTheme === 'light') {
+      currentTheme = 'dark';
+    } else {
+      currentTheme = 'default';
+    }
+
+    // Apply the new theme
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    updateThemeIcon(currentTheme);
+  });
+
+  // Function to update the theme icon
+  function updateThemeIcon(theme) {
+    // Remove all possible theme icon classes
+    themeIcon.classList.remove('ri-sun-line', 'ri-moon-line', 'ri-contrast-2-line');
     
-        menuBtn.addEventListener("click", (e) => {
-          console.log("Menu button clicked");
-          navLinks.classList.toggle("open");
-          const isOpen = navLinks.classList.contains("open");
-          menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-3-line");
-        });
-    
-        navLinks.addEventListener("click", (e) => {
-          if (e.target.tagName === "A") {
-            navLinks.classList.remove("open");
-            menuBtnIcon.setAttribute("class", "ri-menu-3-line");
-          }
-        });
-    
-        // Scroll Offset for Navbar Links
-        document.querySelectorAll('.nav__links a').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            const navbarHeight = document.querySelector('nav').offsetHeight;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight-20;
-    
-            window.scrollTo({
-              top: targetPosition,
-              behavior: 'smooth'
-            });
-          });
-        });
-    
-        // Theme Toggle Functionality
-        const themeToggle = document.querySelector('.theme-toggle');
-        const themeIcon = document.querySelector('.theme-icon');
-    
-        // Load saved theme from localStorage
-        let currentTheme = localStorage.getItem('theme') || 'default';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        updateThemeIcon(currentTheme);
-    
-        // Cycle through themes on click
-        themeToggle.addEventListener('click', () => {
-          if (currentTheme === 'default') {
-            currentTheme = 'light';
-          } else if (currentTheme === 'light') {
-            currentTheme = 'dark';
-          } else if (currentTheme === 'dark') {
-            currentTheme = 'default';
-          }
-          document.documentElement.setAttribute('data-theme', currentTheme);
-          localStorage.setItem('theme', currentTheme);
-          updateThemeIcon(currentTheme);
-        });
-    
-        function updateThemeIcon(theme) {
-          if (theme === 'light') {
-            themeIcon.classList.replace('ri-moon-line', 'ri-sun-line');
-            themeIcon.classList.replace('ri-contrast-2-line', 'ri-sun-line');
-          } else if (theme === 'dark') {
-            themeIcon.classList.replace('ri-sun-line', 'ri-moon-line');
-            themeIcon.classList.replace('ri-contrast-2-line', 'ri-moon-line');
-          } else {
-            themeIcon.classList.replace('ri-sun-line', 'ri-contrast-2-line');
-            themeIcon.classList.replace('ri-moon-line', 'ri-contrast-2-line');
-          }
-        }
-    
+    // Add the appropriate icon class based on the theme
+    if (theme === 'light') {
+      themeIcon.classList.add('ri-sun-line');
+    } else if (theme === 'dark') {
+      themeIcon.classList.add('ri-moon-line');
+    } else {
+      themeIcon.classList.add('ri-contrast-2-line');
+    }
+  }
         // Mixitup Initialization
         const mixer = mixitup(".project__grid");
     
@@ -3049,6 +3018,7 @@ window.addEventListener('scroll', () => {
     </script>
   </body>
 </html>
+
 
 
 
