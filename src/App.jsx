@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
 import { AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
@@ -14,9 +14,10 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
-import NotFound from './components/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import 'lenis/dist/lenis.css';
+
+const NotFound = lazy(() => import('./components/NotFound'));
 
 const Home = ({ loading, setLoading, triggerLoading }) => {
   const [tourStatus, setTourStatus] = useState('idle'); // idle, starting, scrolling, stopping, finishing
@@ -243,7 +244,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home loading={loading} setLoading={setLoading} triggerLoading={triggerLoading} />} />
-        <Route path="*" element={<> <CustomCursor /> <NotFound /> </>} />
+        <Route path="*" element={<> <CustomCursor /> <Suspense fallback={null}><NotFound /></Suspense> </>} />
       </Routes>
     </Router>
   );

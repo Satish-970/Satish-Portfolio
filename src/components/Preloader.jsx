@@ -1,13 +1,6 @@
 import { useEffect, useState } from 'react';
 import logoGif from '../assets/logo.gif';
 import headerImg from '../assets/images/IMG_6223.jpg';
-import aboutImg from '../assets/images/IMG_6234.png';
-import bitcoinGif from '../assets/images/bitcoin.gif';
-import dashboardGif from '../assets/images/dashboard.gif';
-import marketingGif from '../assets/images/marketing.gif';
-import javaGif from '../assets/images/java.gif';
-import portfolioGif from '../assets/images/portfoliogif.gif';
-import sqlGif from '../assets/images/sql.gif';
 
 const Preloader = ({ onLoaded, customText }) => {
     const [text1, setText1] = useState('');
@@ -24,16 +17,10 @@ const Preloader = ({ onLoaded, customText }) => {
         let t2 = '';
 
         const preloadAssets = async () => {
+            // Only preload critical assets for fast initial paint
             const assets = [
                 logoGif,
-                headerImg,
-                aboutImg,
-                bitcoinGif,
-                dashboardGif,
-                marketingGif,
-                javaGif,
-                portfolioGif,
-                sqlGif
+                headerImg
             ];
             const promises = assets.map((src) => {
                 return new Promise((resolve, reject) => {
@@ -68,7 +55,7 @@ const Preloader = ({ onLoaded, customText }) => {
                 }
             }
 
-            // Ensure assets are loaded before finishing (max wait logic could be added but simpler is better for now)
+            // Ensure assets are loaded before finishing
             await assetLoadingPromise;
 
             // Minimum view time after typing/loading
