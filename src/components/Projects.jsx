@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ScrollReveal from 'scrollreveal';
 import { motion, AnimatePresence } from 'framer-motion';
+import LazyImage from './LazyImage';
 
 import bitcoinGif from '../assets/images/bitcoin.gif';
 import dashboardGif from '../assets/images/dashboard.gif';
@@ -158,7 +159,11 @@ const Projects = () => {
                             transition={{ duration: 0.3 }}
                             className={`project__card mix ${project.category}`}
                         >
-                            <a href={project.githubUrl}><img src={project.imgUrl} alt="project" loading="lazy" /></a>
+                            <a href={project.githubUrl}>
+                                <div style={{ height: '200px', width: '100%' }}> {/* Fixed height for skeleton context */}
+                                    <LazyImage src={project.imgUrl} alt="project" className="project__image" />
+                                </div>
+                            </a>
                             <h4 style={{ margin: '15px 0' }}>{project.title}</h4>
                             <ul style={{ lineHeight: 1.6, marginBottom: '20px', paddingLeft: '20px' }}>
                                 {project.details.map((detail, index) => (
