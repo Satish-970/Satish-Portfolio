@@ -4,25 +4,29 @@ import { AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Banner from './components/Banner';
-import Resume from './components/Resume';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Blog from './components/Blog';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import ScrollToTop from './components/ScrollToTop';
 import 'lenis/dist/lenis.css';
 
+// Lazy Load Sections for Performance (Code Splitting)
+const About = lazy(() => import('./components/About'));
+const Banner = lazy(() => import('./components/Banner'));
+const Resume = lazy(() => import('./components/Resume'));
+const Projects = lazy(() => import('./components/Projects'));
+const Skills = lazy(() => import('./components/Skills'));
+const Blog = lazy(() => import('./components/Blog'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 const NotFound = lazy(() => import('./components/NotFound'));
 
 const Home = ({ loading, setLoading, triggerLoading }) => {
   const [tourStatus, setTourStatus] = useState('idle'); // idle, starting, scrolling, stopping, finishing
   const [preloaderText, setPreloaderText] = useState(null);
+  const [showSections, setShowSections] = useState(false);
   const scrollRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Stop tour helper
   const stopTour = (isManual = false) => {
@@ -46,7 +50,9 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
   };
 
   const handleLogoClick = () => {
+    // Force load all sections if starting tour
     if (tourStatus === 'idle') {
+      setShowSections(true);
       // Start Tour
       setTourStatus('starting');
       setPreloaderText(["Initializing Auto Scroll...", "Click logo again to stop"]);
@@ -57,6 +63,26 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
       stopTour(true);
     }
   };
+
+  // Section Loading Logic (Scroll Trigger or Hash)
+  useEffect(() => {
+    // If there is a deep link, load immediately
+    if (location.hash && location.hash !== '#home' && location.hash !== '#') {
+      setShowSections(true);
+    }
+
+    const handleScrollLoading = () => {
+      if (showSections) return;
+      // Load remaining sections when scrolled 50% of viewport
+      if (window.scrollY > window.innerHeight * 0.5) {
+        setShowSections(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollLoading);
+    return () => window.removeEventListener('scroll', handleScrollLoading);
+  }, [location.hash, showSections]);
+
 
   // Handle tour state transitions after loading finishes
   useEffect(() => {
@@ -100,9 +126,8 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
     };
   }, [tourStatus, setLoading]);
 
-  // Strict Hash Validation
-  const location = useLocation();
-  const navigate = useNavigate();
+  // Strict Hash Validation logic moved to top normally, but hook order matters.
+  // We already defined location/navigate at top.
 
   useEffect(() => {
     // List of valid section IDs (must match id="..." in components)
@@ -129,14 +154,20 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
           isTourActive={tourStatus === 'scrolling' || tourStatus === 'starting'}
         />
         <Hero />
-        <About />
-        <Banner />
-        <Resume />
-        <Projects />
-        <Skills />
-        <Blog />
-        <Contact />
-        <Footer />
+
+        {/* Lazy load the rest of the site */}
+        {showSections && (
+          <Suspense fallback={<div style={{ height: '200px' }}></div>}>
+            <About />
+            <Banner />
+            <Resume />
+            <Projects />
+            <Skills />
+            <Blog />
+            <Contact />
+            <Footer />
+          </Suspense>
+        )}
       </div>
     </>
   );
