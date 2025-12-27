@@ -34,8 +34,8 @@ const Preloader = ({ onLoaded, customText }) => {
         };
 
         const runAnimation = async () => {
-            // Start asset loading in parallel
-            const assetLoadingPromise = preloadAssets();
+            // Start asset loading in parallel (fire and forget)
+            preloadAssets();
 
             // Type line 1
             if (fullText1) {
@@ -55,11 +55,9 @@ const Preloader = ({ onLoaded, customText }) => {
                 }
             }
 
-            // Ensure assets are loaded before finishing
-            await assetLoadingPromise;
-
-            // Minimum view time after typing/loading
-            await new Promise(r => setTimeout(r, customText ? 2000 : 400));
+            // DO NOT WAIT for assets. Just finish text and exit.
+            // Minimum view time after typing
+            await new Promise(r => setTimeout(r, customText ? 2000 : 200));
 
             setIsHidden(true);
             setTimeout(() => {
