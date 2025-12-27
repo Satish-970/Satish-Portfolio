@@ -1,39 +1,16 @@
-# Satish-Portfolio
--->Personal Portfolio Website
-Overview::
-This is the source code for my personal portfolio website, hosted at https://satishpakalapati.netlify.app/. 
-The website showcases my skills, projects, and professional experience as a software engineer. 
-It is built using modern web technologies to provide a responsive and engaging user experience.
+# React + Vite
 
-Features::
-Home Section: A brief introduction with a call-to-action to explore the portfolio.
-About Section: Details about my background, skills, and expertise.
-Projects Section: A showcase of my key projects with descriptions and links.
-Contact Section: A form and contact information for reaching out.
-Responsive Design: Optimized for both desktop and mobile devices.
-Smooth Animations: Subtle animations to enhance user experience.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Technologies Used
+Currently, two official plugins are available:
 
-Frontend:
-HTML5
-CSS3 (with  CSS for styling)
-JavaScript (with js for dynamic components)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+## React Compiler
 
-Deployment:
-Netlify for hosting and continuous deployment
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Expanding the ESLint configuration
 
-Version Control:
-Git and GitHub for source code management
-
-
-For any inquiries, reach out via:
-
-Email: satishpakalapati65@gmail.com
-LinkedIn: https://www.linkedin.com/in/satishpakalapati/
-GitHub: https://github.com/Satish-970
-
-
-Built with ❤️ by Satish Pakalapati
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
