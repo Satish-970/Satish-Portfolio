@@ -80,6 +80,7 @@ const Navbar = ({ onRefresh, onLogoClick, isTourActive }) => {
                             <img
                                 src={logoGif}
                                 alt="Satish Pakalapati"
+                                title="Satish Pakalapati"
                                 className={`nav-logo-gif ${isTourActive ? 'nav-logo-rotating' : ''}`}
                             />
                             {isTourActive && <span className="nav-tour-text">Click to Stop</span>}

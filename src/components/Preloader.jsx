@@ -1,4 +1,13 @@
 import { useEffect, useState } from 'react';
+import logoGif from '../assets/logo.gif';
+import headerImg from '../assets/images/IMG_6223.jpg';
+import aboutImg from '../assets/images/IMG_6234.png';
+import bitcoinGif from '../assets/images/bitcoin.gif';
+import dashboardGif from '../assets/images/dashboard.gif';
+import marketingGif from '../assets/images/marketing.gif';
+import javaGif from '../assets/images/java.gif';
+import portfolioGif from '../assets/images/portfoliogif.gif';
+import sqlGif from '../assets/images/sql.gif';
 
 const Preloader = ({ onLoaded, customText }) => {
     const [text1, setText1] = useState('');
@@ -14,11 +23,37 @@ const Preloader = ({ onLoaded, customText }) => {
         let t1 = '';
         let t2 = '';
 
+        const preloadAssets = async () => {
+            const assets = [
+                logoGif,
+                headerImg,
+                aboutImg,
+                bitcoinGif,
+                dashboardGif,
+                marketingGif,
+                javaGif,
+                portfolioGif,
+                sqlGif
+            ];
+            const promises = assets.map((src) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = resolve;
+                    img.onerror = resolve; // Continue even if one fails
+                });
+            });
+            await Promise.all(promises);
+        };
+
         const runAnimation = async () => {
+            // Start asset loading in parallel
+            const assetLoadingPromise = preloadAssets();
+
             // Type line 1
             if (fullText1) {
                 for (let i = 0; i < fullText1.length; i++) {
-                    await new Promise(r => setTimeout(r, 40)); // Slightly faster typing for custom text maybe? kept 40-60
+                    await new Promise(r => setTimeout(r, 40));
                     t1 += fullText1[i];
                     setText1(t1);
                 }
@@ -33,10 +68,12 @@ const Preloader = ({ onLoaded, customText }) => {
                 }
             }
 
-            // Wait, then fade
-            // Increase wait time significantly if custom text is used (likely for the tour)
-            // or just generally to allow reading. 2500ms is good for "Initializing..."
+            // Ensure assets are loaded before finishing (max wait logic could be added but simpler is better for now)
+            await assetLoadingPromise;
+
+            // Minimum view time after typing/loading
             await new Promise(r => setTimeout(r, customText ? 2500 : 800));
+
             setIsHidden(true);
             setTimeout(() => {
                 onLoaded();
