@@ -164,48 +164,62 @@ function App() {
     }
 
     requestAnimationFrame(raf);
+  }, []);
 
-    // Jotform Script
-    const script = document.createElement('script');
-    script.src = "https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js";
-    script.async = true;
-    script.onload = () => {
-      // Small delay to ensure script loaded fully
-      setTimeout(() => {
-        if (window.AgentInitializer) {
-          window.AgentInitializer.init({
-            agentRenderURL: "https://agent.jotform.com/0196780295ee7122bd0ba94b69563ee95eb1",
-            rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
-            formID: "https://form.jotform.com/251165265378058",
-            queryParams: ["skipWelcome=1", "maximizable=1"],
-            domain: "https://www.jotform.com",
-            isDraggable: false,
-            background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
-            buttonBackgroundColor: "#051258",
-            buttonIconColor: "#FFFFFF",
-            variant: false,
-            customizations: {
-              "greeting": "Yes",
-              "greetingMessage": "Hi! I am Satish's Assistant, How can I assist you?",
-              "openByDefault": "No",
-              "pulse": "Yes",
-              "position": "right",
-              "autoOpenChatIn": "0"
-            },
-            isVoice: false,
-          });
-        }
-      }, 100);
+  // Deferred Jotform Loading on Scroll (10%)
+  useEffect(() => {
+    let scriptLoaded = false;
+
+    const loadJotformAgent = () => {
+      if (scriptLoaded) return;
+
+      const script = document.createElement('script');
+      script.src = "https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js";
+      script.async = true;
+      script.onload = () => {
+        setTimeout(() => {
+          if (window.AgentInitializer) {
+            window.AgentInitializer.init({
+              agentRenderURL: "https://agent.jotform.com/0196780295ee7122bd0ba94b69563ee95eb1",
+              rootId: "JotformAgent-0196780295ee7122bd0ba94b69563ee95eb1",
+              formID: "https://form.jotform.com/251165265378058",
+              queryParams: ["skipWelcome=1", "maximizable=1"],
+              domain: "https://www.jotform.com",
+              isDraggable: false,
+              background: "linear-gradient(180deg, #8a660e 0%, #0E408A 100%)",
+              buttonBackgroundColor: "#051258",
+              buttonIconColor: "#FFFFFF",
+              variant: false,
+              customizations: {
+                "greeting": "Yes",
+                "greetingMessage": "Hi! I am Satish's Assistant, How can I assist you?",
+                "openByDefault": "No",
+                "pulse": "Yes",
+                "position": "right",
+                "autoOpenChatIn": "0"
+              },
+              isVoice: false,
+            });
+          }
+        }, 100);
+      };
+      document.body.appendChild(script);
+      scriptLoaded = true;
     };
-    document.body.appendChild(script);
 
-    return () => {
-      try {
-        document.body.removeChild(script);
-      } catch (e) {
-        // ignore if already removed
+    const handleScroll = () => {
+      const scrollPercentage = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      const threshold = 0.1; // 10%
+
+      if (!scriptLoaded && (scrollPercentage > threshold || window.scrollY > 200)) {
+        loadJotformAgent();
+        window.removeEventListener('scroll', handleScroll);
       }
     };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
