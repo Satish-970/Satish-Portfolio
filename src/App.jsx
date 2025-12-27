@@ -73,11 +73,15 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
 
     const handleScrollLoading = () => {
       if (showSections) return;
-      // Load remaining sections when scrolled 50% of viewport
-      if (window.scrollY > window.innerHeight * 0.5) {
+      // Load remaining sections almost immediately (100px) for smooth UX
+      if (window.scrollY > 100) {
         setShowSections(true);
       }
     };
+
+    // ... (This part was not selected for replacement but the tool needs matching context. I will select the block around handleScrollLoading and handleScroll separately or use multi-replace if possible. Actually, I can do it in two chunks using multi_replace_file_content or two calls. Wait, multi_replace is preferred).
+
+    // Let's use multi_replace for safety and efficiency.
 
     window.addEventListener('scroll', handleScrollLoading);
     return () => window.removeEventListener('scroll', handleScrollLoading);
@@ -240,9 +244,9 @@ function App() {
 
     const handleScroll = () => {
       const scrollPercentage = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-      const threshold = 0.1; // 10%
+      const threshold = 0.35; // 35% -> Approx "About Me" section
 
-      if (!scriptLoaded && (scrollPercentage > threshold || window.scrollY > 200)) {
+      if (!scriptLoaded && (scrollPercentage > threshold || window.scrollY > 800)) {
         loadJotformAgent();
         window.removeEventListener('scroll', handleScroll);
       }
