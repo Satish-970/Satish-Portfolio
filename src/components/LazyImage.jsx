@@ -56,7 +56,9 @@ const LazyImage = ({ src, alt, className }) => {
                 loading="lazy"
                 style={{
                     opacity: isLoaded ? 1 : 0,
-                    transition: 'opacity 0.5s ease-in-out',
+                    filter: isLoaded ? 'blur(0)' : 'blur(20px)',
+                    transform: isLoaded ? 'scale(1)' : 'scale(1.1)',
+                    transition: 'opacity 0.7s ease-in-out, filter 0.7s ease-in-out, transform 0.7s ease-in-out',
                     width: '100%',
                     height: '100%',
                     display: 'block',

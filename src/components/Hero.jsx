@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import ScrollReveal from 'scrollreveal';
 import headerImg from '../assets/images/IMG_6223.jpg';
+import LazyImage from './LazyImage';
 
 const Hero = () => {
     useEffect(() => {
@@ -11,7 +12,7 @@ const Hero = () => {
             viewFactor: 0.5,
         };
 
-        ScrollReveal().reveal(".header__image img", { ...scrollRevealOption });
+        ScrollReveal().reveal(".header__image", { ...scrollRevealOption });
         ScrollReveal().reveal(".header__content h4", { ...scrollRevealOption, delay: 500 });
         ScrollReveal().reveal(".header__content h1", { ...scrollRevealOption, delay: 1000 });
         ScrollReveal().reveal(".header__content p", { ...scrollRevealOption, delay: 1500 });
@@ -22,7 +23,7 @@ const Hero = () => {
         <header className="header" id="home">
             <div className="section__container header__container">
                 <div className="header__image">
-                    <img src={headerImg} alt="header" loading="lazy" />
+                    <LazyImage src={headerImg} alt="header" className="" />
                 </div>
                 <div className="header__content">
                     <h4>Crafting Digital Excellence</h4>

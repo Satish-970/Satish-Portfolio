@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import ScrollReveal from 'scrollreveal';
 import aboutImg from '../assets/images/IMG_6234.jpg';
+import LazyImage from './LazyImage';
 
 const About = () => {
     useEffect(() => {
-        ScrollReveal().reveal(".about__image img", {
+        ScrollReveal().reveal(".about__image", {
             distance: "50px",
             origin: "left",
             duration: 1000,
@@ -38,7 +39,7 @@ const About = () => {
     return (
         <section className="section__container about__container" id="about">
             <div className="about__image">
-                <img src={aboutImg} alt="about" loading="lazy" />
+                <LazyImage src={aboutImg} alt="about" className="" />
             </div>
             <div className="about__content">
                 <h2 className="section__header">About me</h2>
