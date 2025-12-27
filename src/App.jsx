@@ -20,10 +20,27 @@ const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const NotFound = lazy(() => import('./components/NotFound'));
 
+// Helper to trigger next section load
+// This ensures strict sequential loading (Waterfall)
+const LoadNotifier = ({ onLoaded }) => {
+  useEffect(() => {
+    // Small delay to ensure paint/transition
+    const timer = setTimeout(() => {
+      onLoaded();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [onLoaded]);
+  return null;
+};
+
 const Home = ({ loading, setLoading, triggerLoading }) => {
   const [tourStatus, setTourStatus] = useState('idle'); // idle, starting, scrolling, stopping, finishing
   const [preloaderText, setPreloaderText] = useState(null);
-  const [showSections, setShowSections] = useState(false);
+
+  // SEQUENTIAL LOADING STATE
+  // 0: Start (About), 1: Banner, 2: Resume, 3: Projects, 4: Skills, 5: Blog, 6: Contact, 7: Footer
+  const [loadIndex, setLoadIndex] = useState(0);
+
   const scrollRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,9 +67,9 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
   };
 
   const handleLogoClick = () => {
-    // Force load all sections if starting tour
     if (tourStatus === 'idle') {
-      setShowSections(true);
+      // Force load ALL if starting tour to ensure smooth scroll
+      setLoadIndex(100);
       // Start Tour
       setTourStatus('starting');
       setPreloaderText(["Initializing Auto Scroll...", "Click logo again to stop"]);
@@ -64,29 +81,13 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
     }
   };
 
-  // Section Loading Logic (Scroll Trigger or Hash)
+  // Force load everything if direct link used
   useEffect(() => {
-    // If there is a deep link, load immediately
-    if (location.hash && location.hash !== '#home' && location.hash !== '#') {
-      setShowSections(true);
+    const validHashes = ['#about', '#resume', '#project', '#service', '#blog', '#contact'];
+    if (location.hash && validHashes.includes(location.hash)) {
+      setLoadIndex(100);
     }
-
-    const handleScrollLoading = () => {
-      if (showSections) return;
-      // Load remaining sections almost immediately (100px) for smooth UX
-      if (window.scrollY > 100) {
-        setShowSections(true);
-      }
-    };
-
-    // ... (This part was not selected for replacement but the tool needs matching context. I will select the block around handleScrollLoading and handleScroll separately or use multi-replace if possible. Actually, I can do it in two chunks using multi_replace_file_content or two calls. Wait, multi_replace is preferred).
-
-    // Let's use multi_replace for safety and efficiency.
-
-    window.addEventListener('scroll', handleScrollLoading);
-    return () => window.removeEventListener('scroll', handleScrollLoading);
-  }, [location.hash, showSections]);
-
+  }, [location.hash]);
 
   // Handle tour state transitions after loading finishes
   useEffect(() => {
@@ -130,15 +131,10 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
     };
   }, [tourStatus, setLoading]);
 
-  // Strict Hash Validation logic moved to top normally, but hook order matters.
-  // We already defined location/navigate at top.
-
+  // Strict Hash Validation
   useEffect(() => {
-    // List of valid section IDs (must match id="..." in components)
     const validHashes = ['', '#', '#home', '#about', '#resume', '#project', '#service', '#blog', '#contact'];
-
     if (location.hash && !validHashes.includes(location.hash)) {
-      // If hash is present but NOT valid, redirect to 404
       navigate('/404');
     }
   }, [location, navigate]);
@@ -159,19 +155,82 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
         />
         <Hero />
 
-        {/* Lazy load the rest of the site */}
-        {showSections && (
-          <Suspense fallback={<div style={{ height: '200px' }}></div>}>
-            <About />
-            <Banner />
-            <Resume />
-            <Projects />
-            <Skills />
-            <Blog />
-            <Contact />
-            <Footer />
-          </Suspense>
-        )}
+        {/* 
+           STRICT SEQUENTIAL LOADING (Chain Reaction)
+           Each section triggers the next one via onLoadedCallback 
+        */}
+
+        <div style={{ minHeight: '600px' }}>
+          {loadIndex >= 0 && (
+            <Suspense fallback={<div style={{ height: '600px' }}></div>}>
+              <About />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 1))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '300px' }}>
+          {loadIndex >= 1 && (
+            <Suspense fallback={<div style={{ height: '300px' }}></div>}>
+              <Banner />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 2))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '800px' }}>
+          {loadIndex >= 2 && (
+            <Suspense fallback={<div style={{ height: '800px' }}></div>}>
+              <Resume />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 3))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '800px' }}>
+          {loadIndex >= 3 && (
+            <Suspense fallback={<div style={{ height: '800px' }}></div>}>
+              <Projects />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 4))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '400px' }}>
+          {loadIndex >= 4 && (
+            <Suspense fallback={<div style={{ height: '400px' }}></div>}>
+              <Skills />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 5))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '600px' }}>
+          {loadIndex >= 5 && (
+            <Suspense fallback={<div style={{ height: '600px' }}></div>}>
+              <Blog />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 6))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '500px' }}>
+          {loadIndex >= 6 && (
+            <Suspense fallback={<div style={{ height: '500px' }}></div>}>
+              <Contact />
+              <LoadNotifier onLoaded={() => setLoadIndex(prev => Math.max(prev, 7))} />
+            </Suspense>
+          )}
+        </div>
+
+        <div style={{ minHeight: '100px' }}>
+          {loadIndex >= 7 && (
+            <Suspense fallback={<div style={{ height: '100px' }}></div>}>
+              <Footer />
+            </Suspense>
+          )}
+        </div>
+
       </div>
     </>
   );
@@ -201,7 +260,7 @@ function App() {
     requestAnimationFrame(raf);
   }, []);
 
-  // Deferred Jotform Loading on Scroll (10%)
+  // Deferred Jotform Loading on Scroll (35% - About Section)
   useEffect(() => {
     let scriptLoaded = false;
 
@@ -234,6 +293,7 @@ function App() {
                 "autoOpenChatIn": "0"
               },
               isVoice: false,
+              customText: "Talk only about Satish, and reply in very short sentences."
             });
           }
         }, 100);
