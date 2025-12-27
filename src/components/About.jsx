@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import ScrollReveal from 'scrollreveal';
-import aboutImg from '../assets/images/IMG_6234.png';
+import aboutImg from '../assets/images/IMG_6234.jpg';
 
 const About = () => {
     useEffect(() => {

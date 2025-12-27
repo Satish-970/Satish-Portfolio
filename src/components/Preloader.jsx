@@ -40,7 +40,7 @@ const Preloader = ({ onLoaded, customText }) => {
             // Type line 1
             if (fullText1) {
                 for (let i = 0; i < fullText1.length; i++) {
-                    await new Promise(r => setTimeout(r, 40));
+                    await new Promise(r => setTimeout(r, 20));
                     t1 += fullText1[i];
                     setText1(t1);
                 }
@@ -49,7 +49,7 @@ const Preloader = ({ onLoaded, customText }) => {
             // Type line 2
             if (fullText2) {
                 for (let i = 0; i < fullText2.length; i++) {
-                    await new Promise(r => setTimeout(r, 40));
+                    await new Promise(r => setTimeout(r, 20));
                     t2 += fullText2[i];
                     setText2(t2);
                 }
@@ -59,7 +59,7 @@ const Preloader = ({ onLoaded, customText }) => {
             await assetLoadingPromise;
 
             // Minimum view time after typing/loading
-            await new Promise(r => setTimeout(r, customText ? 2500 : 800));
+            await new Promise(r => setTimeout(r, customText ? 2000 : 400));
 
             setIsHidden(true);
             setTimeout(() => {
