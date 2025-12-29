@@ -152,6 +152,7 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
           onRefresh={triggerLoading}
           onLogoClick={handleLogoClick}
           isTourActive={tourStatus === 'scrolling' || tourStatus === 'starting'}
+          isLoaded={!loading}
         />
         <Hero />
 

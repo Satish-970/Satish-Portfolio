@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import logoGif from '../assets/logo.gif';
 import headerImg from '../assets/images/IMG_6223.jpg';
 
@@ -12,7 +12,12 @@ const Preloader = ({ onLoaded, customText }) => {
 
     const [isHidden, setIsHidden] = useState(false);
 
+    const hasRun = useRef(false);
+
     useEffect(() => {
+        if (hasRun.current) return;
+        hasRun.current = true;
+
         let t1 = '';
         let t2 = '';
 
@@ -40,7 +45,7 @@ const Preloader = ({ onLoaded, customText }) => {
             // Type line 1
             if (fullText1) {
                 for (let i = 0; i < fullText1.length; i++) {
-                    await new Promise(r => setTimeout(r, 20));
+                    await new Promise(r => setTimeout(r, 75));
                     t1 += fullText1[i];
                     setText1(t1);
                 }
@@ -49,7 +54,7 @@ const Preloader = ({ onLoaded, customText }) => {
             // Type line 2
             if (fullText2) {
                 for (let i = 0; i < fullText2.length; i++) {
-                    await new Promise(r => setTimeout(r, 20));
+                    await new Promise(r => setTimeout(r, 75));
                     t2 += fullText2[i];
                     setText2(t2);
                 }
@@ -57,7 +62,7 @@ const Preloader = ({ onLoaded, customText }) => {
 
             // DO NOT WAIT for assets. Just finish text and exit.
             // Minimum view time after typing
-            await new Promise(r => setTimeout(r, customText ? 2000 : 200));
+            await new Promise(r => setTimeout(r, customText ? 2000 : 2000));
 
             setIsHidden(true);
             setTimeout(() => {

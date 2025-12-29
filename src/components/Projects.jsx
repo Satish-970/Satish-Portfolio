@@ -26,7 +26,7 @@ const Projects = () => {
     const projects = [
         {
             id: 1,
-            category: 'web',
+            category: 'data',
             imgUrl: bitcoinGif,
             title: 'Bitcoin Close Price',
             details: [
@@ -40,7 +40,7 @@ const Projects = () => {
         },
         {
             id: 2,
-            category: 'game',
+            category: 'viz',
             imgUrl: dashboardGif,
             title: 'Data Science Job Salary Analysis',
             details: [
@@ -54,7 +54,7 @@ const Projects = () => {
         },
         {
             id: 3,
-            category: 'web',
+            category: 'data',
             imgUrl: sqlGif,
             title: 'Query Based Analysis - SQL',
             details: [
@@ -97,7 +97,7 @@ const Projects = () => {
         },
         {
             id: 6,
-            category: 'design',
+            category: 'marketing',
             imgUrl: marketingGif,
             title: 'Digital Marketing',
             details: [
@@ -131,17 +131,23 @@ const Projects = () => {
                         className={`btn project__btn ${filter === 'web' ? 'mixitup-control-active' : ''}`}
                         onClick={() => setFilter('web')}
                     >
-                        Data Process
+                        Web Dev
                     </button>
                     <button
-                        className={`btn project__btn ${filter === 'game' ? 'mixitup-control-active' : ''}`}
-                        onClick={() => setFilter('game')}
+                        className={`btn project__btn ${filter === 'data' ? 'mixitup-control-active' : ''}`}
+                        onClick={() => setFilter('data')}
                     >
-                        Data Visual
+                        Data Analysis
                     </button>
                     <button
-                        className={`btn project__btn ${filter === 'design' ? 'mixitup-control-active' : ''}`}
-                        onClick={() => setFilter('design')}
+                        className={`btn project__btn ${filter === 'viz' ? 'mixitup-control-active' : ''}`}
+                        onClick={() => setFilter('viz')}
+                    >
+                        Data Viz
+                    </button>
+                    <button
+                        className={`btn project__btn ${filter === 'marketing' ? 'mixitup-control-active' : ''}`}
+                        onClick={() => setFilter('marketing')}
                     >
                         Marketing
                     </button>
@@ -160,7 +166,7 @@ const Projects = () => {
                             className={`project__card mix ${project.category}`}
                         >
                             <a href={project.githubUrl}>
-                                <div style={{ height: '200px', width: '100%' }}> {/* Fixed height for skeleton context */}
+                                <div>
                                     <LazyImage src={project.imgUrl} alt="project" className="project__image" />
                                 </div>
                             </a>

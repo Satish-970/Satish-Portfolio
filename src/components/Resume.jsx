@@ -24,6 +24,7 @@ const Resume = () => {
 
     return (
         <section className="section__container client__container" id="resume">
+            <div id="resume-trigger" style={{ position: 'absolute', top: '50%', visibility: 'hidden' }}></div>
             <h2 className="section__subheader">Resume</h2>
             <div className="testimonial__card1">
                 <a href="https://www.boardinfinity.com/programs/college-courses"><h3>Summer Training Program</h3></a>

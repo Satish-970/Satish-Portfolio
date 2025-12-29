@@ -496,7 +496,15 @@ nav {
 
 .project__grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.project__card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
 }
 
 .project__card img {
@@ -768,9 +776,7 @@ nav {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .project__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  /* project__grid handled by auto-fit */
 
   .service__grid {
     grid-template-columns: repeat(2, 1fr);
@@ -870,9 +876,7 @@ nav {
     flex-direction: row;
   }
 
-  .project__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  /* project__grid handled by auto-fit */
 
   .service__grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1650,8 +1654,11 @@ nav {
   .blog__grid,
   .footer__container,
   .testimonial__grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 1fr !important;
+  }
+
+  .project__grid {
+    grid-template-columns: 1fr !important;
   }
 
   /* Image Sizing */

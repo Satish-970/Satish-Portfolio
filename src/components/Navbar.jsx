@@ -21,7 +21,7 @@ const RevealText = ({ text }) => {
     );
 }
 
-const Navbar = ({ onRefresh, onLogoClick, isTourActive }) => {
+const Navbar = ({ onRefresh, onLogoClick, isTourActive, isLoaded }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState("light");
 
@@ -34,23 +34,31 @@ const Navbar = ({ onRefresh, onLogoClick, isTourActive }) => {
     const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
-        const sections = document.querySelectorAll('section[id], header[id]');
+        // Wait for loading to finish before attaching observer
+        if (!isLoaded) return;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
-                }
+        // Small timeout to ensure DOM is fully painted
+        const timer = setTimeout(() => {
+            const sections = document.querySelectorAll('section[id], header[id]');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            }, {
+                threshold: 0,
+                rootMargin: "-50% 0px -50% 0px" // Trigger exactly at center of viewport
             });
-        }, {
-            threshold: 0,
-            rootMargin: "-50% 0px -50% 0px" // Trigger exactly at center
-        });
 
-        sections.forEach(section => observer.observe(section));
+            sections.forEach(section => observer.observe(section));
 
-        return () => sections.forEach(section => observer.unobserve(section));
-    }, []);
+            return () => sections.forEach(section => observer.unobserve(section));
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [isLoaded]); // Re-run when isLoaded becomes true
 
     const toggleTheme = () => {
         setTheme((prev) => (prev === "light" ? "dark" : "light"));
