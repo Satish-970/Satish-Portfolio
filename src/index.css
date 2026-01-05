@@ -595,39 +595,270 @@ nav {
   background-color: var(--primary-color-dark);
 }
 
-.blog__grid {
+/* Blog Carousel Styles */
+.blog__slider-wrapper {
+  position: relative;
   margin-top: 4rem;
-  display: grid;
-  gap: 2rem 1rem;
+  padding-bottom: 2rem;
 }
 
-.blog__card img {
-  margin-bottom: 1rem;
-  border-radius: 5px;
+.blog__swiper {
+  width: 100%;
+  padding-bottom: 3rem;
 }
 
-.blog__card p {
-  margin-bottom: 5px;
-  color: var(--primary-color-dark);
+/* Blog Slide - Mobile First (Vertical) */
+.blog__slide {
+  display: flex !important;
+  flex-direction: column;
+  background-color: var(--secondary-color-light);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: auto;
+  /* Dynamic height */
 }
 
-.blog__card h4 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+/* Tablet/Desktop - Horizontal Split */
+@media (min-width: 768px) {
+  .blog__slide {
+    flex-direction: row;
+    height: auto;
+    /* Dynamic height */
+    min-height: unset;
+  }
+}
+
+/* Image Container */
+.blog__image-right {
+  flex: none;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  order: 1;
+}
+
+@media (min-width: 768px) {
+  .blog__image-right {
+    width: 45%;
+    /* Slightly less than half */
+    height: 100%;
+    order: 2;
+    /* Image on right for desktop */
+  }
+}
+
+/* Content Container */
+.blog__content-left {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  order: 2;
+}
+
+@media (min-width: 768px) {
+  .blog__content-left {
+    padding: 2rem;
+    order: 1;
+    /* Content on left for desktop */
+    width: 55%;
+  }
+}
+
+.blog__meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.blog__category {
+  color: var(--primary-color);
   font-weight: 600;
+  text-transform: uppercase;
 }
 
-.blog__card a {
+.blog__date {
   color: var(--text-light);
-  transition: 0.3s;
 }
 
-.blog__card a:hover {
-  color: var(--primary-color-dark);
+.blog__title {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+  color: var(--white);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (min-width: 768px) {
+  .blog__title {
+    font-size: 1.4rem;
+  }
+}
+
+.blog__description {
+  color: var(--text-light);
+  margin-bottom: auto;
+  /* Push button to bottom */
+  line-height: 1.6;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.blog__btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5rem;
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.blog__btn:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.blog__image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.blog__image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Gradient Overlay for Image Blending */
+.blog__image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--secondary-color-light) 0%, transparent 20%, transparent 80%, var(--secondary-color-light) 100%);
+  opacity: 0.3;
+}
+
+@media (min-width: 768px) {
+  .blog__image-overlay {
+    background: linear-gradient(to right, var(--secondary-color-light) 0%, transparent 20%, transparent 100%);
+  }
+}
+
+/* Custom Navigation */
+.blog__navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+  /* Allow clicking through wrapper */
+  padding: 0;
+}
+
+.blog-button-prev,
+.blog-button-next {
+  pointer-events: auto;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.blog-button-prev:hover,
+.blog-button-next:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+.blog-button-prev {
+  margin-left: -50px;
+}
+
+.blog-button-next {
+  margin-right: -50px;
+}
+
+@media (max-width: 1240px) {
+  .blog-button-prev {
+    margin-left: -20px;
+  }
+
+  .blog-button-next {
+    margin-right: -20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-button-prev {
+    margin-left: 0;
+  }
+
+  .blog-button-next {
+    margin-right: 0;
+  }
+}
+
+.contact__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.contact__container .section__header {
+  font-size: 3rem;
+  text-align: left;
+}
+
+.contact__container .section__subheader {
+  font-size: 1.5rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.contact__visuals {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact__form {
-  max-width: 600px;
+  max-width: 100%;
   margin-inline: auto;
   margin-top: 4rem;
   display: grid;
@@ -995,6 +1226,11 @@ nav {
 }
 
 @media (max-width: 767px) {
+  .contact__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
   .contact__form .input__row {
     flex-direction: column;
   }
@@ -1687,5 +1923,39 @@ nav {
 
   .footer__bar {
     font-size: 0.7rem;
+  }
+}
+
+/* Contact Section Layout Refactor */
+.contact__content {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.contact__visuals {
+  /* Placeholder for the interactive element */
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .contact__content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+
+  /* Reset centered alignment for the right side inputs */
+  .contact__form__wrapper .section__header,
+  .contact__form__wrapper .section__subheader {
+    text-align: left;
+  }
+
+  .contact__form {
+    margin-top: 2rem;
+    margin-inline: 0;
+    /* Align form to the left of its column (which is the right side of the page) */
   }
 }
