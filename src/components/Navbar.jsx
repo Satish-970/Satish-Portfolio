@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import logoGif from "../assets/logo.gif";
 import "../logo_styles.css";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { ThemeTogglerButton } from "@/components/animate-ui/components/buttons/theme-toggler";
 
 const RevealText = ({ text }) => {
     return (
@@ -20,6 +21,8 @@ const RevealText = ({ text }) => {
         </div>
     );
 }
+
+
 
 const Navbar = ({ onRefresh, onLogoClick, isTourActive, isLoaded }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -60,8 +63,8 @@ const Navbar = ({ onRefresh, onLogoClick, isTourActive, isLoaded }) => {
         return () => clearTimeout(timer);
     }, [isLoaded]); // Re-run when isLoaded becomes true
 
-    const toggleTheme = () => {
-        setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    const toggleTheme = (newTheme) => {
+        setTheme(newTheme);
     };
 
     const navLinks = [
@@ -126,8 +129,11 @@ const Navbar = ({ onRefresh, onLogoClick, isTourActive, isLoaded }) => {
                             </motion.a>
                         </li>
                     ))}
-                    <li className="theme-toggle" onClick={toggleTheme}>
-                        <i className={theme === "light" ? "ri-moon-line theme-icon" : "ri-sun-line theme-icon"}></i>
+                    <li className="theme-toggle">
+                        <ThemeTogglerButton
+                            currentTheme={theme}
+                            onThemeChange={toggleTheme}
+                        />
                     </li>
                 </ul>
             </div>

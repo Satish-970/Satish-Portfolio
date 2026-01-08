@@ -11,17 +11,12 @@ const About = () => {
             duration: 1000,
             viewFactor: 0.5,
         });
-        ScrollReveal().reveal(".about__content .section__header", {
-            distance: "50px",
-            origin: "bottom",
-            duration: 1000,
-            delay: 500,
-        });
+        // Removed header reveal to ensure visibility
         ScrollReveal().reveal(".about__content p", {
             distance: "50px",
             origin: "bottom",
             duration: 1000,
-            delay: 1000,
+            delay: 500, // Reduced delay
         });
         ScrollReveal().reveal(".about__content h4", {
             distance: "50px",
@@ -33,7 +28,7 @@ const About = () => {
             distance: "50px",
             origin: "bottom",
             duration: 1000,
-            delay: 2000,
+            delay: 1500,
         });
     }, []);
     return (
@@ -42,7 +37,7 @@ const About = () => {
                 <LazyImage src={aboutImg} alt="about" className="" />
             </div>
             <div className="about__content">
-                <h2 className="section__header">About me</h2>
+                <h2 className="section__header" style={{ opacity: 1, visibility: 'visible' }}>About Me</h2>
                 <p>Satish Pakalapati
                     A relentless B.Tech Computer Science student at Lovely Professional University,
                     Mastering the art of Data Science and Digital Marketing with unmatched drive.

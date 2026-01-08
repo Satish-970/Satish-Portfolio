@@ -1,0 +1,63 @@
+.theme-toggler-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Size variants */
+.theme-toggler-btn.default {
+    height: 40px;
+    width: 40px;
+}
+
+.theme-toggler-btn.sm {
+    height: 32px;
+    width: 32px;
+}
+
+/* Hover effects */
+.theme-toggler-btn:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+.theme-toggler-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.theme-icon-sun {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #ff9900;
+    /* Matching existing primary color or gold */
+}
+
+.theme-icon-moon {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #f8f208;
+    /* Bright yellow/primary for dark mode contrast or keep white */
+}
+
+/* In dark mode, moon is usually white or primary. The existing CSS used ri-moon-line. */
+[data-theme="dark"] .theme-icon-moon {
+    color: #f8f208;
+}
+
+[data-theme="light"] .theme-icon-sun {
+    color: #ff9900;
+}

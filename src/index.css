@@ -1,5 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+/* View Transition Styles for Theme Toggler */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+[data-theme="dark"]::view-transition-old(root) {
+  z-index: 9999;
+}
+
+[data-theme="dark"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+
 :root {
   --primary-color: #f8f208;
   --primary-color-dark: #ee9821;
@@ -68,6 +92,8 @@ body {
   font-size: 2.5rem;
   font-weight: 600;
   text-align: center;
+  color: var(--white);
+  /* Ensure visible text color */
 }
 
 .section__subheader {
@@ -383,8 +409,11 @@ nav {
 }
 
 .about__content .section__header {
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  /* Increased to prevent overlap */
   text-align: left;
+  line-height: normal;
+  display: block;
 }
 
 .about__content p {
@@ -693,6 +722,7 @@ nav {
   color: var(--white);
   overflow: hidden;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
