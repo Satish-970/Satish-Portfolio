@@ -7,6 +7,7 @@ import Hero from './components/Hero';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollProgress from './components/ScrollProgress';
 import 'lenis/dist/lenis.css';
 
 // Lazy Load Sections for Performance (Code Splitting)
@@ -148,6 +149,7 @@ const Home = ({ loading, setLoading, triggerLoading }) => {
       <div style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s ease-in-out' }}>
         <CustomCursor />
         <ScrollToTop onRefresh={triggerLoading} />
+        <ScrollProgress />
         <Navbar
           onRefresh={triggerLoading}
           onLogoClick={handleLogoClick}
