@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ScrollReveal from 'scrollreveal';
-import getGif from '../assets/images/get.gif';
+
 
 const Contact = () => {
     useEffect(() => {
@@ -10,25 +10,13 @@ const Contact = () => {
             duration: 1000,
             viewFactor: 0.5,
         });
-        ScrollReveal().reveal(".contact__container p", {
-            distance: "50px",
-            origin: "bottom",
-            duration: 1000,
-            delay: 500
-        });
         ScrollReveal().reveal(".contact__form", {
             distance: "50px",
             origin: "bottom",
             duration: 1000,
             delay: 1000
         });
-        // Reveal for the 3D element
-        ScrollReveal().reveal(".contact__visuals", {
-            distance: "50px",
-            origin: "right",
-            duration: 1000,
-            interval: 500 // Stagger if multiple
-        });
+
     }, []);
     const [status, setStatus] = useState(''); // '', 'loading', 'success', 'error'
     const [errorMsg, setErrorMsg] = useState('');
@@ -72,6 +60,7 @@ const Contact = () => {
                 throw new Error('Submission failed');
             }
         } catch (error) {
+            console.error(error);
             setStatus('error');
             setErrorMsg('Failed to send message. Try again!');
             setTimeout(() => setStatus(''), 3000);
@@ -82,8 +71,7 @@ const Contact = () => {
         <section className="section__container contact__container" id="contact">
             <div className="contact__content">
                 <div className="contact__form__wrapper">
-                    <p className="section__subheader">Contact Me</p>
-                    <h2 className="section__header">Let's Build Something Awesome</h2>
+                    <h2 className="section__header">Connect With Me</h2>
                     <form onSubmit={handleSubmit} className="contact__form">
                         <div className="input__row">
                             <input type="text" name="firstName" placeholder="First Name" required />
@@ -109,21 +97,6 @@ const Contact = () => {
                             </div>
                         )}
                     </form>
-                </div>
-                <div className="contact__visuals">
-                    <img
-                        src={getGif}
-                        alt="Contact Visual"
-                        className="contact__visual-img"
-                        style={{
-                            width: '100%',
-                            height: 'auto',
-                            maxWidth: '500px',
-                            maskImage: 'radial-gradient(circle, black 40%, transparent 80%)',
-                            WebkitMaskImage: 'radial-gradient(circle, black 40%, transparent 80%)',
-                            borderRadius: '10px'
-                        }}
-                    />
                 </div>
             </div>
         </section>

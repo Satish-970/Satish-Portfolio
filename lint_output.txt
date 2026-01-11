@@ -1,0 +1,67 @@
+﻿
+> satish-portfolio@0.0.0 lint
+> eslint .
+
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\App.jsx
+   88:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  86 |     const validHashes = ['#about', '#resume', '#project', '#service', '#blog', '#contact'];
+  87 |     if (location.hash && validHashes.includes(location.hash)) {
+> 88 |       setLoadIndex(100);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  89 |     }
+  90 |   }, [location.hash]);
+  91 |         react-hooks/set-state-in-effect
+   96:9  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  94 |     if (!loading) {
+  95 |       if (tourStatus === 'starting') {
+> 96 |         setTourStatus('scrolling');
+     |         ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  97 |       } else if (tourStatus === 'finishing') {
+  98 |         // When finished naturally, just reset
+  99 |         stopTour(false);  react-hooks/set-state-in-effect
+  103:6  warning  React Hook useEffect has a missing dependency: 'stopTour'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\Contact.jsx
+  62:18  error  'error' is defined but never used  no-unused-vars
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\LazyLoadSection.jsx
+  28:67  warning  The ref value 'sectionRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'sectionRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\Navbar.jsx
+  4:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u               no-unused-vars
+  4:18  error  'useScroll' is defined but never used. Allowed unused vars must match /^[A-Z_]/u            no-unused-vars
+  4:29  error  'useMotionValueEvent' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\NotFound.jsx
+  1:25  error  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\Preloader.jsx
+  31:46  error    'reject' is defined but never used                                                                             no-unused-vars
+  74:8   warning  React Hook useEffect has a missing dependency: 'customText'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\Projects.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\src\components\animate-ui\components\buttons\theme-toggler.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\HP\OneDrive\Documents\Desktop\portfolio\vite.config.js
+  10:25  error  '__dirname' is not defined  no-undef
+
+Γ£û 14 problems (11 errors, 3 warnings)
+

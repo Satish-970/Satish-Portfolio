@@ -1971,21 +1971,65 @@ nav {
   align-items: center;
 }
 
-@media (min-width: 768px) {
-  .contact__content {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
-  }
+/* Gold Background Watermark */
+.gold-bg-face {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background-image: url('./assets/images/leftbackground.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+  opacity: 0.15;
+  z-index: -10;
+  pointer-events: none;
+}
 
-  /* Reset centered alignment for the right side inputs */
-  .contact__form__wrapper .section__header,
-  .contact__form__wrapper .section__subheader {
-    text-align: left;
+@media (max-width: 768px) {
+  .gold-bg-face {
+    display: none;
   }
+}
 
-  .contact__form {
-    margin-top: 2rem;
-    margin-inline: 0;
-    /* Align form to the left of its column (which is the right side of the page) */
-  }
+/* Contact Section Centering */
+.contact__container {
+  text-align: center;
+}
+
+.contact__content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact__form__wrapper {
+  max-width: 600px;
+  width: 100%;
+}
+
+.contact__form {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input__row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.contact__form input,
+.contact__form button {
+  width: 100%;
+}
+
+body {
+  position: relative;
+  z-index: 1;
 }

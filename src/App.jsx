@@ -344,6 +344,7 @@ function App() {
     return () => window.removeEventListener('resize', adjustHeaderPadding);
   }, [loading]);
 
+
   const triggerLoading = () => {
     setLoading(true);
     // Smooth scroll to top when refreshing
@@ -352,6 +353,7 @@ function App() {
 
   return (
     <Router>
+      {!loading && <div className="gold-bg-face" />}
       <Routes>
         <Route path="/" element={<Home loading={loading} setLoading={setLoading} triggerLoading={triggerLoading} />} />
         <Route path="*" element={<> <CustomCursor /> <Suspense fallback={null}><NotFound /></Suspense> </>} />
