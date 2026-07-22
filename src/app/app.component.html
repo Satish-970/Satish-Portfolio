@@ -1,29 +1,65 @@
-<!-- Figma-style arrow cursor -->
-<div class="custom-cursor" #cursor>
-  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 1L17 9.5L10.5 11.2L8.2 18L3 1Z" fill="#e8b84b" stroke="#e8b84b" stroke-width="1" stroke-linejoin="round"/>
+<!-- Interactive Holographic Pointer Cursor -->
+<div 
+  class="custom-cursor pointer-events-none fixed inset-0 z-[99999] w-5 h-5 transition-transform duration-75 ease-out select-none hidden md:block"
+  [class.cursor--visible]="cursorVisible"
+  [style.transform]="'translate3d(' + cursorX + 'px, ' + cursorY + 'px, 0)'">
+  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_0_4px_#00f0ff]">
+    <path d="M3 1L17 9.5L10.5 11.2L8.2 18L3 1Z" fill="#00f0ff" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
   </svg>
 </div>
 
-<!-- Preloader -->
-<div class="preloader" #preloader>
-  <p class="preloader__quote" #quoteEl></p>
-  <span class="preloader__author" #authorEl></span>
-  <div class="preloader__bar-wrap">
-    <div class="preloader__bar" #barEl></div>
-  </div>
-</div>
+<!-- Onboarding Loader Module -->
+<app-loader *ngIf="loading()" (completed)="onLoaderComplete()"></app-loader>
 
-<app-navbar />
-<main>
-  <app-hero />
-  <app-banner />
-  <app-about />
-  <app-resume />
-  <app-projects />
-  <app-skills />
-  <app-blog />
-  <app-contact />
-</main>
-<app-footer />
-<app-scroll-top />
+<!-- Main Visual Observatory Environment -->
+<ng-container *ngIf="!loading()">
+  <!-- Background WebGL Shader Engine -->
+  <app-observatory-canvas></app-observatory-canvas>
+
+  <!-- Interactive Head-up Display Navigation -->
+  <app-navbar [activeRoom]="activeRoom()" (roomSelect)="onRoomSelect($event)"></app-navbar>
+
+  <!-- Visual Soundtrack Control Widget -->
+  <app-audio-widget></app-audio-widget>
+
+  <!-- Horizontal Projection Sliding Layer -->
+  <div class="fixed inset-0 w-full h-full overflow-hidden z-10 pointer-events-none">
+    <div class="horizontal-scroll-container h-full flex flex-row pointer-events-auto">
+      
+      <!-- Room 1: Landing Lab console -->
+      <div class="horizontal-room">
+        <app-hero (navigate)="onRoomSelect($event)"></app-hero>
+      </div>
+
+      <!-- Room 2: Profile Nodes -->
+      <div class="horizontal-room">
+        <app-about></app-about>
+      </div>
+
+      <!-- Room 3: Projects Observatory Cylinder -->
+      <div class="horizontal-room">
+        <app-projects></app-projects>
+      </div>
+
+      <!-- Room 4: Skills Synapse constellation -->
+      <div class="horizontal-room">
+        <app-skills></app-skills>
+      </div>
+
+      <!-- Room 5 & Room 6: Credentials Stack & Pathway Timeline -->
+      <!-- Since app-resume contains both Certifications (100vw) and Timeline (100vw), we style it to occupy 200vw -->
+      <div class="h-full flex-shrink-0 flex flex-row w-[200vw]">
+        <app-resume class="w-full h-full"></app-resume>
+      </div>
+
+      <!-- Room 7: Contact Terminal interface -->
+      <div class="horizontal-room">
+        <app-contact></app-contact>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Vertical Scroll Scrollable Spacer defining vertical path height -->
+  <div class="relative w-full" style="height: 700vh; pointer-events: none;"></div>
+</ng-container>

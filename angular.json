@@ -30,10 +30,7 @@
               }
             ],
             "styles": [
-              "./node_modules/remixicon/fonts/remixicon.css",
-              "./src/index.css",
-              "./src/logo_styles.css",
-              "./src/app/app.component.css"
+              "./src/index.css"
             ],
             "scripts": []
           },
