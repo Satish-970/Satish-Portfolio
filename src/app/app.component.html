@@ -1,65 +1,270 @@
-<!-- Interactive Holographic Pointer Cursor -->
-<div 
-  class="custom-cursor pointer-events-none fixed inset-0 z-[99999] w-5 h-5 transition-transform duration-75 ease-out select-none hidden md:block"
-  [class.cursor--visible]="cursorVisible"
-  [style.transform]="'translate3d(' + cursorX + 'px, ' + cursorY + 'px, 0)'">
-  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_0_4px_#00f0ff]">
-    <path d="M3 1L17 9.5L10.5 11.2L8.2 18L3 1Z" fill="#00f0ff" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
+<!-- Floating Audio Control -->
+<button class="audio-toggle-btn" (click)="toggleAudio()" *ngIf="audioInitialized" [attr.aria-label]="audioMuted ? 'Unmute music' : 'Mute music'">
+  <i [class]="audioMuted ? 'ri-volume-mute-fill' : 'ri-volume-up-fill'"></i>
+</button>
+
+<!-- Tiny Immersive Audio Alert Toast -->
+<div class="audio-alert-toast" *ngIf="showImmersiveModal">
+  <div class="toast-content">
+    <i class="ri-volume-up-fill"></i>
+    <span>Enable background score for an immersive experience?</span>
+  </div>
+  <div class="toast-actions">
+    <button class="toast-btn toast-btn-primary" (click)="enableImmersive(true)">Turn On</button>
+    <button class="toast-btn toast-btn-outline" (click)="enableImmersive(false)">Skip</button>
+  </div>
+</div>
+
+<!-- Figma-style arrow cursor -->
+<div class="custom-cursor" #cursor>
+  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 1L17 9.5L10.5 11.2L8.2 18L3 1Z" fill="#e8b84b" stroke="#e8b84b" stroke-width="1" stroke-linejoin="round"/>
   </svg>
 </div>
 
-<!-- Onboarding Loader Module -->
-<app-loader *ngIf="loading()" (completed)="onLoaderComplete()"></app-loader>
+<!-- Preloader -->
+<div class="preloader" #preloader>
+  <p class="preloader__quote" #quoteEl></p>
+  <span class="preloader__author" #authorEl></span>
+  <div class="preloader__bar-wrap">
+    <div class="preloader__bar" #barEl></div>
+  </div>
+</div>
 
-<!-- Main Visual Observatory Environment -->
-<ng-container *ngIf="!loading()">
-  <!-- Background WebGL Shader Engine -->
-  <app-observatory-canvas></app-observatory-canvas>
 
-  <!-- Interactive Head-up Display Navigation -->
-  <app-navbar [activeRoom]="activeRoom()" (roomSelect)="onRoomSelect($event)"></app-navbar>
 
-  <!-- Visual Soundtrack Control Widget -->
-  <app-audio-widget></app-audio-widget>
+<!-- The Zoom Viewport -->
+<div class="zoom-viewport" [class.zoomed]="zoomedSectionId !== null">
 
-  <!-- Horizontal Projection Sliding Layer -->
-  <div class="fixed inset-0 w-full h-full overflow-hidden z-10 pointer-events-none">
-    <div class="horizontal-scroll-container h-full flex flex-row pointer-events-auto">
-      
-      <!-- Room 1: Landing Lab console -->
-      <div class="horizontal-room">
-        <app-hero (navigate)="onRoomSelect($event)"></app-hero>
+  <!-- Loop Video Background (Preloaded to ensure smooth start) -->
+  <div class="landing-bg-video" [class.gif-loaded]="gifLoaded" style="background: #000000;">
+    <img *ngIf="gifLoaded" src="laptopscreenvideo.gif" class="bg-video-element" alt="Background Loop">
+    <div class="landing-bg-overlay"></div>
+  </div>
+
+  <div class="zoom-container">
+
+    <!-- LANDING / OVERVIEW SLIDE -->
+    <div class="slide landing-slide" id="landing-slide">
+
+      <!-- Map Responsive Header Wrap (Prevents overlapping and supports mobile layout stacking) -->
+      <div class="map-responsive-header">
+        <!-- Left Corner Brand Name & Tagline -->
+        <div class="map-brand-left-corner">
+          <h1>{{ displayName }}</h1>
+          <p class="map-brand-sub-left">Full Stack Java Developer &bull; Data Analyst</p>
+        </div>
+
+        <!-- Right Corner Brand Name -->
+        <div class="map-brand-right-corner">
+          <h1>{{ displayPortfolio }}</h1>
+        </div>
       </div>
 
-      <!-- Room 2: Profile Nodes -->
-      <div class="horizontal-room">
-        <app-about></app-about>
+      <!-- Side Social Buttons -->
+      <div class="map-socials">
+        <a href="mailto:satishpakalapati65@gmail.com" class="map-social-btn" title="Email" aria-label="Email">
+          <i class="ri-mail-line"></i>
+        </a>
+        <a href="https://github.com/Satish-970" target="_blank" rel="noopener noreferrer" class="map-social-btn" title="GitHub" aria-label="GitHub">
+          <i class="ri-github-fill"></i>
+        </a>
+        <a href="https://linkedin.com/in/satishpakalapati" target="_blank" rel="noopener noreferrer" class="map-social-btn" title="LinkedIn" aria-label="LinkedIn">
+          <i class="ri-linkedin-box-fill"></i>
+        </a>
+        <a href="https://satishpakalapati.netlify.app" target="_blank" rel="noopener noreferrer" class="map-social-btn" title="Portfolio" aria-label="Portfolio">
+          <i class="ri-global-line"></i>
+        </a>
       </div>
 
-      <!-- Room 3: Projects Observatory Cylinder -->
-      <div class="horizontal-room">
-        <app-projects></app-projects>
-      </div>
+      <!-- SVG S-Curve Snake Map -->
+      <div class="snake-svg-wrap">
+        <svg class="snake-svg"
+             viewBox="-170 0 840 1720"
+             xmlns="http://www.w3.org/2000/svg"
+             preserveAspectRatio="xMidYMid meet"
+             overflow="visible">
 
-      <!-- Room 4: Skills Synapse constellation -->
-      <div class="horizontal-room">
-        <app-skills></app-skills>
-      </div>
+          <!-- DIM BASE path — always shows as guide -->
+          <path class="snake-path-base"
+                [attr.d]="baseSvgPath"
+                fill="none"
+                stroke="rgba(167,139,250,0.12)"
+                stroke-width="3"
+                stroke-dasharray="6 8"
+                stroke-linecap="round"/>
 
-      <!-- Room 5 & Room 6: Credentials Stack & Pathway Timeline -->
-      <!-- Since app-resume contains both Certifications (100vw) and Timeline (100vw), we style it to occupy 200vw -->
-      <div class="h-full flex-shrink-0 flex flex-row w-[200vw]">
-        <app-resume class="w-full h-full"></app-resume>
-      </div>
+          <!-- LIT path — progressively revealed on hover (Clean teal/cyan color) -->
+          <path #litPath
+                class="snake-path-lit"
+                [style.stroke-dasharray]="snakePathLength"
+                [style.stroke-dashoffset]="snakePathOffset"
+                [style.transition]="'stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1)'"
+                [attr.d]="baseSvgPath"
+                fill="none"
+                stroke-width="4.5"
+                stroke-linecap="round"/>
 
-      <!-- Room 7: Contact Terminal interface -->
-      <div class="horizontal-room">
-        <app-contact></app-contact>
+          <!-- ── NODE 01 — Home ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[0].id"
+             (mouseenter)="onNodeHover(0)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[0].id)">
+            <circle class="snake-circle-outer" [attr.cx]="lx" cy="80" r="72" [class.node-active]="hoveredNodeIdx === 0"/>
+            <circle class="snake-circle-inner" [attr.cx]="lx" cy="80" r="60" [class.node-active]="hoveredNodeIdx === 0"/>
+            <text class="snake-num-text" [attr.x]="lx" y="70" text-anchor="middle" dominant-baseline="middle">01</text>
+            <text class="snake-label-text" [attr.x]="lx" y="96" text-anchor="middle" dominant-baseline="middle">HOME</text>
+          </g>
+
+          <!-- ── NODE 02 — About Me ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[1].id"
+             (mouseenter)="onNodeHover(1)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[1].id)">
+            <circle class="snake-circle-outer" [attr.cx]="rx" cy="180" r="72" [class.node-active]="hoveredNodeIdx === 1"/>
+            <circle class="snake-circle-inner" [attr.cx]="rx" cy="180" r="60" [class.node-active]="hoveredNodeIdx === 1"/>
+            <text class="snake-num-text" [attr.x]="rx" y="170" text-anchor="middle" dominant-baseline="middle">02</text>
+            <text class="snake-label-text" [attr.x]="rx" y="196" text-anchor="middle" dominant-baseline="middle">ABOUT ME</text>
+          </g>
+
+          <!-- ── NODE 03 — Resume ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[2].id"
+             (mouseenter)="onNodeHover(2)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[2].id)">
+            <circle class="snake-circle-outer" [attr.cx]="rx" cy="540" r="72" [class.node-active]="hoveredNodeIdx === 2"/>
+            <circle class="snake-circle-inner" [attr.cx]="rx" cy="540" r="60" [class.node-active]="hoveredNodeIdx === 2"/>
+            <text class="snake-num-text" [attr.x]="rx" y="530" text-anchor="middle" dominant-baseline="middle">03</text>
+            <text class="snake-label-text" [attr.x]="rx" y="556" text-anchor="middle" dominant-baseline="middle">RESUME</text>
+          </g>
+
+          <!-- ── NODE 04 — Certifications ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[3].id"
+             (mouseenter)="onNodeHover(3)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[3].id)">
+            <circle class="snake-circle-outer" [attr.cx]="lx" cy="640" r="72" [class.node-active]="hoveredNodeIdx === 3"/>
+            <circle class="snake-circle-inner" [attr.cx]="lx" cy="640" r="60" [class.node-active]="hoveredNodeIdx === 3"/>
+            <text class="snake-num-text" [attr.x]="lx" y="630" text-anchor="middle" dominant-baseline="middle">04</text>
+            <text class="snake-label-text" [attr.x]="lx" y="656" text-anchor="middle" dominant-baseline="middle">CERTS</text>
+          </g>
+
+          <!-- ── NODE 05 — Projects ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[4].id"
+             (mouseenter)="onNodeHover(4)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[4].id)">
+            <circle class="snake-circle-outer" [attr.cx]="lx" cy="1000" r="72" [class.node-active]="hoveredNodeIdx === 4"/>
+            <circle class="snake-circle-inner" [attr.cx]="lx" cy="1000" r="60" [class.node-active]="hoveredNodeIdx === 4"/>
+            <text class="snake-num-text" [attr.x]="lx" y="990" text-anchor="middle" dominant-baseline="middle">05</text>
+            <text class="snake-label-text" [attr.x]="lx" y="1016" text-anchor="middle" dominant-baseline="middle">PROJECTS</text>
+          </g>
+
+          <!-- ── NODE 06 — Skills ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[5].id"
+             (mouseenter)="onNodeHover(5)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[5].id)">
+            <circle class="snake-circle-outer" [attr.cx]="rx" cy="1100" r="72" [class.node-active]="hoveredNodeIdx === 5"/>
+            <circle class="snake-circle-inner" [attr.cx]="rx" cy="1100" r="60" [class.node-active]="hoveredNodeIdx === 5"/>
+            <text class="snake-num-text" [attr.x]="rx" y="1090" text-anchor="middle" dominant-baseline="middle">06</text>
+            <text class="snake-label-text" [attr.x]="rx" y="1116" text-anchor="middle" dominant-baseline="middle">SKILLS</text>
+          </g>
+
+          <!-- ── NODE 07 — Blog ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[6].id"
+             (mouseenter)="onNodeHover(6)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[6].id)">
+            <circle class="snake-circle-outer" [attr.cx]="rx" cy="1460" r="72" [class.node-active]="hoveredNodeIdx === 6"/>
+            <circle class="snake-circle-inner" [attr.cx]="rx" cy="1460" r="60" [class.node-active]="hoveredNodeIdx === 6"/>
+            <text class="snake-num-text" [attr.x]="rx" y="1450" text-anchor="middle" dominant-baseline="middle">07</text>
+            <text class="snake-label-text" [attr.x]="rx" y="1476" text-anchor="middle" dominant-baseline="middle">BLOG</text>
+          </g>
+
+          <!-- ── NODE 08 — Contact ── -->
+          <g class="snake-node-g"
+             [attr.data-slide-id]="slideList[7].id"
+             (mouseenter)="onNodeHover(7)"
+             (mouseleave)="onNodeLeave()"
+             (click)="zoomInto(slideList[7].id)">
+            <circle class="snake-circle-outer" [attr.cx]="mx" cy="1640" r="72" [class.node-active]="hoveredNodeIdx === 7"/>
+            <circle class="snake-circle-inner" [attr.cx]="mx" cy="1640" r="60" [class.node-active]="hoveredNodeIdx === 7"/>
+            <text class="snake-num-text" [attr.x]="mx" y="1630" text-anchor="middle" dominant-baseline="middle">08</text>
+            <text class="snake-label-text" [attr.x]="mx" y="1656" text-anchor="middle" dominant-baseline="middle">CONTACT</text>
+          </g>
+
+        </svg>
       </div>
 
     </div>
-  </div>
 
-  <!-- Vertical Scroll Scrollable Spacer defining vertical path height -->
-  <div class="relative w-full" style="height: 700vh; pointer-events: none;"></div>
-</ng-container>
+    <!-- SPATIAL COMPONENT SLIDES -->
+
+    <div *ngFor="let s of slideList"
+         [id]="s.id + '-slide'"
+         class="slide section-slide"
+         [class.active]="zoomedSectionId === s.id"
+         [style.pointer-events]="zoomedSectionId === s.id ? 'auto' : 'none'">
+
+      <!-- Clicking overlay zooms in if zoomed out -->
+      <div class="slide-zoom-overlay" *ngIf="zoomedSectionId !== s.id" (click)="zoomInto(s.id)"></div>
+
+      <!-- Content scroller -->
+      <div class="slide-content-scroller">
+        
+        <!-- Zoomed Slide HUD Header -->
+        <div class="slide-hud-header" *ngIf="zoomedSectionId === s.id">
+          <button class="hud-back-btn" (click)="zoomOut()">
+            <i class="ri-arrow-left-line"></i> Back to Map
+          </button>
+          <span class="hud-slide-title">Section {{ s.num }} &mdash; {{ s.label }}</span>
+        </div>
+
+        <!-- Render the actual Component -->
+        <div class="slide-actual-content">
+          <ng-container [ngSwitch]="s.id">
+            <div *ngSwitchCase="'home'">
+              <app-hero />
+              <app-banner />
+            </div>
+            <app-about *ngSwitchCase="'about'" />
+            <app-resume *ngSwitchCase="'resume'" [showOnly]="'resume'" />
+            <app-resume *ngSwitchCase="'certifications'" [showOnly]="'certifications'" />
+            <app-projects *ngSwitchCase="'project'" />
+            <app-skills *ngSwitchCase="'service'" />
+            <app-blog *ngSwitchCase="'blog'" />
+            <app-contact *ngSwitchCase="'contact'" />
+          </ng-container>
+        </div>
+
+        <!-- Slide HUD Footer Nav -->
+        <div class="slide-hud-footer" *ngIf="zoomedSectionId === s.id">
+          <button class="hud-nav-btn" (click)="goToPrevSlide()">
+            <i class="ri-arrow-left-s-line"></i> Prev Section
+          </button>
+          <span class="hud-progress-dots">
+            <span *ngFor="let dot of slideList" 
+                  class="progress-dot" 
+                  [class.active]="dot.id === zoomedSectionId"
+                  (click)="zoomInto(dot.id)"></span>
+          </span>
+          <button class="hud-nav-btn" (click)="goToNextSlide()">
+            Next Section <i class="ri-arrow-right-s-line"></i>
+          </button>
+        </div>
+
+        <app-footer />
+
+      </div>
+    </div>
+
+  </div>
+</div>
