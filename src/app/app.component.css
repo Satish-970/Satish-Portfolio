@@ -1310,8 +1310,7 @@ textarea {
     top: 2rem !important;
   }
   .map-brand-right-corner {
-    text-align: left !important;
-    margin-top: 0.2rem;
+    display: none !important;
   }
 }
 

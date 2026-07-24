@@ -149,7 +149,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     document.documentElement.style.setProperty('--svg-min-height', `${minSvgHeight}px`);
     
     // Dynamically adjust horizontal distance between nodes based on viewport
-    this.horizontalSpan = Math.min(560, Math.max(260, w * 0.42));
+    this.horizontalSpan = Math.min(560, Math.max(460, w * 0.42));
 
     if (this.zoomedSectionId) {
       this.zoomInto(this.zoomedSectionId);
@@ -579,12 +579,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.scrollerVideoRef) {
         const video = this.scrollerVideoRef.nativeElement;
         const now = performance.now();
-        // Check readystate, ensure not currently seeking, and throttle seeks to 30 seek/sec max
-        if (video.readyState >= 2 && !video.seeking && (now - lastSeekTime > 33)) {
+        // Check readystate, ensure not currently seeking, and throttle seeks to 25 seek/sec max (40ms throttle)
+        if (video.readyState >= 2 && !video.seeking && (now - lastSeekTime > 40)) {
           const diff = this.targetVideoTime - video.currentTime;
-          if (Math.abs(diff) > 0.01) {
-            // Interpolate toward target time
-            video.currentTime += diff * 0.18;
+          if (Math.abs(diff) > 0.02) {
+            // Seek directly to the target time to eliminate trailing lag and intermediate seek queuing
+            video.currentTime = this.targetVideoTime;
             lastSeekTime = now;
           }
         }
