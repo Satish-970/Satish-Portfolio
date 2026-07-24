@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 interface BlogPost {
   title: string;
@@ -23,7 +23,7 @@ interface BlogPost {
         <button class="blog-button-prev" type="button" aria-label="Previous article" (click)="scrollBlog('prev')">
           <i class="ri-arrow-left-line"></i>
         </button>
-        <div class="blog-carousel">
+        <div class="blog-carousel" (mouseenter)="pauseAuto()" (mouseleave)="resumeAuto()">
           <div class="blog-track">
             <article 
               class="blog__slide" 
@@ -60,9 +60,11 @@ interface BlogPost {
     </section>
   `,
 })
-export class BlogComponent implements OnInit {
+export class BlogComponent implements OnInit, OnDestroy {
   blogPosts: BlogPost[] = [];
   activeIndex = 0;
+  private autoTimer?: ReturnType<typeof setInterval>;
+  private isPaused = false;
 
   private readonly fallbackPosts: BlogPost[] = [
     {
@@ -94,6 +96,29 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     void this.loadBlogPosts();
   }
+
+  ngOnDestroy(): void {
+    this.clearAuto();
+  }
+
+  private startAuto(): void {
+    this.clearAuto();
+    this.autoTimer = setInterval(() => {
+      if (!this.isPaused && this.blogPosts.length > 1) {
+        this.activeIndex = (this.activeIndex + 1) % this.blogPosts.length;
+      }
+    }, 3500);
+  }
+
+  private clearAuto(): void {
+    if (this.autoTimer) {
+      clearInterval(this.autoTimer);
+      this.autoTimer = undefined;
+    }
+  }
+
+  pauseAuto(): void  { this.isPaused = true; }
+  resumeAuto(): void { this.isPaused = false; }
 
   scrollBlog(direction: 'prev' | 'next'): void {
     if (!this.blogPosts.length) return;
@@ -157,6 +182,8 @@ export class BlogComponent implements OnInit {
     } catch {
       this.blogPosts = [...this.fallbackPosts];
     }
+    // Start auto-scroll once posts are ready
+    this.startAuto();
   }
 
   private formatPost(item: Record<string, unknown>): BlogPost {

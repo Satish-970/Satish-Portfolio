@@ -339,15 +339,7 @@ textarea {
   }
 }
 
-@keyframes blogAutoScroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-50% - 0.75rem));
-  }
-}
+/* blogAutoScroll removed — replaced by 3D arch fanned deck */
 
 /* ── RESPONSIVE (non-hero) ── */
 @media (max-width: 1024px) {
@@ -1031,6 +1023,24 @@ textarea {
 
 .snake-node-g:hover {
   transform: scale(1.1);
+}
+
+/* Scale up circles on narrow mobile screens so they stay readable */
+@media (max-width: 600px) {
+  .snake-node-g {
+    transform: scale(1.55);
+  }
+  .snake-node-g:hover {
+    transform: scale(1.65);
+  }
+}
+@media (max-width: 400px) {
+  .snake-node-g {
+    transform: scale(1.9);
+  }
+  .snake-node-g:hover {
+    transform: scale(2.0);
+  }
 }
 
 .snake-circle-outer {
