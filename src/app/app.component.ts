@@ -376,6 +376,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   private onMouseEnter = () => this.cursorEl.nativeElement.classList.add('cursor--visible');
 
   private initCursor(): void {
+    if (!this.cursorEl) return;
     const el = this.cursorEl.nativeElement;
 
     window.addEventListener('mousemove', this.onMouseMove, { passive: true });
@@ -401,6 +402,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initPreloader(): void {
+    if (!this.preloaderEl || !this.quoteEl || !this.authorEl || !this.barEl) return;
     const preloader = this.preloaderEl.nativeElement;
     const quoteEl   = this.quoteEl.nativeElement;
     const authorEl  = this.authorEl.nativeElement;
