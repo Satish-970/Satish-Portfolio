@@ -1149,11 +1149,6 @@ textarea {
 }
 
 /* ── OVERRIDES FOR GLASSMORPHISM AND SPACING INSIDE SLIDES ── */
-.slide-actual-content .section__container {
-  padding-top: 1.5rem !important;
-  margin-top: 0 !important;
-}
-
 .slide-actual-content .about__content,
 .slide-actual-content .resume__card,
 .slide-actual-content .project-card,
@@ -1161,12 +1156,12 @@ textarea {
 .slide-actual-content .blog__card,
 .slide-actual-content .cert__card,
 .slide-actual-content .contact__container {
-  background: rgba(15, 12, 30, 0.55) !important;
-  border: 1px solid rgba(139, 92, 246, 0.15) !important;
-  color: #f1f5f9 !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  background: rgba(10, 10, 14, 0.38) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(16px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.2) !important;
+  box-shadow: none !important;
 }
 
 [data-theme="light"] .slide-actual-content .about__content,
@@ -1189,7 +1184,7 @@ textarea {
   font-weight: 500;
   letter-spacing: 0.5px;
   fill: transparent;
-  stroke: #2dd4bf;
+  stroke: var(--gold);
   stroke-width: 1;
   stroke-dasharray: 600;
   stroke-dashoffset: 600;
@@ -1208,7 +1203,7 @@ textarea {
 }
 
 [data-theme="light"] .snake-brand-name {
-  stroke: #0d9488;
+  stroke: var(--gold-dim);
 }
 
 [data-theme="light"] .snake-brand-sub {
@@ -1242,7 +1237,7 @@ textarea {
   font-weight: 700;
   font-style: italic;
   font-size: clamp(2rem, 5vw, 2.8rem);
-  color: #2dd4bf;
+  color: var(--gold);
   letter-spacing: -0.5px;
   line-height: 1;
   margin: 0 0 0.4rem 0;
@@ -1286,7 +1281,7 @@ textarea {
   font-weight: 700;
   font-style: italic;
   font-size: clamp(2rem, 5vw, 2.8rem);
-  color: #2dd4bf;
+  color: var(--gold);
   letter-spacing: -0.5px;
   line-height: 1;
   margin: 0;
@@ -1302,7 +1297,7 @@ textarea {
 /* Light Theme Colors */
 [data-theme="light"] .map-brand-left-corner h1,
 [data-theme="light"] .map-brand-right-corner h1 {
-  color: #0d9488;
+  color: var(--gold-dim);
 }
 
 /* Responsive Queries */
@@ -1328,5 +1323,101 @@ textarea {
   .map-brand-sub-left {
     font-size: 9px !important;
     letter-spacing: 0.5px !important;
+  }
+}
+
+/* =============================================
+   SMARTWATCH & MICRO-SCREEN RESPONSIVENESS (<= 340px)
+   ============================================= */
+@media (max-width: 340px) {
+  /* Header adjustments */
+  .map-responsive-header {
+    top: 1rem !important;
+    padding: 0 0.5rem !important;
+    gap: 0.3rem !important;
+  }
+  .map-brand-left-corner h1,
+  .map-brand-right-corner h1 {
+    font-size: 0.85rem !important;
+    letter-spacing: -0.2px !important;
+  }
+  .map-brand-sub-left {
+    display: none !important; /* Hide to save vertical watch height */
+  }
+  
+  /* Hide side socials on tiny watch display */
+  .map-socials {
+    display: none !important;
+  }
+  
+  /* SVG Snake roadmap wrapper padding */
+  .snake-svg-wrap {
+    padding: 3rem 0.1rem 1.5rem !important;
+  }
+  
+  /* SVG Snake elements scale down */
+  .snake-circle-outer {
+    stroke-width: 1.0 !important;
+  }
+  .snake-circle-inner {
+    stroke-width: 0.8 !important;
+  }
+  .snake-num-text {
+    font-size: 16px !important; /* Make number text size appropriate for watch screens */
+  }
+  .snake-label-text {
+    font-size: 7px !important; /* Make label size appropriate for watch screens */
+  }
+  
+  /* Zoomed slides structure */
+  .slide-hud-header {
+    padding: 0.5rem 0.8rem !important;
+  }
+  .hud-back-btn {
+    padding: 0.35rem 0.8rem !important;
+    font-size: 0.65rem !important;
+    gap: 5px !important;
+  }
+  .hud-slide-title {
+    font-size: 0.65rem !important;
+  }
+  
+  .slide-actual-content {
+    padding-top: 2.8rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+  
+  .slide-hud-footer {
+    padding: 0.5rem 1rem !important;
+  }
+  .progress-dot {
+    width: 6px !important;
+    height: 6px !important;
+    margin: 0 2px !important;
+  }
+  
+  /* Hero component overrides on landing */
+  .landing-slide app-hero .hero__inner {
+    padding-top: 5rem !important;
+    padding-bottom: 2rem !important;
+  }
+  app-hero .hero__name {
+    font-size: 2.2rem !important;
+  }
+  app-hero .hero__lastname {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  app-hero .hero__role {
+    font-size: 0.62rem !important;
+    padding: 4px 10px !important;
+    margin-bottom: 0.8rem !important;
+  }
+  app-hero .hero__desc {
+    font-size: 0.72rem !important;
+    margin-bottom: 1rem !important;
+  }
+  app-hero .hero__actions {
+    gap: 0.5rem !important;
   }
 }
