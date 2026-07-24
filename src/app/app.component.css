@@ -39,14 +39,14 @@ textarea {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(232, 184, 75, 0.1);
+  background: rgba(var(--gold-rgb), 0.1);
   color: var(--gold);
   font-size: 1.05rem;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .theme-switch:hover {
-  background: rgba(232, 184, 75, 0.18);
+  background: rgba(var(--gold-rgb), 0.18);
   transform: translateY(-2px);
 }
 
@@ -89,7 +89,7 @@ textarea {
 
 .download__btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(232, 184, 75, 0.35);
+  box-shadow: 0 8px 30px rgba(var(--gold-rgb), 0.35);
 }
 
 /* ── RESUME ── */
@@ -115,7 +115,7 @@ textarea {
   padding: 2px 10px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(232, 184, 75, 0.1);
+  background: rgba(var(--gold-rgb), 0.1);
   color: var(--gold);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -159,7 +159,7 @@ textarea {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: var(--gold);
-  background: rgba(232, 184, 75, 0.1);
+  background: rgba(var(--gold-rgb), 0.1);
   border: 1px solid var(--border);
   padding: 3px 10px;
   border-radius: 999px;
@@ -494,7 +494,7 @@ textarea {
 .landing-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(6, 5, 11, 0.72);
+  background: rgba(6, 5, 11, 0.58);
   z-index: 2;
   transition: background 0.3s ease;
 }
@@ -664,7 +664,7 @@ textarea {
   padding: 0.6rem 1.4rem;
   border: 1px solid var(--border-bright);
   border-radius: 999px;
-  background: rgba(232, 184, 75, 0.08);
+  background: rgba(var(--gold-rgb), 0.08);
   color: var(--gold);
   font-family: var(--font-body);
   font-size: 0.85rem;
@@ -725,7 +725,7 @@ textarea {
 .hud-nav-btn:hover {
   border-color: var(--border-bright);
   color: var(--gold);
-  background: rgba(232, 184, 75, 0.08);
+  background: rgba(var(--gold-rgb), 0.08);
   transform: translateY(-2px);
 }
 
@@ -745,7 +745,7 @@ textarea {
 }
 
 .progress-dot:hover {
-  background: rgba(232, 184, 75, 0.5);
+  background: rgba(var(--gold-rgb), 0.5);
   transform: scale(1.2);
 }
 
@@ -770,7 +770,7 @@ textarea {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-bright);
   border-radius: 100px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--glow-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   animation: slideInToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   max-width: 90vw;
 }
@@ -999,6 +999,7 @@ textarea {
   width: 100%;
   max-width: min(780px, 94vw);
   height: auto;
+  min-height: var(--svg-min-height, 1600px);
   overflow: visible;
 }
 

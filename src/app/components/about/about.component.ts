@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
 
       <div class="about__content">
         <div class="section__tag">About Me</div>
-        <h2 class="section__header">Passionate About <span>Data & Innovation</span></h2>
+        <h2 class="section__header">Passionate About <span>Data and Innovation</span></h2>
         <p>
           I'm Satish Pakalapati, a B.Tech Computer Science student at Lovely Professional University,
           building a strong path across Data Science, Digital Marketing, and full-stack development.

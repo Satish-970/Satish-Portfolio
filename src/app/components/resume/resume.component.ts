@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   imports: [CommonModule],
   template: `
     <section class="section__container client__container" id="resume" *ngIf="showOnly === 'resume'">
-      <h2 class="section__header">Experience & <span>Education</span></h2>
+      <h2 class="section__header">Experience and <span>Education</span></h2>
 
       <h3 class="test">Work Experience</h3>
       <article class="testimonial__card1">
@@ -16,8 +16,7 @@ import { Component, Input } from '@angular/core';
             <h3>Program Analyst Trainee (Intern)</h3>
             <h3 class="resume-org">Cognizant &mdash; <span>Full Stack Java Engineering</span></h3>
           </div>
-          <span class="resume-date">Jan 2026 &nda
-          sh; May 2026</span>
+          <span class="resume-date">Jan 2026 – May 2026</span>
         </div>
         <h5>Full Stack Java Developer Intern Details</h5>
         <ul>
@@ -34,11 +33,11 @@ import { Component, Input } from '@angular/core';
         <div class="resume-card__top">
           <div>
             <a href="https://www.boardinfinity.com/programs/college-courses" target="_blank" rel="noopener noreferrer"><h3>Data Analyst Intern</h3></a>
-            <h3 class="resume-org">Board Infinity <span>DBMS & SQL</span></h3>
+            <h3 class="resume-org">Board Infinity <span>DBMS and SQL</span></h3>
           </div>
           <a href="/Resume.pdf" target="_blank" class="download__btn" rel="noopener noreferrer"><i class="ri-download-2-line"></i>Download CV</a>
         </div>
-        <h5>Database Management Systems & SQL Proficiency</h5>
+        <h5>Database Management Systems and SQL Proficiency</h5>
         <ul>
           <li>Mastered DBMS concepts including ER diagrams, normalization (1NF-3NF), and B/B+ Tree query optimization.</li>
           <li>Gained expertise in transaction management (ACID, serializability, concurrency control) and optimized structures.</li>
@@ -64,7 +63,7 @@ import { Component, Input } from '@angular/core';
     </section>
 
     <section class="section__container" id="certifications" *ngIf="showOnly === 'certifications'">
-      <h2 class="section__header">Certifications & <span>Courses</span></h2>
+      <h2 class="section__header">Certifications and <span>Courses</span></h2>
       <div class="cert__grid">
         <article class="cert__card" *ngFor="let cert of certificates">
           <div class="cert__card-logo">{{ cert[0] }}</div>

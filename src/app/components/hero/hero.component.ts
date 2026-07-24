@@ -77,7 +77,7 @@ import { scrollToSection } from '../../shared/section-navigation';
       display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--font-stencil); font-size: 0.82rem;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gold); background: rgba(232,184,75,0.08);
+      color: var(--gold); background: rgba(var(--gold-rgb),0.08);
       border: 1px solid var(--border); padding: 6px 14px;
       border-radius: 100px; margin-bottom: 1.25rem;
       opacity: 0; animation: fadeUp 0.6s ease 0.7s forwards;
@@ -155,13 +155,13 @@ import { scrollToSection } from '../../shared/section-navigation';
     .hero__socials a {
       width: 42px; height: 42px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(232,184,75,0.06); border: 1px solid var(--border);
+      background: rgba(var(--gold-rgb),0.06); border: 1px solid var(--border);
       border-radius: 10px; font-size: 1.05rem; color: var(--text-muted);
       transition: all 0.25s ease;
     }
     .hero__socials a:hover {
       color: var(--gold); border-color: var(--border-bright);
-      background: rgba(232,184,75,0.14); transform: translateX(-3px);
+      background: rgba(var(--gold-rgb),0.14); transform: translateX(-3px);
     }
 
     @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
@@ -190,9 +190,9 @@ import { scrollToSection } from '../../shared/section-navigation';
           <p class="hero__hi">Hi, I'm</p>
           <span class="hero__name" [class.cycling]="hasCycled" [class.out]="nameOut">{{ displayName }}</span>
           <span class="hero__lastname">Pakalapati</span>
-          <div class="hero__role">Data Analyst &amp; Full Stack Developer</div>
+          <div class="hero__role">Data Analyst and Full Stack Developer</div>
           <p class="hero__desc">
-            Satish, A dynamic Data Analyst &amp; Developer — fiercely dedicated to unlocking insights through data and driving AI-powered breakthroughs. Fusing razor-sharp analytical prowess with cutting-edge development expertise.
+            Satish, A dynamic Data Analyst and Developer — fiercely dedicated to unlocking insights through data and driving AI-powered breakthroughs. Fusing razor-sharp analytical prowess with cutting-edge development expertise.
           </p>
           <div class="hero__actions">
             <a href="mailto:satishpakalapati65@gmail.com" class="btn">
@@ -320,17 +320,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       const isDark = !document.body.getAttribute('data-theme') || document.body.getAttribute('data-theme') === 'dark';
 
       // nebula glows
-      const glows = isDark
-        ? [
-            { x: 0.72, y: 0.28, r: W * 0.28, c: '6,182,212',  a: 0.035 },
-            { x: 0.18, y: 0.62, r: W * 0.22, c: '139,92,246',  a: 0.04 },
-            { x: 0.88, y: 0.72, r: W * 0.18, c: '139,92,246', a: 0.03 },
-          ]
-        : [
-            { x: 0.72, y: 0.28, r: W * 0.28, c: '15,23,42',  a: 0.015 },
-            { x: 0.18, y: 0.62, r: W * 0.22, c: '15,23,42',  a: 0.02 },
-            { x: 0.88, y: 0.72, r: W * 0.18, c: '15,23,42',  a: 0.01 },
-          ];
+      const glows: any[] = [];
       glows.forEach(g => {
         const gr = ctx.createRadialGradient(g.x*W, g.y*H, 0, g.x*W, g.y*H, g.r);
         gr.addColorStop(0, `rgba(${g.c},${g.a})`);

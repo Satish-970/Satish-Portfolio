@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('authorEl')  authorEl!:  ElementRef<HTMLSpanElement>;
   @ViewChild('barEl')     barEl!:     ElementRef<HTMLDivElement>;
   @ViewChild('litPath')   litPathRef?: ElementRef<SVGPathElement>;
+  @ViewChild('scrollerVideo') scrollerVideoRef?: ElementRef<HTMLVideoElement>;
 
   private cx = 0; private cy = 0;
   private raf = 0;
@@ -44,8 +45,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   audioInitialized = false;
   private audio?: HTMLAudioElement;
 
-  // Background video preloading state
-  gifLoaded = false;
+  // Background video state
+  targetVideoTime = 0.2;
+  private currentVideoTime = 0.2;
+  private videoScrubFrameId?: number;
 
   // Morphing text brand states
   displayName = 'Satish Pakalapati';
@@ -140,6 +143,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     document.documentElement.style.setProperty('--device-width',  `${w}px`);
     document.documentElement.style.setProperty('--device-height', `${h}px`);
     
+    // Adjust scroll height dynamically based on vertical width and height to guarantee scroll range
+    const scrollRangeFactor = w < 768 ? 2.2 : 1.8;
+    const minSvgHeight = h * scrollRangeFactor;
+    document.documentElement.style.setProperty('--svg-min-height', `${minSvgHeight}px`);
+    
     // Dynamically adjust horizontal distance between nodes based on viewport
     this.horizontalSpan = Math.min(560, Math.max(260, w * 0.42));
 
@@ -176,22 +184,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this.preloadBackgroundGif();
+    // No background gif preloading needed
   }
 
-  private preloadBackgroundGif(): void {
-    const img = new Image();
-    img.src = 'laptopscreenvideo.gif';
-    img.onload = () => {
-      this.gifLoaded = true;
-      this.cdr.detectChanges();
-    };
-    // Fallback in case loading is extremely slow or fails
-    setTimeout(() => {
-      this.gifLoaded = true;
-      this.cdr.detectChanges();
-    }, 6000);
-  }
+  // Removed preloadBackgroundGif method
 
   ngAfterViewInit(): void {
     const path = window.location.pathname.replace('/', '') || 'map';
@@ -200,6 +196,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.initCursor();
     this.initPreloader();
+
+    // Start video scrub rendering loop and initialize start frame
+    if (this.scrollerVideoRef) {
+      this.scrollerVideoRef.nativeElement.currentTime = 0.2;
+    }
+    this.startVideoScrubLoop();
 
     setTimeout(() => this.findNodeFractions(), 200);
   }
@@ -358,6 +360,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       this.navSub.unsubscribe();
     }
     cancelAnimationFrame(this.raf);
+    if (this.videoScrubFrameId) {
+      cancelAnimationFrame(this.videoScrubFrameId);
+    }
     window.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseleave', this.onMouseLeave);
     document.removeEventListener('mouseenter', this.onMouseEnter);
@@ -548,6 +553,45 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     if (idx === -1) return;
     const nextIdx = (idx + 1) % this.slideList.length;
     this.zoomInto(this.slideList[nextIdx].id);
+  }
+
+  // Scroll handler for scrubbing scroller.mp4
+  onLandingScroll(event: Event): void {
+    const container = event.currentTarget as HTMLElement;
+    const scrollTop = container.scrollTop;
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    
+    if (maxScroll > 0) {
+      const scrollRatio = scrollTop / maxScroll;
+      if (this.scrollerVideoRef) {
+        const video = this.scrollerVideoRef.nativeElement;
+        const duration = video.duration || 10;
+        const start = 0.2; // play from 0.2 seconds
+        this.targetVideoTime = start + scrollRatio * (duration - start);
+      }
+    }
+  }
+
+  // Smooth video scrub animation loop
+  private startVideoScrubLoop(): void {
+    let lastSeekTime = 0;
+    const tick = () => {
+      if (this.scrollerVideoRef) {
+        const video = this.scrollerVideoRef.nativeElement;
+        const now = performance.now();
+        // Check readystate, ensure not currently seeking, and throttle seeks to 30 seek/sec max
+        if (video.readyState >= 2 && !video.seeking && (now - lastSeekTime > 33)) {
+          const diff = this.targetVideoTime - video.currentTime;
+          if (Math.abs(diff) > 0.01) {
+            // Interpolate toward target time
+            video.currentTime += diff * 0.18;
+            lastSeekTime = now;
+          }
+        }
+      }
+      this.videoScrubFrameId = requestAnimationFrame(tick);
+    };
+    tick();
   }
 }
 

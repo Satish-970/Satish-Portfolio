@@ -68,7 +68,7 @@ export class ProjectsComponent {
       id: 7,
       category: 'web',
       image: 'assets/images/java.gif',
-      title: 'CityCare – Healthcare & Emergency Response',
+      title: 'CityCare – Healthcare and Emergency Response',
       details: [
         'Engineered an 8-module municipal full-stack healthcare platform (Access, Citizen, Facility, Emergency, Compliance, Reporting, Notifications).',
         'Built REST API microservices with Spring Boot and Hibernate ORM against relational MySQL/PostgreSQL databases.',
