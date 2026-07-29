@@ -44,6 +44,7 @@
            preload="auto"
            playsinline
            muted
+          (loadedmetadata)="onVideoMetadataLoaded()"
            [autoplay]="false"
            [loop]="false"
            style="width: 100%; height: 100%; object-fit: cover;">

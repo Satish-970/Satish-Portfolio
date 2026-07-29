@@ -82,8 +82,8 @@ export class ResumeComponent {
     ['NPTEL', 'assets/images/12210470_MOOC_DZU2MXFCertificate_page-0001.jpg', 'Cloud Computing: Swayam cloud technology foundations certificate.', 'https://drive.google.com/file/d/1kXMl26U8M9dGRxv2W_9ZGZ5N3DfTL2JC/view?usp=sharing'],
     ['Coursera', 'assets/images/12210470_MOOC_7VK5AUXCertificate_page-0001.jpg', 'Supervised Machine Learning: Regression and Classification from Coursera.', 'https://drive.google.com/file/d/10To75UJpChRRsKQdrSanRagJ7EbPhhMp/view?usp=sharing'],
     ['Coursera', 'assets/images/12210470_MOOC_PVXX77WCertificate_page-0001.jpg', 'Data Visualization and Data Analysis course covering Tableau and analytics.', 'https://drive.google.com/file/d/1wL3HxfTMfYB-OstuJikaRAdDZVYf3-s3/view?usp=sharing'],
-    ['Spring Board', 'assets/images/genai.jpg', 'Principles of Gen AI certificate from Spring Board.', ''],
-    ['Coursera', 'assets/images/excel.jpg', 'Excel Skills for Data Analytics and Visualization from Coursera.', ''],
+    ['Spring Board', 'assets/images/genai.png', 'Principles of Gen AI certificate from Spring Board.', ''],
+    ['Coursera', 'assets/images/excel.png', 'Excel Skills for Data Analytics and Visualization from Coursera.', ''],
     ['HackerRank', 'assets/images/python_basic certificate_page-0001.jpg', 'Python certification showing core programming and problem-solving skills.', 'https://www.hackerrank.com/certificates/b18906a3a19c'],
   ];
 }

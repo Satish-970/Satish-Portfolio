@@ -46,8 +46,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   private audio?: HTMLAudioElement;
 
   // Background video state
-  targetVideoTime = 0.2;
-  private currentVideoTime = 0.2;
+  private readonly videoStartTime = 0.2;
+  private readonly videoFrameRate = 24;
+  private readonly videoTailFrameCount = 2;
+  private videoEndTime = 0.2;
+  private videoFrameDuration = 1 / this.videoFrameRate;
+  targetVideoTime = this.videoStartTime;
+  private currentVideoTime = this.videoStartTime;
   private videoScrubFrameId?: number;
 
   // Morphing text brand states
@@ -199,7 +204,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Start video scrub rendering loop and initialize start frame
     if (this.scrollerVideoRef) {
-      this.scrollerVideoRef.nativeElement.currentTime = 0.2;
+      this.syncVideoBounds();
+      this.scrollerVideoRef.nativeElement.pause();
+      this.scrollerVideoRef.nativeElement.currentTime = this.targetVideoTime;
     }
     this.startVideoScrubLoop();
 
@@ -456,17 +463,22 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initAudio(play: boolean): void {
     if (this.audioInitialized) return;
-    this.audio = new Audio('/backgroundscore.mp3');
+    this.audio = new Audio('/BGM.mp3');
     this.audio.loop = true;
-    this.audio.volume = 0.45;
-    this.audioMuted = true; // Always start muted
-    this.audio.muted = true;
+    this.audio.volume = 0.65;
+    this.audioMuted = !play;
+    this.audio.muted = this.audioMuted;
     this.audioInitialized = true;
     
     // Call play() immediately on the muted audio to start it silently
     this.audio.play().catch(err => {
       console.warn('Audio Muted Autoplay Blocked:', err);
     });
+
+    if (play) {
+      this.audioMuted = false;
+      this.audio.muted = false;
+    }
     this.cdr.detectChanges();
   }
 
@@ -566,34 +578,59 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     if (maxScroll > 0) {
       const scrollRatio = scrollTop / maxScroll;
       if (this.scrollerVideoRef) {
-        const video = this.scrollerVideoRef.nativeElement;
-        const duration = video.duration || 10;
-        const start = 0.2; // play from 0.2 seconds
-        this.targetVideoTime = start + scrollRatio * (duration - start);
+        const rawTime = this.videoStartTime + scrollRatio * (this.videoEndTime - this.videoStartTime);
+        this.targetVideoTime = this.snapVideoTime(rawTime);
       }
+    }
+  }
+
+  onVideoMetadataLoaded(): void {
+    this.syncVideoBounds();
+    if (this.scrollerVideoRef) {
+      const video = this.scrollerVideoRef.nativeElement;
+      video.pause();
+      video.currentTime = this.targetVideoTime;
+      this.currentVideoTime = this.targetVideoTime;
     }
   }
 
   // Smooth video scrub animation loop
   private startVideoScrubLoop(): void {
-    let lastSeekTime = 0;
     const tick = () => {
       if (this.scrollerVideoRef) {
         const video = this.scrollerVideoRef.nativeElement;
-        const now = performance.now();
-        // Check readystate, ensure not currently seeking, and throttle seeks to 25 seek/sec max (40ms throttle)
-        if (video.readyState >= 2 && !video.seeking && (now - lastSeekTime > 40)) {
-          const diff = this.targetVideoTime - video.currentTime;
-          if (Math.abs(diff) > 0.02) {
-            // Seek directly to the target time to eliminate trailing lag and intermediate seek queuing
-            video.currentTime = this.targetVideoTime;
-            lastSeekTime = now;
+        if (video.readyState >= 2 && !video.seeking) {
+          const nextTime = this.snapVideoTime(this.targetVideoTime);
+          if (Math.abs(nextTime - this.currentVideoTime) >= this.videoFrameDuration * 0.25) {
+            video.currentTime = nextTime;
+            this.currentVideoTime = nextTime;
           }
         }
       }
       this.videoScrubFrameId = requestAnimationFrame(tick);
     };
     tick();
+  }
+
+  private syncVideoBounds(): void {
+    if (!this.scrollerVideoRef) {
+      return;
+    }
+
+    const duration = this.scrollerVideoRef.nativeElement.duration;
+    if (!Number.isFinite(duration) || duration <= 0) {
+      return;
+    }
+
+    this.videoFrameDuration = 1 / this.videoFrameRate;
+    this.videoEndTime = Math.max(this.videoStartTime, duration - (this.videoTailFrameCount * this.videoFrameDuration));
+    this.targetVideoTime = this.snapVideoTime(this.targetVideoTime);
+    this.currentVideoTime = this.targetVideoTime;
+  }
+
+  private snapVideoTime(time: number): number {
+    const snapped = Math.round((time - this.videoStartTime) / this.videoFrameDuration) * this.videoFrameDuration + this.videoStartTime;
+    return Math.min(this.videoEndTime, Math.max(this.videoStartTime, snapped));
   }
 }
 
